@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DAY 002 · 2026-08-06 국어·영어·수학 학습지</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#F7F5EF;font-family:"Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",sans-serif;color:#2E2A26;line-height:1.75}
+.sheet{max-width:820px;margin:0 auto;background:#fff;padding:30px 34px 44px;box-shadow:0 2px 14px rgba(0,0,0,.07)}
+.deco{width:52px;height:52px;flex:none}
+header.top{display:flex;align-items:center;gap:14px;border-bottom:4px dotted #F0C24B;padding-bottom:14px}
+header.top h1{font-size:21px;margin:0 0 4px}
+.daychip{display:inline-block;background:#F0C24B;color:#5A410A;font-weight:700;border-radius:999px;padding:2px 12px;font-size:13px}
+.theme{font-size:14px;color:#7A6E5E;margin-top:3px}
+.namebar{display:flex;gap:10px;margin:16px 0 6px;flex-wrap:wrap}
+.namebar div{flex:1;min-width:150px;border:2.5px solid #CFE3F5;border-radius:14px;padding:9px 14px;background:#F4FAFF;font-size:14px;font-weight:700;color:#3C6690}
+.namebar span{display:inline-block;min-width:96px;border-bottom:2px dashed #9FC3E0;margin-left:8px}
+h2.sec{display:flex;align-items:center;gap:9px;font-size:17px;margin:30px 0 12px;padding:8px 14px;border-radius:12px;background:#FFF3D6;border-left:8px solid #F0C24B}
+h2.sec.blue{background:#E8F2FD;border-left-color:#79ACDD}
+h2.sec.green{background:#E9F7E8;border-left-color:#7CC183}
+h2.sec.pink{background:#FDECF1;border-left-color:#E68FA6}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{border:1.5px solid #DED7C7;padding:7px 9px;text-align:left;vertical-align:middle}
+th{background:#F4EFE2;font-weight:700;font-size:13px}
+td.w{font-weight:700;font-size:15px;color:#1F4E79;font-family:Georgia,serif}
+td.trace{background:repeating-linear-gradient(to bottom,transparent 0 15px,#EDE7DA 15px 16px);height:38px}
+.ex{font-size:12.5px;color:#6B6357}
+.ex b{color:#1F4E79;font-family:Georgia,serif}
+.quiz{display:grid;grid-template-columns:1fr 1fr;gap:8px 18px;margin-top:10px;font-size:14px}
+.quiz div{border-bottom:1.5px dashed #C9C0AE;padding:8px 4px}
+.blank{display:inline-block;min-width:104px;border-bottom:1.6px solid #9A9182;margin-left:6px}
+.wtest{display:grid;grid-template-columns:1fr 1fr;gap:9px 18px;margin-top:10px;font-size:14px}
+.wtest div{padding:8px 4px}
+.wtest .no{color:#A29A8A;font-weight:700}
+.wline{display:inline-block;min-width:158px;border-bottom:2px solid #9A9182;margin-left:8px}
+.scorebox{margin-left:auto;font-size:12.5px;font-weight:700;color:#3C6690;background:#F4FAFF;border:2px solid #CFE3F5;border-radius:10px;padding:1px 12px;white-space:nowrap}
+.howto{font-size:13px;color:#6B6357}
+.passage{border:2.5px solid #DCEBF7;border-radius:16px;padding:18px 20px;margin-top:12px;background:#FBFDFF}
+.passage .genre{display:inline-block;font-size:12px;font-weight:700;color:#3C6690;background:#DCEBF7;border-radius:999px;padding:2px 11px}
+.passage h3{margin:9px 0 12px;font-size:17.5px}
+.passage p{margin:0 0 11px;font-size:15px;text-indent:.4em}
+.hw{margin-top:12px;padding-top:10px;border-top:1.5px dashed #C9DCEB;font-size:12.5px;color:#5C6B78}
+.hw b{color:#26506F}
+.q{border:2px solid #EFE6D2;border-radius:14px;padding:14px 17px;margin-top:12px;background:#FFFDF7}
+.q .qh{font-size:12px;font-weight:700;color:#8A6A1E;background:#FBEFCF;border-radius:999px;padding:2px 10px;display:inline-block}
+.q .qt{font-weight:700;margin:8px 0 9px;font-size:15px}
+.q ol{list-style:none;margin:0;padding:0;font-size:14.5px}
+.q ol li{padding:4px 2px}
+.writelines{margin-top:8px}
+.writelines div{border-bottom:1.6px solid #CFC7B5;height:31px}
+.check{margin-top:22px;border:2.5px solid #F0C24B;border-radius:16px;padding:14px 18px;background:#FFFDF4}
+.check h4{margin:0 0 10px;font-size:16px;color:#8A6A1E}
+.check table{font-size:13.5px}
+.check td.k{background:#FFF8E6;font-weight:700;color:#8A6A1E;width:112px;text-align:center}
+.check .box{height:30px}
+.check .memo div{border-bottom:1.5px solid #E3D9BE;height:27px}
+.face{font-size:13px;color:#7A6E5E;margin-top:8px}
+.face b{color:#3B7A44}
+.mgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px 16px;margin-top:10px}
+.mcell{border:2px solid #DCE9FB;border-radius:12px;padding:9px 12px;background:#FBFDFF}
+.mcell .mno{display:inline-block;min-width:22px;font-weight:700;color:#3C6690}
+.mcell .mq{font-size:14.5px;font-weight:700;color:#23405C}
+.mcell .mwork{margin-top:6px;height:62px;border-top:1.5px dashed #CFE3F5}
+.mword{border:2px solid #E7DFF2;border-radius:12px;padding:10px 14px;margin-top:9px;background:#FDFBFF}
+.mword .mq{font-size:14.5px;font-weight:700;color:#3F2E5A}
+.mword .mwork{margin-top:6px}
+.mword .mwork div{border-bottom:1.5px solid #DED7C7;height:26px}
+.mopts{margin:6px 0 0;padding:0;list-style:none;font-size:14px}
+.mopts li{padding:2px 0}
+.mans{margin-top:6px;font-size:13px;color:#3C6690;font-weight:700}
+.mans span{display:inline-block;min-width:110px;border-bottom:2px solid #9FC3E0;margin-left:6px}
+.mstd{font-size:11px;color:#9AA7B5;margin-left:6px;font-weight:400}
+.munit{display:inline-block;background:#DCE9FB;color:#3C6690;border-radius:999px;padding:2px 11px;font-size:12px;font-weight:700}
+details{margin-top:26px;border:2.5px dashed #E5B9C6;border-radius:14px;padding:12px 18px;background:#FFF7F9}
+details summary{font-weight:700;cursor:pointer;color:#B0517A;font-size:15px}
+details table{margin-top:12px}
+details td{font-size:13.5px}
+.tips{margin-top:26px;border-radius:14px;background:#EEF7EC;border:2px solid #C7E3C2;padding:14px 18px;font-size:14px}
+.tips b{color:#3B7A44}
+.tips ul{margin:8px 0 0;padding-left:20px}
+.src{margin-top:16px;font-size:11.5px;color:#8A8272}
+.src a{color:#6B8FB0}
+footer{margin-top:26px;text-align:center;font-size:12px;color:#A29A8A;border-top:2px dotted #DED7C7;padding-top:12px}
+@media print{
+@page{size:A4;margin:11mm 11mm}
+html,body{background:#fff}
+body{line-height:1.48;font-size:13.4px}
+.sheet{box-shadow:none;max-width:100%;padding:0;margin:0}
+.deco{width:38px;height:38px}
+header.top{gap:10px;padding-bottom:7px;border-bottom-width:3px}
+header.top h1{font-size:18px;margin:0 0 2px}
+.daychip{font-size:11.5px;padding:1px 10px}
+.theme{font-size:12px;margin-top:2px}
+.namebar{margin:7px 0 2px;gap:8px}
+.namebar div{padding:5px 10px;font-size:12px;border-width:2px;border-radius:11px;min-width:120px}
+h2.sec{font-size:14px;margin:9px 0 4px;padding:4px 10px;border-left-width:6px;border-radius:9px;break-after:avoid}
+table{font-size:13px}
+th,td{padding:1.5px 6px}
+th{font-size:11.5px}
+td.w{font-size:14px}
+td.trace{height:36px;background:repeating-linear-gradient(to bottom,transparent 0 15px,#EDE7DA 15px 16px)}
+.ex{font-size:11px;line-height:1.32}
+.quiz{gap:3px 16px;margin-top:5px;font-size:13px}
+.quiz div{padding:5px 3px}
+.passage{padding:9px 13px;margin-top:6px;border-width:2px;border-radius:12px}
+.passage .genre{font-size:11px}
+.passage h3{margin:4px 0 5px;font-size:15px}
+.passage p{margin:0 0 4.5px;font-size:13.4px}
+.hw{margin-top:5px;padding-top:4px;font-size:10.5px;line-height:1.3}
+.q{padding:6px 12px;margin-top:5px;border-radius:11px}
+.q .qh{font-size:11px}
+.q .qt{margin:3px 0;font-size:13.2px}
+.q ol{font-size:13.2px;line-height:1.42}
+.q ol li{padding:1px 2px}
+.writelines div{height:32px}
+details{display:none}
+.tips{margin-top:9px;padding:9px 13px;font-size:11.3px;border-radius:11px;line-height:1.4}
+.tips ul{margin:6px 0 0;padding-left:18px}
+.src{margin-top:6px;font-size:9px}
+footer{margin-top:8px;padding-top:6px;font-size:9.5px}
+.q,.passage,.tips,.namebar{break-inside:avoid}
+tr{break-inside:avoid}
+.wtest{gap:3px 16px;margin-top:5px;font-size:13px}
+.wtest div{padding:6.5px 3px}
+.wline{min-width:150px;border-bottom-width:1.8px}
+.scorebox{font-size:11px;padding:1px 9px;border-width:1.6px}
+.howto{font-size:11.5px}
+.wtest{break-inside:avoid}
+.mgrid{gap:5px 14px;margin-top:5px}
+.mcell{padding:5px 10px;border-radius:10px;border-width:1.6px}
+.mcell .mq{font-size:12.8px}
+.mcell .mwork{height:132px;margin-top:6px}
+.mcell.opt .mwork{height:34px}
+.mword.opt .mwork div{height:26px}
+.mword{padding:6px 11px;margin-top:5px;border-radius:10px;border-width:1.6px}
+.mword .mq{font-size:12.8px}
+.mword .mwork div{height:33px}
+.mopts{font-size:12.5px}
+.mopts li{padding:0}
+.mans{font-size:11.5px;margin-top:3px}
+.munit{font-size:11px}
+.mstd{font-size:9.5px}
+.mcell,.mword{break-inside:avoid}
+.check{margin-top:10px;padding:9px 13px;border-radius:11px;border-width:2px;break-inside:avoid}
+.check h4{font-size:13.5px;margin:0 0 6px}
+.check table{font-size:12px}
+.check .box{height:26px}
+.check .memo div{height:24px}
+.face{font-size:11.5px;margin-top:5px}
+}
+
+</style></head><body>
+<div class="sheet">
+
+<header class="top"><svg viewBox="0 0 64 64" class="deco"><circle cx="32" cy="32" r="14" fill="#FFD86B" stroke="#E8A33D" stroke-width="2.5"/><g stroke="#E8A33D" stroke-width="3" stroke-linecap="round"><path d="M32 6v8M32 50v8M6 32h8M50 32h8M13 13l6 6M45 45l6 6M51 13l-6 6M19 45l-6 6"/></g><circle cx="27" cy="30" r="2" fill="#7A5B1E"/><circle cx="37" cy="30" r="2" fill="#7A5B1E"/><path d="M27 37q5 5 10 0" stroke="#7A5B1E" stroke-width="2.2" fill="none" stroke-linecap="round"/></svg>
+  <div><span class="daychip">DAY 002</span>
+  <h1>오늘의 국어·영어·수학 학습지</h1>
+  <div class="theme">2026-08-06 (목요일) · 주제 — 떨림에서 마음까지 — 소리가 건너오는 길</div></div>
+</header>
+
+<div class="namebar">
+  <div>날짜 <span>2026-08-06</span></div>
+  <div>이름 <span>&nbsp;</span></div>
+  <div>스스로 점수 <span>&nbsp;/ 15</span></div>
+</div>
+
+<h2 class="sec"><svg viewBox="0 0 64 64" class="deco"><path d="M14 50l4-12L44 12l8 8-26 26z" fill="#FFE08A" stroke="#D6A02E" stroke-width="2.5" stroke-linejoin="round"/><path d="M44 12l8 8" stroke="#D6A02E" stroke-width="2.5"/><path d="M14 50l10-2-8-8z" fill="#8A6A48" stroke="#5C462F" stroke-width="2"/><circle cx="34" cy="30" r="1.8" fill="#8A6A2E"/><circle cx="40" cy="24" r="1.8" fill="#8A6A2E"/></svg>오늘의 영어 낱말 10개</h2>
+<table>
+<tr><th style="width:34px">번호</th><th style="width:120px">낱말</th><th style="width:44px">품사</th>
+<th style="width:150px">뜻</th><th>따라 쓰기 (2번)</th></tr>
+<tr><td style="text-align:center;color:#A29A8A">11</td><td class="w">airport</td><td style="font-size:12px;color:#8A8272;text-align:center">명</td><td>공항</td><td class="trace"></td></tr><tr><td></td><td colspan="4" class="ex"><b>My uncle works at the airport.</b> — 우리 삼촌은 공항에서 일한다.</td></tr><tr><td style="text-align:center;color:#A29A8A">12</td><td class="w">almost</td><td style="font-size:12px;color:#8A8272;text-align:center">부</td><td>거의</td><td class="trace"></td></tr><tr><td></td><td colspan="4" class="ex"><b>The bus is almost full today.</b> — 오늘 버스는 거의 가득 찼다.</td></tr><tr><td style="text-align:center;color:#A29A8A">13</td><td class="w">alone</td><td style="font-size:12px;color:#8A8272;text-align:center">부</td><td>혼자</td><td class="trace"></td></tr><tr><td></td><td colspan="4" class="ex"><b>She sits alone under the big tree.</b> — 그녀는 큰 나무 아래에 혼자 앉아 있다.</td></tr><tr><td style="text-align:center;color:#A29A8A">14</td><td class="w">already</td><td style="font-size:12px;color:#8A8272;text-align:center">부</td><td>이미</td><td class="trace"></td></tr><tr><td></td><td colspan="4" class="ex"><b>The show already started ten minutes ago.</b> — 공연은 이미 10분 전에 시작했다.</td></tr><tr><td style="text-align:center;color:#A29A8A">15</td><td class="w">also</td><td style="font-size:12px;color:#8A8272;text-align:center">부</td><td>또한</td><td class="trace"></td></tr><tr><td></td><td colspan="4" class="ex"><b>I like music, and I also like art.</b> — 나는 음악을 좋아하고, 미술도 또한 좋아한다.</td></tr><tr><td style="text-align:center;color:#A29A8A">16</td><td class="w">always</td><td style="font-size:12px;color:#8A8272;text-align:center">부</td><td>항상</td><td class="trace"></td></tr><tr><td></td><td colspan="4" class="ex"><b>My grandmother always sings in the morning.</b> — 우리 할머니는 항상 아침에 노래하신다.</td></tr><tr><td style="text-align:center;color:#A29A8A">17</td><td class="w">animal</td><td style="font-size:12px;color:#8A8272;text-align:center">명</td><td>동물</td><td class="trace"></td></tr><tr><td></td><td colspan="4" class="ex"><b>This animal has very good ears.</b> — 이 동물은 아주 좋은 귀를 가지고 있다.</td></tr><tr><td style="text-align:center;color:#A29A8A">18</td><td class="w">answer</td><td style="font-size:12px;color:#8A8272;text-align:center">명</td><td>대답</td><td class="trace"></td></tr><tr><td></td><td colspan="4" class="ex"><b>Your answer is right this time.</b> — 이번에는 네 대답이 맞다.</td></tr><tr><td style="text-align:center;color:#A29A8A">19</td><td class="w">ant</td><td style="font-size:12px;color:#8A8272;text-align:center">명</td><td>개미</td><td class="trace"></td></tr><tr><td></td><td colspan="4" class="ex"><b>A small ant walks across my hand.</b> — 작은 개미가 내 손을 가로질러 걷는다.</td></tr><tr><td style="text-align:center;color:#A29A8A">20</td><td class="w">arm</td><td style="font-size:12px;color:#8A8272;text-align:center">명</td><td>팔</td><td class="trace"></td></tr><tr><td></td><td colspan="4" class="ex"><b>He holds the drum with one arm.</b> — 그는 한 팔로 북을 잡는다.</td></tr>
+</table>
+
+<h2 class="sec blue"><svg viewBox="0 0 64 64" class="deco"><path d="M32 8l7 15 16 2-12 11 3 16-14-8-14 8 3-16L9 25l16-2z" fill="#FFE9A8" stroke="#E0AE38" stroke-width="2.5" stroke-linejoin="round"/><circle cx="27" cy="30" r="1.9" fill="#9A7420"/><circle cx="37" cy="30" r="1.9" fill="#9A7420"/><path d="M28 36q4 4 8 0" stroke="#9A7420" stroke-width="2" fill="none" stroke-linecap="round"/></svg>낱말 뜻 시험 10문제<span class="scorebox">점수 &nbsp;&nbsp;&nbsp;&nbsp; / 10</span></h2>
+<div class="howto">영어 낱말을 보고 <b>뜻을 한글로</b> 쓰세요.</div>
+<div class="quiz"><div><span class="no">1.</span> <b style="font-family:Georgia,serif;color:#1F4E79">answer</b><span class="blank"></span></div><div><span class="no">2.</span> <b style="font-family:Georgia,serif;color:#1F4E79">airport</b><span class="blank"></span></div><div><span class="no">3.</span> <b style="font-family:Georgia,serif;color:#1F4E79">animal</b><span class="blank"></span></div><div><span class="no">4.</span> <b style="font-family:Georgia,serif;color:#1F4E79">already</b><span class="blank"></span></div><div><span class="no">5.</span> <b style="font-family:Georgia,serif;color:#1F4E79">alone</b><span class="blank"></span></div><div><span class="no">6.</span> <b style="font-family:Georgia,serif;color:#1F4E79">arm</b><span class="blank"></span></div><div><span class="no">7.</span> <b style="font-family:Georgia,serif;color:#1F4E79">almost</b><span class="blank"></span></div><div><span class="no">8.</span> <b style="font-family:Georgia,serif;color:#1F4E79">ant</b><span class="blank"></span></div><div><span class="no">9.</span> <b style="font-family:Georgia,serif;color:#1F4E79">always</b><span class="blank"></span></div><div><span class="no">10.</span> <b style="font-family:Georgia,serif;color:#1F4E79">also</b><span class="blank"></span></div></div>
+
+<h2 class="sec blue"><svg viewBox="0 0 64 64" class="deco"><path d="M14 50l4-12L44 12l8 8-26 26z" fill="#FFE08A" stroke="#D6A02E" stroke-width="2.5" stroke-linejoin="round"/><path d="M44 12l8 8" stroke="#D6A02E" stroke-width="2.5"/><path d="M14 50l10-2-8-8z" fill="#8A6A48" stroke="#5C462F" stroke-width="2"/><circle cx="34" cy="30" r="1.8" fill="#8A6A2E"/><circle cx="40" cy="24" r="1.8" fill="#8A6A2E"/></svg>단어 쓰기 시험 10문제<span class="scorebox">점수 &nbsp;&nbsp;&nbsp;&nbsp; / 10</span></h2>
+<div class="howto">뜻을 보고 <b>영어 낱말의 철자</b>를 정확히 쓰세요. 대문자·소문자도 맞게 쓰세요.</div>
+<div class="wtest"><div><span class="no">1.</span> 혼자<span class="wline"></span></div><div><span class="no">2.</span> 항상<span class="wline"></span></div><div><span class="no">3.</span> 또한<span class="wline"></span></div><div><span class="no">4.</span> 개미<span class="wline"></span></div><div><span class="no">5.</span> 공항<span class="wline"></span></div><div><span class="no">6.</span> 동물<span class="wline"></span></div><div><span class="no">7.</span> 팔<span class="wline"></span></div><div><span class="no">8.</span> 이미<span class="wline"></span></div><div><span class="no">9.</span> 대답<span class="wline"></span></div><div><span class="no">10.</span> 거의<span class="wline"></span></div></div>
+
+<h2 class="sec green"><svg viewBox="0 0 64 64" class="deco"><path d="M8 14h20c3 0 4 2 4 4v34c0-2-1-4-4-4H8z" fill="#FFC7D3" stroke="#D9758F" stroke-width="2.5" stroke-linejoin="round"/><path d="M56 14H36c-3 0-4 2-4 4v34c0-2 1-4 4-4h20z" fill="#BFD9FF" stroke="#5B84C4" stroke-width="2.5" stroke-linejoin="round"/><path d="M32 18v34" stroke="#8A6A78" stroke-width="2.5"/><circle cx="19" cy="30" r="1.8" fill="#B44A68"/><circle cx="45" cy="30" r="1.8" fill="#3E63A0"/></svg>오늘의 문해력 지문 2개</h2>
+<div class="passage"><span class="genre">지문 1 · 예술·문화</span><h3>얼쑤! 두 사람이 만드는 판소리 한마당</h3><p>무대에 오르는 사람은 단 두 명이다. 부채를 든 소리꾼과 북을 든 고수. 화려한 무대 장치도, 여러 대의 악기도 없다. 그런데도 사람들은 몇 시간 동안 자리를 뜨지 않는다. 이것이 우리 소리, 판소리다.</p><p>소리꾼은 노래만 하지 않는다. 이야기를 말로 풀어내는 아니리를 섞고, 몸짓으로 장면을 보여 주는 너름새를 함께 한다. 손에 든 부채 하나가 배를 젓는 노가 되었다가, 지팡이가 되었다가, 편지가 된다. 듣는 사람은 그 작은 부채를 보며 넓은 강도 보고 높은 산도 본다.</p><p>고수는 북을 치면서 &quot;얼쑤!&quot;, &quot;잘한다!&quot; 하고 외친다. 이것을 추임새라고 한다. 추임새는 소리꾼에게 힘을 주고, 이야기의 빈자리를 채운다. 관객도 함께 추임새를 넣는다. 그래서 판소리에는 가만히 구경만 하는 사람이 없고, 함께 만드는 자리만 있다.</p><p>지금까지 전해 오는 판소리는 다섯 마당이다. 춘향가, 심청가, 흥보가, 수궁가, 적벽가. 한 마당을 처음부터 끝까지 부르면 서너 시간이 걸리기도 한다. 소리꾼은 그 긴 시간을 목소리 하나로 버틴다.</p><p>2003년, 유네스코는 판소리를 인류가 함께 지켜야 할 소중한 유산으로 뽑았다. 오래전부터 우리 곁에 있던 소리가 세계의 소리가 된 것이다.</p><div class="hw">낱말 풀이 &nbsp;<b>아니리</b> 판소리에서 노래하지 않고 말로 이야기를 풀어내는 부분. &nbsp;·&nbsp; <b>너름새</b> 소리꾼이 몸짓과 표정으로 장면을 보여 주는 것. &nbsp;·&nbsp; <b>추임새</b> 고수나 관객이 흥을 돋우려고 넣는 짧은 외침. &quot;얼쑤!&quot; 같은 말.</div></div><div class="passage"><span class="genre">지문 2 · 과학</span><h3>소리는 어떻게 내 귀까지 올까</h3><p>고수가 북을 치면 북 가죽이 파르르 떨린다. 이 떨림이 소리의 시작이다. 떨림이 없으면 소리도 없다. 자를 책상 끝에 걸쳐 놓고 튕겨 보면 떨리는 모습을 눈으로도 볼 수 있다.</p><p>떨림은 둘레의 공기를 밀었다 당겼다 한다. 밀린 공기는 그 옆의 공기를 밀고, 그 공기는 또 옆의 공기를 민다. 이렇게 떨림이 물결처럼 퍼져 나가 우리 귀에 닿는다. 귓속의 얇은 막이 함께 떨리면 그제야 우리는 소리를 듣는다.</p><p>소리는 공기로만 다니지 않는다. 물속에서도 다니고, 나무나 쇠처럼 단단한 것에서도 다닌다. 오히려 단단한 것에서 더 빠르고 또렷하게 간다. 책상에 귀를 대고 반대쪽 끝을 손톱으로 긁어 보면, 공기로 들을 때보다 훨씬 크게 들린다.</p><p>종이컵 두 개를 실로 이으면 실 전화기가 되는 것도 그래서다. 말소리가 컵 바닥을 떨게 하고, 그 떨림이 팽팽한 실을 타고 건너간다. 실이 축 늘어지면 떨림이 이어지지 못해 소리도 건너가지 못한다.</p><p>반대로 공기가 하나도 없는 곳에서는 아무리 큰 소리를 내도 들리지 않는다. 우주에서 우주인들이 무전기로 이야기를 나누는 까닭이 여기에 있다. 소리는 혼자 다니지 못한다. 언제나 무언가를 타고 건너온다.</p><div class="hw">낱말 풀이 &nbsp;<b>무전기</b> 전파를 이용해 멀리 있는 사람과 말을 주고받는 기계. &nbsp;·&nbsp; <b>또렷하다</b> 흐리지 않고 분명하다.</div></div>
+
+<h2 class="sec pink"><svg viewBox="0 0 64 64" class="deco"><path d="M52 12C28 12 12 26 12 44c0 4 2 8 2 8s16-2 26-12c8-8 12-20 12-28z" fill="#A9DFA0" stroke="#4E9A54" stroke-width="2.5"/><path d="M50 14C36 26 24 38 15 51" stroke="#4E9A54" stroke-width="2.2" fill="none" stroke-linecap="round"/><circle cx="30" cy="30" r="2" fill="#2F6B36"/><circle cx="39" cy="24" r="2" fill="#2F6B36"/><path d="M30 36q5 4 9-1" stroke="#2F6B36" stroke-width="2" fill="none" stroke-linecap="round"/></svg>문해력 문제 5개</h2>
+<div class="q"><span class="qh">1. 사실 확인 · 지문 1</span><div class="qt">판소리 무대에 대한 설명으로 알맞은 것은 무엇인가요?</div><ol><li>① 소리꾼 여러 명이 나란히 서서 함께 노래한다.</li><li>② 고수는 북을 치지 않고 노래만 부른다.</li><li>③ 무대에는 소리꾼과 고수, 두 사람만 오른다.</li><li>④ 화려한 무대 장치가 반드시 있어야 한다.</li></ol></div><div class="q"><span class="qh">2. 낱말 뜻 · 지문 1</span><div class="qt">글에서 쓰인 &#x27;추임새&#x27;의 뜻으로 알맞은 것은 무엇인가요?</div><ol><li>① 고수와 관객이 흥을 돋우려고 넣는 짧은 외침</li><li>② 소리꾼이 노래하지 않고 말로 이야기를 풀어내는 부분</li><li>③ 소리꾼이 손에 들고 여러 물건처럼 쓰는 부채</li><li>④ 지금까지 전해 오는 판소리 다섯 마당의 이름</li></ol></div><div class="q"><span class="qh">3. 추론 · 지문 2</span><div class="qt">실 전화기의 실이 축 늘어지면 소리가 잘 건너가지 못합니다. 그 까닭으로 가장 알맞은 것은 무엇인가요?</div><ol><li>① 실이 길어져서 소리가 도중에 지쳐 버리기 때문이다.</li><li>② 늘어진 실이 둘레의 공기를 모두 빨아들이기 때문이다.</li><li>③ 종이컵이 소리를 컵 안에 가두어 버리기 때문이다.</li><li>④ 떨림이 실을 따라 이어지지 못하기 때문이다.</li></ol></div><div class="q"><span class="qh">4. 중심 생각 · 지문 1+2</span><div class="qt">두 글을 함께 읽고 알 수 있는 중심 생각으로 가장 알맞은 것은 무엇인가요?</div><ol><li>① 판소리는 다른 나라의 음악보다 뛰어난 예술이다.</li><li>② 소리는 떨림에서 시작해 무언가를 타고 전해지며, 사람들은 그 소리로 마음을 나눈다.</li><li>③ 소리는 공기가 하나도 없는 곳에서 가장 잘 들린다.</li><li>④ 판소리를 즐기려면 과학 공부를 먼저 해야 한다.</li></ol></div><div class="q"><span class="qh">5. 적용·서술형 · 지문 1+2</span><div class="qt">판소리 공연에서 관객이 &quot;얼쑤!&quot; 하고 추임새를 넣었습니다. 이 소리가 소리꾼에게 닿기까지 어떤 길을 지나는지 글 2의 내용을 이용해 설명하고, 그 소리를 들은 소리꾼의 마음은 어떠할지 한 문장으로 덧붙여 쓰세요.</div><div class="writelines"><div></div><div></div><div></div><div></div></div></div>
+
+<h2 class="sec blue"><svg viewBox="0 0 64 64" class="deco"><rect x="10" y="10" width="44" height="44" rx="9" fill="#DCE9FB" stroke="#5B84C4" stroke-width="2.5"/><path d="M18 24h10M23 19v10" stroke="#3C6690" stroke-width="2.6" stroke-linecap="round"/><path d="M36 24h10" stroke="#3C6690" stroke-width="2.6" stroke-linecap="round"/><path d="M18 40h10" stroke="#B0517A" stroke-width="2.6" stroke-linecap="round"/><path d="M36 37h10M36 43h10" stroke="#B0517A" stroke-width="2.6" stroke-linecap="round"/><circle cx="24" cy="47" r="1.8" fill="#3C6690"/></svg>오늘의 수학 10문제<span class="scorebox">점수 &nbsp;&nbsp;&nbsp;&nbsp; / 10</span></h2>
+<div class="howto">오늘의 단원 — <span class="munit">곱셈</span>
+&nbsp; 복습 — 나눗셈 · 어림셈 · 큰 수 &nbsp;·&nbsp; 1~7번은 계산, 8~10번은 문장제입니다.
+빈칸에 <b>풀이 과정을 꼭 남기며</b> 푸세요.</div>
+<div class="mgrid"><div class="mcell"><span class="mno">1.</span> <span class="mq">535 × 85 = ☐</span><div class="mwork"></div></div><div class="mcell"><span class="mno">2.</span> <span class="mq">310 × 49 = ☐</span><div class="mwork"></div></div><div class="mcell"><span class="mno">3.</span> <span class="mq">979 × 81 = ☐</span><div class="mwork"></div></div><div class="mcell"><span class="mno">4.</span> <span class="mq">225 × 58 = ☐</span><div class="mwork"></div></div><div class="mcell"><span class="mno">5.</span> <span class="mq">162 × 88 = ☐</span><div class="mwork"></div></div><div class="mcell"><span class="mno">6.</span> <span class="mq">331 ÷ 19 의 몫과 나머지를 쓰세요.  (쓰는 법: 몫…나머지)</span><div class="mwork"></div></div><div class="mcell"><span class="mno">7.</span> <span class="mq">887 × 57 를 어림셈으로 구하면 약 얼마인가요? (887는 백의 자리, 57는 십의 자리까지 반올림하기)</span><div class="mwork"></div></div></div>
+<div class="mword"><span class="mno">8.</span> <span class="mq">한 상자에 사과가 366개씩 들어 있습니다. 28상자에 든 사과는 모두 몇 개인가요?</span><div class="mwork"><div></div><div></div><div></div><div></div></div><div class="mans">답<span></span></div></div><div class="mword"><span class="mno">9.</span> <span class="mq">공연장의 좌석은 256자리입니다. 39일 동안 날마다 좌석이 모두 찼다면 공연을 본 사람은 모두 몇 명인가요?</span><div class="mwork"><div></div><div></div><div></div><div></div></div><div class="mans">답<span></span></div></div><div class="mword"><span class="mno">10.</span> <span class="mq">어느 도시의 인구는 7,764,425명입니다. 올해 59,416명이 늘었다면 지금 인구는 몇 명인가요?</span><div class="mwork"><div></div><div></div><div></div><div></div></div><div class="mans">답<span></span></div></div>
+
+<details><summary>정답과 해설 (접혀 있어요 — 다 풀고 나서 열어 보세요)</summary>
+<div style="margin-top:10px;font-size:13.5px"><b>낱말 뜻 시험</b><br>1. 대답 &nbsp;·&nbsp; 2. 공항 &nbsp;·&nbsp; 3. 동물 &nbsp;·&nbsp; 4. 이미 &nbsp;·&nbsp; 5. 혼자 &nbsp;·&nbsp; 6. 팔 &nbsp;·&nbsp; 7. 거의 &nbsp;·&nbsp; 8. 개미 &nbsp;·&nbsp; 9. 항상 &nbsp;·&nbsp; 10. 또한</div>
+<div style="margin-top:8px;font-size:13.5px"><b>단어 쓰기 시험</b><br>1. <b style="font-family:Georgia,serif">alone</b> &nbsp;·&nbsp; 2. <b style="font-family:Georgia,serif">always</b> &nbsp;·&nbsp; 3. <b style="font-family:Georgia,serif">also</b> &nbsp;·&nbsp; 4. <b style="font-family:Georgia,serif">ant</b> &nbsp;·&nbsp; 5. <b style="font-family:Georgia,serif">airport</b> &nbsp;·&nbsp; 6. <b style="font-family:Georgia,serif">animal</b> &nbsp;·&nbsp; 7. <b style="font-family:Georgia,serif">arm</b> &nbsp;·&nbsp; 8. <b style="font-family:Georgia,serif">already</b> &nbsp;·&nbsp; 9. <b style="font-family:Georgia,serif">answer</b> &nbsp;·&nbsp; 10. <b style="font-family:Georgia,serif">almost</b></div>
+<div style="margin-top:12px;font-size:13.5px"><b>문해력 문제</b></div>
+<table><tr><th style="width:44px">번호</th><th style="width:60px">정답</th><th>해설</th></tr><tr><td style="text-align:center;font-weight:700">1</td><td style="text-align:center;font-weight:700;color:#B0517A;font-size:16px">③</td><td>첫 문단에 &quot;무대에 오르는 사람은 단 두 명이다. 부채를 든 소리꾼과 북을 든 고수&quot;라고 나옵니다. 관객도 함께 추임새를 넣는다는 3문단 때문에 &#x27;여러 사람이 함께 노래한다&#x27;고 헷갈리기 쉬운데, 무대에 오르는 사람 수와 함께 즐기는 사람 수는 다른 이야기입니다.</td></tr><tr><td style="text-align:center;font-weight:700">2</td><td style="text-align:center;font-weight:700;color:#B0517A;font-size:16px">①</td><td>3문단에서 고수가 &quot;얼쑤!&quot;, &quot;잘한다!&quot; 하고 외치는 것을 추임새라고 했습니다. 2번은 &#x27;아니리&#x27;의 뜻이라 특히 헷갈리기 쉽습니다. 낱말 뜻을 고를 때는 그 낱말이 나온 문장의 바로 앞뒤를 다시 읽어 확인하세요.</td></tr><tr><td style="text-align:center;font-weight:700">3</td><td style="text-align:center;font-weight:700;color:#B0517A;font-size:16px">④</td><td>4문단은 &quot;말소리가 컵 바닥을 떨게 하고, 그 떨림이 팽팽한 실을 타고 건너간다&quot;고 했습니다. 소리를 옮기는 것은 실 자체가 아니라 실을 타고 이어지는 &#x27;떨림&#x27;입니다. 소리가 &#x27;지친다&#x27;거나 &#x27;길이&#x27; 때문이라고 생각하기 쉬운데, 글 전체가 떨림 이야기라는 점을 떠올리면 답이 보입니다.</td></tr><tr><td style="text-align:center;font-weight:700">4</td><td style="text-align:center;font-weight:700;color:#B0517A;font-size:16px">②</td><td>글 1은 소리로 마음을 주고받는 판소리를, 글 2는 소리가 전해지는 원리를 설명합니다. 두 글을 하나로 묶으면 2번이 됩니다. 1번처럼 어느 쪽이 더 뛰어나다고 견주는 말은 두 글 어디에도 없고, 3번은 글 2의 마지막 문단과 정반대입니다.</td></tr><tr><td style="text-align:center;font-weight:700">5</td><td style="text-align:center;color:#B0517A;font-weight:700">서술</td><td><b>예시 답안</b><br>관객의 목이 떨리면서 소리가 생기고, 그 떨림이 둘레의 공기를 밀어 물결처럼 퍼져 나간다. 퍼진 떨림이 소리꾼의 귓속 얇은 막을 떨게 해서 소리꾼이 &quot;얼쑤!&quot;를 듣게 된다. 그 소리를 들은 소리꾼은 힘이 나서 더 신나게 노래를 이어 갈 것이다.<br><br><b>채점 기준</b><br>· 소리의 시작이 &#x27;떨림&#x27;이라는 점을 썼는가.<br>· 떨림이 공기를 타고 귀까지 전해지는 과정을 순서대로 썼는가.<br>· 소리꾼의 마음을 자기 말로 한 문장 덧붙였는가.</td></tr></table>
+<div style="margin-top:12px;font-size:13.5px"><b>수학 문제</b> — 오늘의 단원 곱셈</div>
+<table><tr><th style="width:44px">번호</th><th style="width:76px">정답</th><th>풀이</th></tr><tr><td style="text-align:center;font-weight:700">1</td><td style="text-align:center;font-weight:700;color:#3C6690">45475</td><td>535×5=2675, 535×80=42800 이므로 두 값을 더하면 45,475 입니다. <span class="mstd">[4수01-04]</span></td></tr><tr><td style="text-align:center;font-weight:700">2</td><td style="text-align:center;font-weight:700;color:#3C6690">15190</td><td>310×9=2790, 310×40=12400 이므로 두 값을 더하면 15,190 입니다. <span class="mstd">[4수01-04]</span></td></tr><tr><td style="text-align:center;font-weight:700">3</td><td style="text-align:center;font-weight:700;color:#3C6690">79299</td><td>979×1=979, 979×80=78320 이므로 두 값을 더하면 79,299 입니다. <span class="mstd">[4수01-04]</span></td></tr><tr><td style="text-align:center;font-weight:700">4</td><td style="text-align:center;font-weight:700;color:#3C6690">13050</td><td>225×8=1800, 225×50=11250 이므로 두 값을 더하면 13,050 입니다. <span class="mstd">[4수01-04]</span></td></tr><tr><td style="text-align:center;font-weight:700">5</td><td style="text-align:center;font-weight:700;color:#3C6690">14256</td><td>162×8=1296, 162×80=12960 이므로 두 값을 더하면 14,256 입니다. <span class="mstd">[4수01-04]</span></td></tr><tr><td style="text-align:center;font-weight:700">6</td><td style="text-align:center;font-weight:700;color:#3C6690">17…8</td><td>19×17=323, 331−323=8 이므로 몫 17, 나머지 8. 나머지는 늘 나누는 수 19보다 작아야 합니다. <span class="mstd">[4수01-07]</span></td></tr><tr><td style="text-align:center;font-weight:700">7</td><td style="text-align:center;font-weight:700;color:#3C6690">54000</td><td>887≈900, 57≈60 이므로 900×60=54,000 쯤으로 어림합니다. (정확한 값 50,559) <span class="mstd">[4수01-08]</span></td></tr><tr><td style="text-align:center;font-weight:700">8</td><td style="text-align:center;font-weight:700;color:#3C6690">10248</td><td>(한 상자 개수)×(상자 수) = 366×28 = 10,248개 <span class="mstd">[4수01-04]</span></td></tr><tr><td style="text-align:center;font-weight:700">9</td><td style="text-align:center;font-weight:700;color:#3C6690">9984</td><td>(하루 관람객)×(날수) = 256×39 = 9,984명 <span class="mstd">[4수01-04]</span></td></tr><tr><td style="text-align:center;font-weight:700">10</td><td style="text-align:center;font-weight:700;color:#3C6690">7823841</td><td>7,764,425 + 59,416 = 7,823,841명 <span class="mstd">[4수01-02]</span></td></tr></table>
+</details>
+
+<div class="check">
+  <h4>오늘 공부 스스로 점검표 &nbsp;— 다 풀고 나서 채점한 뒤 적어요</h4>
+  <table>
+    <tr><td class="k">과목</td><td class="k">점수</td><td class="k">틀린 문제 번호</td>
+        <td class="k">다시 볼 것</td></tr>
+    <tr><td class="k">영어 낱말 뜻</td><td class="box"></td><td class="box"></td><td class="box"></td></tr>
+    <tr><td class="k">영어 단어 쓰기</td><td class="box"></td><td class="box"></td><td class="box"></td></tr>
+    <tr><td class="k">국어 문해력</td><td class="box"></td><td class="box"></td><td class="box"></td></tr>
+    <tr><td class="k">수학</td><td class="box"></td><td class="box"></td><td class="box"></td></tr>
+  </table>
+  <div class="face">오늘 가장 어려웠던 것과 그 까닭을 한 줄로 써 보세요.
+  <b>틀린 문제는 실수가 아니라 내일 배울 것</b>이에요.</div>
+  <div class="memo"><div></div><div></div></div>
+</div>
+
+<div class="tips"><b>선생님·부모님을 위한 수업 활용 팁</b><ul><li>소리 사슬: 짝과 번갈아 오늘 낱말을 소리 내어 읽고, 앞 사람이 읽은 낱말의 뜻을 말해야 다음으로 넘어갑니다. almost, already, always처럼 생김새가 비슷한 낱말을 이어 붙이면 더 재미있습니다.</li><li>추임새 넣으며 읽기: 지문 1을 한 문단씩 소리 내어 읽고, 듣는 친구들은 &quot;얼쑤!&quot;, &quot;잘한다!&quot; 추임새를 넣어 줍니다. 판소리가 왜 함께 만드는 공연인지 몸으로 알게 됩니다.</li><li>실 전화기 3분 실험: 종이컵 두 개와 실만 있으면 됩니다. 실을 팽팽하게 했을 때와 늘어뜨렸을 때를 비교한 뒤, 그 까닭이 담긴 문장을 지문 2에서 찾아 밑줄 긋게 하면 3번 문항과 바로 이어집니다.</li></ul></div>
+<div class="src">출처 &nbsp;<a href="https://www.heritage.go.kr/heri/html/HtmlPage.do?pg=/unesco/CulHeritage/CulHeritage_02.jsp&amp;pageNo=5_3_2_0">판소리 — 국가유산청 한국의 인류무형문화유산</a> &nbsp;|&nbsp; <a href="https://ko.wikipedia.org/wiki/%ED%8C%90%EC%86%8C%EB%A6%AC">판소리 — 위키백과</a></div>
+
+<footer>2022 개정 교육과정 연계 · 국어 4학년군 읽기/쓰기 · 영어 3~4학년군 읽기/쓰기 · 수학 3~4학년군<br>
+지난 학습지와 복습 프로그램은 <b>index.html</b> 에서 볼 수 있어요.</footer>
+</div></body></html>
