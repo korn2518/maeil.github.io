@@ -70,9 +70,19 @@ footer{margin-top:36px;text-align:center;font-size:12px;color:#A29A8A}
 .mchip{display:inline-block;font-size:12px;color:#3C6690;background:#DCEBF7;border-radius:999px;
        padding:2px 10px;font-weight:700;margin-right:6px}
 .mhow{font-size:13px;color:#8A8272;margin-top:6px}
-.install{display:none;align-items:center;gap:12px;background:#FFF3D6;border:2.5px solid #F0C24B;
-         border-radius:16px;padding:12px 16px;margin-top:16px}
-.install.on{display:flex}
+.install{display:flex;align-items:flex-start;gap:13px;background:#FFF3D6;border:2.5px solid #F0C24B;
+         border-radius:16px;padding:14px 16px;margin-top:16px;flex-wrap:wrap}
+.install.done{background:#EEF7EC;border-color:#7CC183}
+.install .how{flex-basis:100%;font-size:13.5px;color:#7A5F1E;margin-top:2px;line-height:1.7}
+.install .how b{color:#5A410A}
+.install .step{display:inline-block;background:#fff;border:1.5px solid #E3CE8F;border-radius:8px;
+               padding:1px 9px;margin:0 3px;font-weight:700;font-size:12.5px}
+.diag{flex-basis:100%;margin-top:8px;border-top:1.5px dashed #E3CE8F;padding-top:9px;font-size:12.5px}
+.diag summary{cursor:pointer;color:#8A6A1E;font-weight:700}
+.diag ul{margin:8px 0 0;padding-left:6px;list-style:none}
+.diag li{padding:2px 0;color:#6B6357}
+.diag .no{color:#B0517A;font-weight:700}
+.diag .yes{color:#3B7A44}
 .install img{width:42px;height:42px;border-radius:11px;flex:none}
 .install .t{flex:1;font-size:13.5px;color:#7A5F1E;line-height:1.5}
 .install .t b{display:block;font-size:15px;color:#5A410A}
@@ -116,9 +126,13 @@ footer{margin-top:36px;text-align:center;font-size:12px;color:#A29A8A}
 
 <div class="install" id="inst">
   <img src="app/icon-192.png" alt="">
-  <div class="t"><b>홈 화면에 앱으로 두기</b>
-  한 번 설치하면 인터넷이 없어도 지난 학습지와 복습 퀴즈를 쓸 수 있어요.</div>
-  <button class="btn p" onclick="doInstall()">설치</button>
+  <div class="t"><b id="instTitle">앱으로 두고 쓰기</b>
+  <span id="instLead">한 번 설치하면 인터넷이 없어도 지난 학습지와 복습 퀴즈를 쓸 수 있어요.</span></div>
+  <button class="btn p" id="instBtn" onclick="doInstall()" style="display:none">설치</button>
+  <div class="how" id="instHow"></div>
+  <details class="diag" id="instDiag"><summary>설치가 안 되면 여기를 눌러 상태 보기</summary>
+    <ul id="diagList"><li>확인하는 중…</li></ul>
+  </details>
 </div>
 <div class="offline" id="offmsg">📴 지금은 인터넷에 연결되어 있지 않아요. 이미 열어 본 학습지는 그대로 볼 수 있어요.</div>
 
@@ -266,38 +280,128 @@ async function hardRefresh() {
 }
 
 let deferredPrompt = null;
+
 window.addEventListener("beforeinstallprompt", ev => {
   ev.preventDefault();
   deferredPrompt = ev;
-  document.getElementById("inst").classList.add("on");
+  const b = document.getElementById("instBtn");
+  if (b) b.style.display = "";
+  setHow("<b>준비됐어요.</b> 오른쪽 ‘설치’ 단추를 누르세요.");
 });
 function doInstall() {
   if (!deferredPrompt) return;
   deferredPrompt.prompt();
   deferredPrompt.userChoice.finally(() => {
     deferredPrompt = null;
-    document.getElementById("inst").classList.remove("on");
+    const b = document.getElementById("instBtn");
+    if (b) b.style.display = "none";
   });
 }
 window.addEventListener("appinstalled", () => {
-  document.getElementById("inst").classList.remove("on");
+  const c = document.getElementById("inst");
+  if (c) c.classList.add("done");
+  document.getElementById("instTitle").textContent = "앱으로 설치됐어요";
+  setHow("이제 홈 화면(또는 독)의 부엉이 아이콘으로 바로 열 수 있어요.");
+  const b = document.getElementById("instBtn");
+  if (b) b.style.display = "none";
 });
 
-/* 아이폰은 beforeinstallprompt 가 없어서 방법을 글로 알려 준다 */
+function setHow(html) {
+  const el = document.getElementById("instHow");
+  if (el) el.innerHTML = html;
+}
+function chip(t) { return '<span class="step">' + t + '</span>'; }
+
+/* ---- 기기별 설치 방법 안내 ---- */
 (function () {
-  const ios = /iPad|iPhone|iPod/.test(navigator.userAgent);
+  const ua = navigator.userAgent;
+  const ios = /iPad|iPhone|iPod/.test(ua)
+           || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  const android = /Android/.test(ua);
+  const edge = /Edg\//.test(ua);
+  const chrome = /Chrome\//.test(ua) && !edge;
+  const safari = /Safari\//.test(ua) && !/Chrome\//.test(ua) && !edge;
+  const inApp = /KAKAOTALK|NAVER|Instagram|FBAN|FBAV|Line\//i.test(ua);
   const standalone = window.matchMedia("(display-mode: standalone)").matches
                   || window.navigator.standalone === true;
-  const tip = document.getElementById("iostip");
-  if (!tip) return;
-  if (standalone) return;
-  if (ios) {
-    tip.innerHTML = "아이폰·아이패드는 사파리에서 아래 <b>공유 버튼(⬆️)</b> → "
-                  + "<b>‘홈 화면에 추가’</b> 를 누르면 앱처럼 쓸 수 있어요.";
-  } else if (location.protocol === "file:") {
-    tip.innerHTML = "지금은 파일을 직접 열어 보고 있어요. "
-                  + "웹 주소로 열면 홈 화면 앱으로 설치할 수 있습니다.";
+
+  if (standalone) {
+    document.getElementById("inst").classList.add("done");
+    document.getElementById("instTitle").textContent = "이미 앱으로 열려 있어요";
+    setHow("잘 설치되어 있습니다. 인터넷이 없어도 지난 학습지를 볼 수 있어요.");
+    document.getElementById("instDiag").style.display = "none";
+    return;
   }
+
+  if (inApp) {
+    setHow("<b>지금은 카카오톡·네이버 같은 앱 안의 브라우저로 보고 있어요.</b> "
+         + "여기서는 설치가 안 됩니다. 오른쪽 아래 " + chip("⋯")
+         + " 를 눌러 <b>‘다른 브라우저로 열기’</b>(크롬 또는 사파리)를 고른 뒤 다시 해 보세요.");
+  } else if (ios) {
+    setHow("<b>아이폰·아이패드</b>는 설치 단추가 없어요. 사파리에서 화면 아래 "
+         + chip("공유 ⬆") + " → 목록을 내려 " + chip("홈 화면에 추가")
+         + " → " + chip("추가") + " 를 누르세요. (크롬 앱에서는 안 나옵니다)");
+  } else if (android) {
+    setHow("<b>안드로이드 크롬</b>이라면 오른쪽 위 " + chip("⋮") + " → "
+         + chip("앱 설치") + " 또는 " + chip("홈 화면에 추가") + " 를 누르세요.");
+  } else if (chrome || edge) {
+    setHow("<b>컴퓨터 " + (edge ? "엣지</b>라면" : "크롬</b>이라면") + " 주소창 오른쪽 끝의 "
+         + chip("⊕") + " 또는 " + chip("🖥️") + " 모양 아이콘을 누르세요. "
+         + "안 보이면 오른쪽 위 " + chip("⋮") + " → "
+         + (edge ? chip("app") + " → " + chip("이 사이트를 앱으로 설치")
+                 : chip("전송, 저장 및 공유") + " → " + chip("페이지를 앱으로 설치"))
+         + " 로도 됩니다.");
+  } else if (safari) {
+    setHow("<b>맥 사파리</b>는 위쪽 메뉴 " + chip("파일") + " → " + chip("독에 추가")
+         + " 를 누르면 앱처럼 쓸 수 있어요. (사파리 17 이상)");
+  } else {
+    setHow("브라우저 메뉴에서 <b>‘앱 설치’</b> 또는 <b>‘홈 화면에 추가’</b> 를 찾아 누르세요.");
+  }
+})();
+
+/* ---- 설치가 되려면 갖춰야 할 조건을 스스로 점검 ---- */
+(async function () {
+  const out = [];
+  const mark = (ok, good, bad) =>
+    out.push('<li class="' + (ok ? "yes" : "no") + '">' + (ok ? "✅ " : "⚠️ ") + (ok ? good : bad) + "</li>");
+
+  const host = location.hostname;
+  const secure = location.protocol === "https:" || host === "localhost";
+  mark(secure, "안전한 주소(https)로 열렸습니다",
+       "주소가 https 가 아닙니다 — 지금 주소: " + location.protocol + "//" + host
+       + " · 파일을 직접 열거나 http 로 열면 설치가 안 됩니다");
+
+  const onGitHub = /(^|\.)github\.com$/.test(host);
+  mark(!onGitHub, "학습지 사이트 주소가 맞습니다",
+       "<b>여기는 깃허브 저장소 화면입니다.</b> 학습지 사이트 주소는 "
+       + "<b>아이디.github.io</b> 처럼 생겼습니다. 저장소의 Settings → Pages 에 적힌 주소로 들어가세요");
+
+  try {
+    const r = await fetch("manifest.webmanifest", { cache: "no-store" });
+    const m = await r.json();
+    mark(true, "앱 정보 파일을 읽었습니다 (" + m.short_name + ")", "");
+    let iconOk = true;
+    for (const ic of m.icons) {
+      const ir = await fetch(ic.src, { method: "GET", cache: "no-store" });
+      if (!ir.ok) iconOk = false;
+    }
+    mark(iconOk, "앱 아이콘 " + m.icons.length + "개를 모두 찾았습니다",
+         "아이콘 파일이 없습니다 — app 폴더를 올렸는지 확인하세요");
+  } catch (e) {
+    mark(false, "", "앱 정보 파일(manifest.webmanifest)을 못 읽었습니다 — 이 파일을 올렸는지 확인하세요");
+  }
+
+  if ("serviceWorker" in navigator) {
+    try {
+      const reg = await navigator.serviceWorker.getRegistration();
+      mark(!!reg, "오프라인 기능이 켜져 있습니다",
+           "오프라인 기능이 아직 안 켜졌습니다 — 화면을 한 번 새로고침 해 보세요");
+    } catch (e) { mark(false, "", "오프라인 기능 확인에 실패했습니다"); }
+  } else {
+    mark(false, "", "이 브라우저는 앱 설치를 지원하지 않습니다");
+  }
+
+  document.getElementById("diagList").innerHTML = out.join("");
 })();
 
 /* 인터넷 연결 상태 표시 */
