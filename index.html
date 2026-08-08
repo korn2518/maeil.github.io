@@ -205,7 +205,10 @@ footer{margin-top:36px;text-align:center;font-size:12px;color:#A29A8A}
 </div>
 
 <footer>이 페이지는 매일 아침 자동으로 새로 만들어집니다.
-<div class="tip" id="iostip"></div></footer>
+<div class="tip" id="iostip"></div>
+<div class="tip">화면이 옛날 것으로 보이거나 학습지가 안 열리면
+<button class="btn s" style="padding:6px 16px;font-size:13px" onclick="hardRefresh()">🔄 새로 받아오기</button></div>
+</footer>
 </div>
 
 <script>
@@ -232,6 +235,34 @@ if ("serviceWorker" in navigator && location.protocol !== "file:") {
   window.addEventListener("load", () => {
     navigator.serviceWorker.register("sw.js").catch(() => {});
   });
+}
+
+/* 새 버전이 준비되면 화면을 한 번만 자동으로 새로 고친다.
+   (이게 없으면 학습지를 새로 올려도 기기에 저장된 옛 화면이 계속 뜬다) */
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.addEventListener("message", ev => {
+    if (ev.data && ev.data.type === "updated") {
+      if (sessionStorage.getItem("swReloaded") === ev.data.version) return;
+      sessionStorage.setItem("swReloaded", ev.data.version);
+      location.reload();
+    }
+  });
+}
+
+/* 그래도 옛 화면이 남아 있을 때 쓰는 비상 단추 */
+async function hardRefresh() {
+  try {
+    if ("serviceWorker" in navigator) {
+      const rs = await navigator.serviceWorker.getRegistrations();
+      await Promise.all(rs.map(r => r.unregister()));
+    }
+    if (window.caches) {
+      const ks = await caches.keys();
+      await Promise.all(ks.map(k => caches.delete(k)));
+    }
+    sessionStorage.removeItem("swReloaded");
+  } catch (e) {}
+  location.replace(location.pathname + "?v=" + Date.now());
 }
 
 let deferredPrompt = null;
