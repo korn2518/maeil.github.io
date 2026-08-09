@@ -86,6 +86,8 @@
       html += "</div>";
     }
 
+    if (isEssay) html += '<div class="hlwrap" id="penPassage"></div>';
+
     html += '<div class="penpad" id="penPad"></div>';
 
     if (!isEssay && !q.choices) {
@@ -99,6 +101,10 @@
 
     html += '<div class="fb" id="penFb"></div>';
     el("penBody").innerHTML = html;
+
+    if (isEssay && window.showPassages) {
+      window.showPassages(el("penPassage"), q.date, 0);
+    }
 
     pad = new Pen.Pad(el("penPad"), "ink:" + q.date + ":" + (isEssay ? "e" : "m") + (q.no || 1),
                       { height: isEssay ? 320 : 260 });

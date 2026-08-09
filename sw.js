@@ -1,6 +1,6 @@
 /* 매일학습지 서비스워커 — 한 번 열어 본 학습지는 인터넷 없이도 볼 수 있게 저장한다. */
-const CACHE = "maeil-3b65f0954e";
-const ASSETS = ["./", "./index.html", "./review-data.js", "./manifest.webmanifest", "./app/pen.js", "./app/pentab.js", "./app/icon-192.png", "./app/icon-512.png", "./app/icon-maskable-512.png", "./app/apple-touch-icon.png", "./sheets/2026-08-05.html", "./sheets/2026-08-06.html", "./sheets/2026-08-07.html", "./sheets/2026-08-08.html"];
+const CACHE = "maeil-7b4be09870";
+const ASSETS = ["./", "./index.html", "./review-data.js", "./manifest.webmanifest", "./app/pen.js", "./app/pentab.js", "./app/hl.js", "./app/logo.png", "./app/icon-192.png", "./app/icon-512.png", "./app/icon-maskable-512.png", "./app/apple-touch-icon.png", "./sheets/2026-08-05.html", "./sheets/2026-08-06.html", "./sheets/2026-08-07.html", "./sheets/2026-08-08.html", "./sheets/2026-08-09.html"];
 
 self.addEventListener("install", e => {
   e.waitUntil(
