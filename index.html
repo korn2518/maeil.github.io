@@ -1,857 +1,573 @@
-<!DOCTYPE html>
-<html lang="ko"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>초등 국어·영어·수학 학습지 아카이브</title>
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="theme-color" content="#C88A4B">
+<title>곰돌이 학습장</title>
 <link rel="manifest" href="manifest.webmanifest">
-<meta name="theme-color" content="#F0C24B">
 <link rel="apple-touch-icon" href="app/apple-touch-icon.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="매일학습지">
-<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="곰돌이 학습장">
 <style>
-*{box-sizing:border-box}
-body{margin:0;background:#F7F5EF;font-family:"Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",sans-serif;color:#2E2A26;line-height:1.7}
-.wrap{max-width:900px;margin:0 auto;padding:26px 20px 60px}
-header{display:flex;align-items:center;gap:14px;background:#fff;border-radius:20px;padding:20px 24px;box-shadow:0 2px 12px rgba(0,0,0,.06)}
-header h1{margin:0;font-size:22px}
-header p{margin:4px 0 0;font-size:13.5px;color:#7A6E5E}
-.deco{width:58px;height:58px;flex:none;border-radius:14px;object-fit:contain}
-.stats{display:flex;gap:12px;margin-top:16px;flex-wrap:wrap}
-.stat{flex:1;min-width:130px;background:#fff;border-radius:16px;padding:14px 18px;box-shadow:0 2px 8px rgba(0,0,0,.05);border-left:7px solid #F0C24B}
-.stat b{display:block;font-size:26px;color:#1F4E79}
-.stat span{font-size:12.5px;color:#8A8272}
-.tabs{display:flex;gap:8px;margin:26px 0 14px;flex-wrap:wrap}
-.tabs button{border:2px solid #E2DACA;background:#fff;border-radius:999px;padding:8px 20px;font-size:14.5px;font-weight:700;color:#7A6E5E;cursor:pointer;font-family:inherit}
-.tabs button.on{background:#F0C24B;border-color:#F0C24B;color:#5A410A}
-.panel{display:none}.panel.on{display:block}
-.card{background:#fff;border-radius:16px;padding:18px 22px;box-shadow:0 2px 8px rgba(0,0,0,.05);margin-bottom:12px}
-.card a{color:#1F4E79;font-weight:700;text-decoration:none;font-size:16px}
-.card a:hover{text-decoration:underline}
-.chip{display:inline-block;background:#FFF3D6;color:#8A6A1E;border-radius:999px;padding:2px 11px;font-size:12px;font-weight:700;margin-right:8px}
-.meta{font-size:13px;color:#8A8272;margin-top:6px}
-.wordpills{margin-top:8px;font-size:12.5px;color:#5C6B78;font-family:Georgia,serif}
-.flash{background:#fff;border-radius:20px;padding:40px 24px;text-align:center;box-shadow:0 2px 10px rgba(0,0,0,.06)}
-.flash .fw{font-size:44px;font-weight:700;color:#1F4E79;font-family:Georgia,serif;min-height:56px}
-.flash .fm{font-size:21px;color:#B0517A;min-height:32px;margin-top:10px}
-.flash .fx{font-size:14px;color:#8A8272;min-height:24px;margin-top:8px}
-.btn{border:none;border-radius:999px;padding:10px 24px;font-size:14.5px;font-weight:700;cursor:pointer;font-family:inherit;margin:4px}
-.btn.p{background:#F0C24B;color:#5A410A}.btn.s{background:#DCEBF7;color:#3C6690}
-.btn.g{background:#D6EFD3;color:#3B7A44}.btn.r{background:#FBDDE5;color:#B0517A}
-.qz{background:#fff;border-radius:16px;padding:20px 24px;box-shadow:0 2px 8px rgba(0,0,0,.05)}
-.qz .qq{font-size:19px;font-weight:700;margin-bottom:14px}
-.qz .opt{display:block;width:100%;text-align:left;border:2px solid #E2DACA;background:#FCFAF5;border-radius:12px;padding:11px 16px;margin-bottom:8px;font-size:15px;cursor:pointer;font-family:inherit}
-.qz .opt:hover{border-color:#F0C24B}
-.qz .opt.ok{background:#E4F5E1;border-color:#7CC183}
-.qz .opt.no{background:#FBE3E9;border-color:#E68FA6}
-.qz .fb{margin-top:12px;font-size:14px;padding:12px 16px;border-radius:12px;background:#F4EFE2;display:none}
-.bar{height:9px;background:#EDE7DA;border-radius:999px;overflow:hidden;margin-bottom:16px}
-.bar i{display:block;height:100%;background:#7CC183;width:0;transition:width .3s}
-.tin{width:100%;max-width:340px;border:2.5px solid #CFE3F5;border-radius:12px;padding:12px 16px;font-size:20px;
-     font-family:Georgia,serif;color:#1F4E79;background:#F8FBFF;outline:none;letter-spacing:.5px}
-.tin:focus{border-color:#79ACDD;background:#fff}
-.tin.ok{border-color:#7CC183;background:#F1FAF0}
-.tin.no{border-color:#E68FA6;background:#FDF2F5}
-.hintbox{margin-top:9px;font-size:14px;color:#8A8272;font-family:Georgia,serif;letter-spacing:3px}
-.empty{color:#8A8272;font-size:14px;text-align:center;padding:30px}
-footer{margin-top:36px;text-align:center;font-size:12px;color:#A29A8A}
-.spk{border:none;background:#DCEBF7;color:#3C6690;border-radius:999px;width:44px;height:44px;
-     font-size:20px;cursor:pointer;vertical-align:middle;margin-left:10px;line-height:1}
-.spk:hover{background:#C4DDF2}
-.spk.sm{width:34px;height:34px;font-size:16px;margin-left:7px}
-.spkbar{margin-top:14px;font-size:13px;color:#7A6E5E;display:flex;gap:14px;
-        justify-content:center;flex-wrap:wrap;align-items:center}
-.spkbar label{cursor:pointer;background:#fff;border:2px solid #E2DACA;border-radius:999px;
-              padding:5px 14px;font-weight:700}
-.spkbar label.on{background:#E4F5E1;border-color:#7CC183;color:#3B7A44}
-.spkbar input{vertical-align:-2px;margin-right:5px}
-.nosp{color:#B0517A;font-size:12.5px}
-.mq2{font-size:17.5px;font-weight:700;line-height:1.6;white-space:pre-wrap}
-.mchip{display:inline-block;font-size:12px;color:#3C6690;background:#DCEBF7;border-radius:999px;
-       padding:2px 10px;font-weight:700;margin-right:6px}
-.mhow{font-size:13px;color:#8A8272;margin-top:6px}
-.penbar{display:flex;gap:7px;flex-wrap:wrap;align-items:center;margin-bottom:8px}
-.pentool{border:2px solid #E2DACA;background:#fff;border-radius:999px;padding:7px 15px;
-         font-size:13.5px;font-weight:700;color:#7A6E5E;cursor:pointer;font-family:inherit}
-.pentool.on{background:#DCEBF7;border-color:#79ACDD;color:#26506F}
-.penfinger{font-size:12.5px;color:#8A8272;margin-left:auto;cursor:pointer}
-.penfinger input{vertical-align:-2px;margin-right:4px}
-.penwrap{position:relative;border:2.5px dashed #CFE3F5;border-radius:14px;background:#FCFEFF;
-         overflow:hidden;background-image:repeating-linear-gradient(to bottom,transparent 0 33px,#EAF2F9 33px 34px)}
-.pencanvas{display:block;touch-action:none;-ms-touch-action:none;cursor:crosshair}
-.penhead{display:flex;align-items:center;gap:12px;margin-bottom:12px}
-.penprog{flex:1;height:8px;background:#EDE7DA;border-radius:999px;overflow:hidden}
-.penprog i{display:block;height:100%;background:#7CC183;transition:width .3s}
-.pencnt{font-size:13px;color:#8A8272;font-weight:700;white-space:nowrap}
-.penq{font-size:17.5px;font-weight:700;line-height:1.65;white-space:pre-wrap;margin-bottom:12px}
-.penopts{margin-bottom:12px}
-.penpad{margin:12px 0}
-.penans{display:flex;align-items:center;gap:10px;margin-top:12px}
-.penanslabel{font-size:14px;font-weight:700;color:#3C6690}
-.pentyped{flex:1;min-height:46px;border:2.5px solid #CFE3F5;border-radius:12px;background:#F8FBFF;
-          padding:8px 14px;font-size:22px;font-family:Georgia,serif;color:#1F4E79;letter-spacing:1px}
-.pentyped.ok{border-color:#7CC183;background:#F1FAF0}
-.pentyped.no{border-color:#E68FA6;background:#FDF2F5}
-.npd{margin-top:10px}
-.nprow{display:flex;gap:7px;margin-bottom:7px}
-.npk{flex:1;border:2px solid #E2DACA;background:#fff;border-radius:12px;padding:14px 0;
-     font-size:20px;font-weight:700;color:#3C6690;cursor:pointer;font-family:inherit}
-.npk:active{background:#DCEBF7}
-.npk.wide{flex:2;font-size:15px}
+:root{
+  --cream:#FFF8EF; --card:#FFFFFF; --ink:#3D2B1F; --sub:#8A7461;
+  --bear:#C88A4B; --bear-d:#8B5A2B; --bear-l:#F0D9BE;
+  --ko:#FF8A4C; --ko-l:#FFEDE2;
+  --ma:#3FAF6E; --ma-l:#E4F6EB;
+  --en:#4C93F0; --en-l:#E6F0FE;
+  --ok:#2E9E5B; --no:#E2574C; --line:#EFE2D2;
+  --r:20px; --sh:0 3px 0 rgba(139,90,43,.14), 0 8px 24px rgba(139,90,43,.10);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{
+  background:var(--cream); color:var(--ink);
+  font-family:"Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",system-ui,-apple-system,sans-serif;
+  font-size:17px; line-height:1.65; padding-bottom:env(safe-area-inset-bottom);
+}
+button{font-family:inherit;font-size:inherit;color:inherit;cursor:pointer;border:0;background:none}
+.wrap{max-width:760px;margin:0 auto;padding:0 16px 48px}
+
+/* ---------- 머리글 ---------- */
+header{
+  position:sticky;top:0;z-index:30;background:rgba(255,248,239,.94);
+  backdrop-filter:saturate(150%) blur(8px);border-bottom:2px solid var(--line);
+}
+.hd{max-width:760px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:10px}
+.hd .logo{width:40px;height:40px;border-radius:12px;flex:0 0 auto;box-shadow:var(--sh)}
+.hd h1{font-size:19px;margin:0;font-weight:800;letter-spacing:-.4px;flex:1}
+.hd .who{font-size:13px;color:var(--sub);font-weight:700}
+.iconbtn{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;
+  background:var(--bear-l);font-size:19px;flex:0 0 auto}
+.iconbtn:active{transform:translateY(1px)}
+.backbtn{display:inline-flex;align-items:center;gap:6px;font-weight:800;color:var(--bear-d);
+  padding:10px 4px;margin:6px 0 2px;font-size:16px}
+
+/* ---------- 화면 전환 ---------- */
+.screen{display:none;animation:pop .22s ease}
+.screen.on{display:block}
+@keyframes pop{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* ---------- 곰돌이 ---------- */
+.bear{display:block}
+.bearbox{display:grid;place-items:center;padding:6px 0 2px}
+.speech{
+  background:var(--card);border:2px solid var(--line);border-radius:18px;
+  padding:10px 16px;font-weight:700;text-align:center;position:relative;margin:6px auto 14px;
+  max-width:420px;box-shadow:var(--sh)
+}
+.speech:after{content:"";position:absolute;top:-9px;left:50%;transform:translateX(-50%) rotate(45deg);
+  width:14px;height:14px;background:var(--card);border-left:2px solid var(--line);border-top:2px solid var(--line)}
+
+/* ---------- 학년 고르기 ---------- */
+.gradegrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:4px 0 22px}
+.gbtn{
+  background:var(--card);border:2px solid var(--line);border-radius:var(--r);
+  padding:16px 8px 12px;text-align:center;box-shadow:var(--sh);transition:transform .12s
+}
+.gbtn:active{transform:translateY(2px)}
+.gbtn.sel{border-color:var(--bear);background:#FFF3E4}
+.gbtn .num{font-size:26px;font-weight:900;color:var(--bear-d);line-height:1.1}
+.gbtn .lb{font-size:13px;color:var(--sub);font-weight:700}
+
+/* ---------- 과목 카드 ---------- */
+.subj{display:grid;gap:14px;margin-top:6px}
+.scard{
+  display:flex;align-items:center;gap:14px;background:var(--card);border:2px solid var(--line);
+  border-radius:var(--r);padding:16px;box-shadow:var(--sh);text-align:left;width:100%;transition:transform .12s
+}
+.scard:active{transform:translateY(2px)}
+.scard .ic{width:56px;height:56px;border-radius:16px;display:grid;place-items:center;flex:0 0 auto}
+.scard .tt{flex:1;min-width:0}
+.scard .tt b{display:block;font-size:19px;font-weight:800;letter-spacing:-.3px}
+.scard .tt span{font-size:13.5px;color:var(--sub);font-weight:600}
+.scard .go{font-size:22px;color:var(--bear);font-weight:900}
+.scard.ko .ic{background:var(--ko-l)} .scard.ma .ic{background:var(--ma-l)} .scard.en .ic{background:var(--en-l)}
+.scard.done{background:#F6FBF7;border-color:#BFE6CD}
+.badge{display:inline-block;font-size:12px;font-weight:800;padding:3px 9px;border-radius:999px;
+  background:var(--bear-l);color:var(--bear-d);margin-left:6px;vertical-align:2px}
+.badge.ok{background:#DCF3E4;color:var(--ok)}
+.stepno{font-size:12px;font-weight:900;color:#fff;background:var(--bear);border-radius:999px;
+  width:20px;height:20px;display:inline-grid;place-items:center;margin-right:6px;vertical-align:-3px}
+
+/* ---------- 진행 막대 ---------- */
+.pbar{height:12px;background:var(--bear-l);border-radius:999px;overflow:hidden;margin:12px 0 6px}
+.pbar i{display:block;height:100%;background:var(--bear);border-radius:999px;transition:width .3s}
+.pmeta{display:flex;justify-content:space-between;font-size:13px;color:var(--sub);font-weight:700}
+.pacenote{margin-top:8px;font-size:13px;font-weight:700;border-radius:12px;padding:8px 12px;
+  background:#FFF3E4;color:var(--bear-d);border:2px solid var(--bear-l)}
+.pacenote.ok{background:#E9F8EE;border-color:#BFE6CD;color:var(--ok)}
+.pacenote.warn{background:#FFF6E6;border-color:#F3DDB3;color:#A9761B}
+.pacenote:empty{display:none}
+
+/* ---------- 홈 화면 설치 안내 ---------- */
+.instbox{background:var(--card);border:2px solid var(--bear-l);border-radius:var(--r);
+  padding:16px;box-shadow:var(--sh);margin:0 0 18px}
+.instbox h4{margin:0 0 6px;font-size:16px;display:flex;align-items:center;gap:7px}
+.instbox p{margin:0 0 4px;font-size:14px;color:var(--sub);line-height:1.7}
+.instbox ol{margin:8px 0 0;padding-left:20px;font-size:14.5px;line-height:1.9}
+.instbox .kbd{display:inline-block;background:#F6EFE5;border:1px solid var(--line);
+  border-radius:6px;padding:1px 7px;font-size:13px;font-weight:800;color:var(--bear-d)}
+.diag{margin-top:12px;border:2px solid var(--line);border-radius:14px;overflow:hidden}
+.diag div{display:flex;justify-content:space-between;gap:10px;padding:9px 12px;
+  font-size:13.5px;border-top:1px solid var(--line)}
+.diag div:first-child{border-top:0}
+.diag b{font-weight:800}
+.diag .y{color:var(--ok)} .diag .n{color:var(--no)}
+
+/* ---------- 설치 안내 화면 ---------- */
+.iconbtn.hot{background:var(--bear);color:#fff;animation:nudge 2.4s ease-in-out infinite}
+@keyframes nudge{0%,88%,100%{transform:translateY(0)}92%{transform:translateY(-3px)}96%{transform:translateY(0)}}
+.plat{display:flex;gap:8px;margin:6px 0 16px}
+.plat button{flex:1;background:var(--card);border:2px solid var(--line);border-radius:14px;
+  padding:11px 6px;font-size:14px;font-weight:800;color:var(--sub);box-shadow:var(--sh)}
+.plat button.on{border-color:var(--bear);background:#FFF3E4;color:var(--bear-d)}
+.steps{display:grid;gap:10px;margin:0}
+.step{display:flex;gap:12px;align-items:flex-start;background:var(--card);border:2px solid var(--line);
+  border-radius:16px;padding:14px;box-shadow:var(--sh)}
+.step .n{flex:0 0 auto;width:28px;height:28px;border-radius:999px;background:var(--bear);color:#fff;
+  display:grid;place-items:center;font-weight:900;font-size:15px}
+.step .tx{flex:1;font-size:15.5px;line-height:1.65;font-weight:600}
+.step .tx small{display:block;font-size:13px;color:var(--sub);font-weight:600;margin-top:3px}
+.kbd{display:inline-block;background:#F6EFE5;border:1.5px solid var(--line);border-radius:7px;
+  padding:1px 8px;font-size:14px;font-weight:800;color:var(--bear-d)}
+.urlbox{display:flex;gap:8px;align-items:center;background:#FDFAF6;border:2px solid var(--line);
+  border-radius:14px;padding:10px 12px;margin-top:14px}
+.urlbox code{flex:1;font-size:13px;word-break:break-all;color:var(--bear-d);font-weight:700}
+.warnbox{background:#FFF6E6;border:2px solid #F3DDB3;border-radius:14px;padding:12px 14px;
+  font-size:14.5px;font-weight:700;color:#A9761B;line-height:1.65;margin-bottom:14px}
+.okbox{background:#E9F8EE;border:2px solid #BFE6CD;border-radius:14px;padding:12px 14px;
+  font-size:14.5px;font-weight:700;color:var(--ok);line-height:1.65;margin-bottom:14px}
+
+/* ---------- 통계 ---------- */
+.range{display:flex;gap:8px;margin:4px 0 14px}
+.range button{flex:1;background:var(--card);border:2px solid var(--line);border-radius:13px;
+  padding:9px 4px;font-size:13.5px;font-weight:800;color:var(--sub);box-shadow:var(--sh)}
+.range button.on{border-color:var(--bear);background:#FFF3E4;color:var(--bear-d)}
+.kpi{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+.kpi div{background:var(--card);border:2px solid var(--line);border-radius:16px;
+  padding:13px 8px;text-align:center;box-shadow:var(--sh)}
+.kpi .t{font-size:12.5px;font-weight:800;color:var(--sub)}
+.kpi .v{font-size:23px;font-weight:900;color:var(--bear-d);line-height:1.25;margin-top:2px}
+.chbox{background:var(--card);border:2px solid var(--line);border-radius:var(--r);
+  padding:15px;box-shadow:var(--sh);margin-bottom:14px}
+.chbox h4{margin:0 0 3px;font-size:16px}
+.chbox .cap{font-size:12.5px;color:var(--sub);font-weight:700;margin-bottom:10px}
+.lgd{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:9px;
+  font-size:12.5px;font-weight:800;color:var(--sub)}
+.lgd span{display:flex;align-items:center;gap:5px}
+.lgd i{width:11px;height:11px;border-radius:3px;display:inline-block}
+.chempty{text-align:center;color:var(--sub);font-weight:700;font-size:14px;padding:26px 0}
+.synced{display:inline-block;font-size:11.5px;font-weight:800;padding:2px 8px;border-radius:999px;
+  background:#DCF3E4;color:var(--ok);margin-left:6px}
+.synced.wait{background:#FFF6E6;color:#A9761B}
+
+/* ---------- 문제 ---------- */
+.qcard{background:var(--card);border:2px solid var(--line);border-radius:var(--r);
+  padding:18px;box-shadow:var(--sh);margin-top:12px}
+.qtag{display:inline-block;font-size:12px;font-weight:800;padding:3px 10px;border-radius:999px;
+  background:var(--bear-l);color:var(--bear-d);margin-bottom:10px}
+.qtext{font-size:19px;font-weight:700;line-height:1.6;margin:2px 0 14px;word-break:keep-all}
+.choices{display:grid;gap:9px}
+.ch{display:flex;gap:10px;align-items:flex-start;background:#FDFAF6;border:2px solid var(--line);
+  border-radius:14px;padding:12px 14px;text-align:left;font-weight:600;line-height:1.5;word-break:keep-all}
+.ch b{flex:0 0 auto;width:24px;height:24px;border-radius:999px;background:var(--bear-l);
+  color:var(--bear-d);display:grid;place-items:center;font-size:13px;font-weight:900}
+.ch.sel{border-color:var(--bear);background:#FFF3E4}
+.ch.right{border-color:var(--ok);background:#E9F8EE}
+.ch.wrong{border-color:var(--no);background:#FDECEA}
+.ansrow{display:flex;gap:8px;align-items:center;margin-top:6px}
+.ansbox{flex:1;font-size:22px;font-weight:800;background:#FDFAF6;border:2px solid var(--line);
+  border-radius:14px;padding:12px 14px;min-height:54px;letter-spacing:.5px}
+.ansbox.right{border-color:var(--ok);background:#E9F8EE}
+.ansbox.wrong{border-color:var(--no);background:#FDECEA}
+textarea.long{width:100%;min-height:120px;font-family:inherit;font-size:17px;line-height:1.6;
+  background:#FDFAF6;border:2px solid var(--line);border-radius:14px;padding:12px 14px;resize:vertical}
+.fb{margin-top:12px;border-radius:14px;padding:12px 14px;font-weight:600;line-height:1.6;font-size:15.5px}
+.fb.ok{background:#E9F8EE;border:2px solid #BFE6CD}
+.fb.no{background:#FDECEA;border:2px solid #F4C7C2}
+.fb b{display:block;margin-bottom:3px}
+
+/* ---------- 지문 ---------- */
+.passage{background:#FFFDF9;border:2px solid var(--line);border-radius:var(--r);padding:18px;margin-top:12px}
+.passage h3{margin:0 0 4px;font-size:20px;letter-spacing:-.4px}
+.passage .gen{font-size:12.5px;color:var(--sub);font-weight:800;margin-bottom:10px}
+.passage p{margin:0 0 11px;line-height:1.85;word-break:keep-all}
+.hardw{margin-top:10px;padding-top:10px;border-top:1px dashed var(--line);font-size:14px;color:var(--sub)}
+.hardw b{color:var(--bear-d)}
+
+/* ---------- 낱말 ---------- */
+.wordcard{background:var(--card);border:2px solid var(--line);border-radius:var(--r);
+  padding:26px 18px;text-align:center;box-shadow:var(--sh);margin-top:12px}
+.wordcard .en{font-size:38px;font-weight:900;letter-spacing:.5px;color:var(--en)}
+.wordcard .ko{font-size:22px;font-weight:800;margin-top:8px}
+.wordcard .pos{font-size:13px;color:var(--sub);font-weight:700}
+.alpha{font-size:52px;font-weight:900;color:var(--en);letter-spacing:4px}
+
+/* ---------- 버튼 ---------- */
+.btn{display:block;width:100%;background:var(--bear);color:#fff;font-weight:800;font-size:18px;
+  border-radius:16px;padding:15px;box-shadow:0 3px 0 var(--bear-d);margin-top:14px}
+.btn:active{transform:translateY(2px);box-shadow:0 1px 0 var(--bear-d)}
+.btn[disabled]{opacity:.45;box-shadow:none}
+.btn.ghost{background:var(--card);color:var(--bear-d);border:2px solid var(--bear-l);box-shadow:var(--sh)}
+.btn.sm{font-size:15px;padding:11px;border-radius:13px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+
+/* ---------- 필기판 (pen.js 가 만드는 구조) ---------- */
+.penbox{margin-top:12px;background:#fff;border:2px dashed var(--bear-l);border-radius:16px;overflow:hidden}
+.penlabel{font-size:13px;color:var(--sub);font-weight:800;margin:12px 0 5px}
+.penbar{display:flex;gap:6px;padding:8px;border-bottom:1px solid var(--line);flex-wrap:wrap;align-items:center;background:#FFFDF9}
+.pentool{font-size:13px;font-weight:800;padding:6px 11px;border-radius:10px;background:#FDFAF6;border:2px solid var(--line)}
+.pentool.on{background:var(--bear-l);border-color:var(--bear)}
+.penfinger{font-size:12px;color:var(--sub);margin-left:auto;display:flex;align-items:center;gap:5px;font-weight:700}
+.penwrap{position:relative;width:100%}
+.pencanvas{display:block;width:100%;height:100%;touch-action:none;
+  background-image:repeating-linear-gradient(180deg,transparent 0 43px,#F3EADD 43px 44px)}
+.npd{margin-top:9px}
+.nprow{display:flex;gap:6px;margin-bottom:6px}
+.npk{flex:1;background:#FDFAF6;border:2px solid var(--line);border-radius:12px;padding:13px 0;
+  font-size:19px;font-weight:800}
+.npk.wide{flex:1.4;font-size:15px}
 .npk.sm{font-size:15px;padding:11px 0}
-.nprow.extra .npk{background:#FFFDF4;border-color:#F0C24B;color:#8A6A1E}
-.pensel b{font-size:16px}
-.penchips{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
-.penchip{border:2px solid #E2DACA;background:#fff;border-radius:14px;padding:12px 18px;
-         font-size:15px;font-weight:700;color:#1F4E79;cursor:pointer;font-family:inherit;text-align:left}
-.penchip:hover{border-color:#F0C24B}
-.penchip span{display:block;font-size:12px;color:#8A8272;font-weight:400;margin-top:3px}
-.pendone{text-align:center;padding:34px 20px}
-.pendoneicon{font-size:46px}
-.pendone b{display:block;font-size:19px;margin:10px 0 6px}
-.pendone p{color:#8A8272;font-size:14px;margin:0 0 18px}
-.penhint{background:#F4FAFF;border-left:6px solid #79ACDD;border-radius:10px;padding:10px 15px;
-         font-size:13px;color:#26506F;margin-bottom:12px}
-.hlbar{display:flex;gap:7px;flex-wrap:wrap;align-items:center;margin-bottom:9px}
-.hltool{border:2px solid #E2DACA;background:#fff;border-radius:999px;padding:7px 15px;
-        font-size:13.5px;font-weight:700;color:#7A6E5E;cursor:pointer;font-family:inherit}
-.hltool.on{background:#FFF3D6;border-color:#F0C24B;color:#5A410A}
+.npk:active{background:var(--bear-l)}
+
+/* ---------- 형광펜 (hl.js 가 만드는 구조) ---------- */
+.hlbar{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-bottom:10px}
 .hlcolors{display:flex;gap:5px}
-.hlc{border:2.5px solid #DED7C7;border-radius:999px;padding:6px 13px;font-size:12.5px;
-     font-weight:700;color:#5C5347;cursor:pointer;font-family:inherit}
-.hlc.on{border-color:#8A8272;box-shadow:0 0 0 2px #fff inset}
-.hlpassage{border:2.5px solid #DCEBF7;border-radius:16px;padding:16px 19px;background:#FBFDFF;
-           font-size:15.5px;line-height:1.95}
-.hlpassage.marking{border-color:#F0C24B;background:#FFFEF9;cursor:crosshair}
-.hlpassage .genre{display:inline-block;font-size:12px;font-weight:700;color:#3C6690;
-                  background:#DCEBF7;border-radius:999px;padding:2px 11px}
-.hlpassage h4{margin:9px 0 11px;font-size:18px}
-.hlpassage p{margin:0 0 11px;text-indent:.4em}
-.hlwords{margin-top:12px;padding-top:9px;border-top:1.5px dashed #C9DCEB;font-size:12.5px;color:#5C6B78}
-.hlwords b{color:#26506F}
-.hw{border-radius:4px;padding:1px 0}
+.hlc{min-width:56px;height:34px;border-radius:11px;border:2.5px solid var(--line);
+  font-size:11.5px;font-weight:800;color:#4A3826;padding:0 8px}
+.hlc.on{border-color:var(--bear-d);box-shadow:0 0 0 2px #fff inset;transform:scale(1.05)}
+.hltool{font-size:13px;font-weight:800;padding:7px 11px;border-radius:10px;
+  background:#FDFAF6;border:2px solid var(--line)}
+.hltool.on{background:var(--bear-l);border-color:var(--bear)}
+.hlhint{width:100%;font-size:12.5px;color:var(--sub);font-weight:700;margin-top:2px}
+
+.hlpassage{touch-action:pan-y;border:2px dashed transparent;border-radius:14px;
+  margin:0 -8px;padding:8px;transition:background .15s,border-color .15s}
+.hlpassage.marking{border-color:var(--bear);background:#FFFDF5;cursor:crosshair}
 .hlpassage.marking .hw{cursor:crosshair}
-.m-y{background:#FFE9A8;box-shadow:0 0 0 2px #FFE9A8}
-.m-b{background:#CFE6FA;box-shadow:0 0 0 2px #CFE6FA}
-.m-p{background:#FBD5E2;box-shadow:0 0 0 2px #FBD5E2}
-.hlwrap{margin-bottom:14px}
-.hltabs{display:flex;gap:6px;margin-bottom:8px}
-.hltabs button{border:2px solid #E2DACA;background:#fff;border-radius:999px;padding:6px 16px;
-               font-size:13px;font-weight:700;color:#7A6E5E;cursor:pointer;font-family:inherit}
-.hltabs button.on{background:#DCEBF7;border-color:#79ACDD;color:#26506F}
-.install{display:flex;align-items:flex-start;gap:13px;background:#FFF3D6;border:2.5px solid #F0C24B;
-         border-radius:16px;padding:14px 16px;margin-top:16px;flex-wrap:wrap}
-.install.done{background:#EEF7EC;border-color:#7CC183}
-.install .how{flex-basis:100%;font-size:13.5px;color:#7A5F1E;margin-top:2px;line-height:1.7}
-.install .how b{color:#5A410A}
-.install .step{display:inline-block;background:#fff;border:1.5px solid #E3CE8F;border-radius:8px;
-               padding:1px 9px;margin:0 3px;font-weight:700;font-size:12.5px}
-.diag{flex-basis:100%;margin-top:8px;border-top:1.5px dashed #E3CE8F;padding-top:9px;font-size:12.5px}
-.diag summary{cursor:pointer;color:#8A6A1E;font-weight:700}
-.diag ul{margin:8px 0 0;padding-left:6px;list-style:none}
-.diag li{padding:2px 0;color:#6B6357}
-.diag .no{color:#B0517A;font-weight:700}
-.diag .yes{color:#3B7A44}
-.install img{width:42px;height:42px;border-radius:11px;flex:none}
-.install .t{flex:1;font-size:13.5px;color:#7A5F1E;line-height:1.5}
-.install .t b{display:block;font-size:15px;color:#5A410A}
-.offline{display:none;background:#EDEAE2;color:#6B6357;border-radius:12px;padding:9px 14px;
-         font-size:13px;margin-top:12px}
-.offline.on{display:block}
-.tip{font-size:12.5px;color:#8A8272;margin-top:10px;line-height:1.6}
-@media (max-width:640px){
-  .wrap{padding:14px 12px 44px}
-  header{padding:14px 16px;gap:10px;border-radius:16px}
-  header h1{font-size:17px}
-  header p{font-size:12px}
-  .deco{width:44px;height:44px}
-  .stat{min-width:calc(50% - 6px);padding:11px 14px}
-  .stat b{font-size:22px}
-  .tabs{gap:6px;margin:18px 0 10px}
-  .tabs button{padding:7px 14px;font-size:13px}
-  .card{padding:14px 16px}
-  .card a{font-size:15px}
-  .qz{padding:16px 15px}
-  .qz .qq{font-size:17px}
-  .qz .opt{font-size:14.5px;padding:12px 14px}
-  .flash{padding:28px 16px}
-  .flash .fw{font-size:36px;min-height:46px}
-  .flash .fm{font-size:19px}
-  .btn{padding:11px 18px;font-size:14px}
-  .tin{font-size:19px}
-  .mq2{font-size:16px}
-}
-</style></head><body><div class="wrap">
+.hlpassage .genre{font-size:12.5px;color:var(--sub);font-weight:800}
+.hlpassage h4{margin:2px 0 10px;font-size:20px;letter-spacing:-.4px}
+.hlpassage p{margin:0 0 11px;line-height:1.95;word-break:keep-all}
+.hlwords{margin-top:12px;padding-top:10px;border-top:1px dashed var(--line);
+  font-size:14px;color:var(--sub);line-height:1.8}
+.hlwords b{color:var(--bear-d)}
 
-<header><img src="app/logo.png" class="deco" alt=""><div><h1>초등 국어·영어·수학 학습지 아카이브</h1>
-<p>매일 쌓이는 학습지와 복습 프로그램 · 2022 개정 교육과정 연계</p></div></header>
+/* 칠한 낱말 — box-shadow 로 좌우를 조금 넓혀 낱말이 통째로 칠해져 보이게 한다 */
+.hw{border-radius:3px}
+.m-y{background:#FFE9A8;box-shadow:0 0 0 2.5px #FFE9A8}
+.m-b{background:#CFE6FA;box-shadow:0 0 0 2.5px #CFE6FA}
+.m-p{background:#FBD5E2;box-shadow:0 0 0 2.5px #FBD5E2}
 
-<div class="stats">
-  <div class="stat"><b>5</b><span>쌓인 학습지</span></div>
-  <div class="stat"><b>60</b><span>배운 영어 낱말</span></div>
-  <div class="stat"><b>25</b><span>푼 문해력 문제</span></div>
-  <div class="stat"><b>50</b><span>푼 수학 문제</span></div>
-</div>
+/* ---------- 결과 ---------- */
+.scoregrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}
+.sc{background:var(--card);border:2px solid var(--line);border-radius:16px;padding:14px 8px;text-align:center;box-shadow:var(--sh)}
+.sc .t{font-size:13px;font-weight:800;color:var(--sub)}
+.sc .v{font-size:25px;font-weight:900;line-height:1.2;margin-top:2px}
+.sc.ko .v{color:var(--ko)} .sc.ma .v{color:var(--ma)} .sc.en .v{color:var(--en)}
+.wronglist{background:var(--card);border:2px solid var(--line);border-radius:var(--r);padding:16px;margin-top:12px}
+.wronglist h4{margin:0 0 10px;font-size:16px}
+.wi{border-top:1px dashed var(--line);padding:10px 0;font-size:15px;line-height:1.6}
+.wi:first-of-type{border-top:0}
+.wi .q{font-weight:700}
+.wi .a{color:var(--no);font-weight:700}
+.wi .c{color:var(--ok);font-weight:700}
 
-<div class="install" id="inst">
-  <img src="app/icon-192.png" alt="">
-  <div class="t"><b id="instTitle">앱으로 두고 쓰기</b>
-  <span id="instLead">한 번 설치하면 인터넷이 없어도 지난 학습지와 복습 퀴즈를 쓸 수 있어요.</span></div>
-  <button class="btn p" id="instBtn" onclick="doInstall()" style="display:none">설치</button>
-  <div class="how" id="instHow"></div>
-  <details class="diag" id="instDiag"><summary>설치가 안 되면 여기를 눌러 상태 보기</summary>
-    <ul id="diagList"><li>확인하는 중…</li></ul>
+/* ---------- 설정 ---------- */
+.field{margin-top:14px}
+.field label{display:block;font-size:14px;font-weight:800;color:var(--sub);margin-bottom:5px}
+.field input{width:100%;font-family:inherit;font-size:17px;background:var(--card);
+  border:2px solid var(--line);border-radius:14px;padding:12px 14px}
+.field .hint{font-size:12.5px;color:var(--sub);margin-top:4px;line-height:1.5}
+details.help{background:var(--card);border:2px solid var(--line);border-radius:var(--r);padding:14px 16px;margin-top:16px}
+details.help summary{font-weight:800;cursor:pointer}
+details.help ol{padding-left:20px;font-size:15px;line-height:1.8}
+details.help code{background:#F6EFE5;padding:1px 6px;border-radius:6px;font-size:13.5px}
+.mailstat{margin-top:12px;border-radius:14px;padding:12px 14px;font-weight:700;font-size:15px}
+.mailstat.wait{background:#FFF6E6;border:2px solid #F3DDB3}
+.mailstat.ok{background:#E9F8EE;border:2px solid #BFE6CD}
+.mailstat.no{background:#FDECEA;border:2px solid #F4C7C2}
+.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);background:var(--ink);color:#fff;
+  padding:12px 20px;border-radius:999px;font-weight:800;font-size:15px;z-index:99;opacity:0;
+  pointer-events:none;transition:opacity .25s}
+.toast.on{opacity:.95}
+.tiny{font-size:12.5px;color:var(--sub);line-height:1.6}
+hr.sep{border:0;border-top:2px dashed var(--line);margin:22px 0}
+@media (max-width:400px){ .qtext{font-size:18px} .wordcard .en{font-size:32px} }
+@media print{ header,.btn,.pentools{display:none} }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hd">
+    <img class="logo" src="app/logo.png" alt="곰돌이 학습장">
+    <h1>곰돌이 학습장</h1>
+    <span class="who" id="who"></span>
+    <button class="iconbtn" id="btnStats" title="공부 기록 보기">📊</button>
+    <button class="iconbtn hot" id="btnInstall" title="홈 화면에 앱으로 두기" style="display:none">📲</button>
+    <button class="iconbtn" id="btnSet" title="설정">⚙️</button>
+  </div>
+</header>
+
+<div class="wrap">
+
+<!-- ============ 1. 홈 : 학년 고르기 ============ -->
+<section class="screen on" id="scHome">
+  <div class="bearbox" id="homeBear"></div>
+  <div class="speech" id="homeMsg">오늘도 반가워! 몇 학년이야?</div>
+
+  <div class="gradegrid" id="gradeGrid"></div>
+
+  <div id="installBox"></div>
+  <div id="homeProgress"></div>
+</section>
+
+<!-- ============ 2. 과목 고르기 ============ -->
+<section class="screen" id="scSubject">
+  <button class="backbtn" data-go="scHome">‹ 학년 다시 고르기</button>
+  <div class="bearbox" id="subjBear"></div>
+  <div class="speech" id="subjMsg"></div>
+
+  <div class="pbar"><i id="dayBar" style="width:0%"></i></div>
+  <div class="pmeta"><span id="dayText">진도</span><span id="dayPct">0%</span></div>
+  <div class="pacenote" id="paceNote"></div>
+
+  <div class="subj" id="subjList"></div>
+
+  <button class="btn ghost sm" id="btnResultPeek" style="margin-top:18px">오늘 결과 보기</button>
+</section>
+
+<!-- ============ 3. 학습 ============ -->
+<section class="screen" id="scPlay">
+  <button class="backbtn" data-go="scSubject">‹ 그만두고 나가기</button>
+  <div class="pbar"><i id="qBar" style="width:0%"></i></div>
+  <div class="pmeta"><span id="qMeta"></span><span id="qTimer">0:00</span></div>
+  <div id="playBody"></div>
+  <button class="btn" id="btnNext">확인</button>
+</section>
+
+<!-- ============ 4. 결과 ============ -->
+<section class="screen" id="scResult">
+  <button class="backbtn" data-go="scSubject">‹ 과목 고르기</button>
+  <div class="bearbox" id="resBear"></div>
+  <div class="speech" id="resMsg"></div>
+
+  <div class="scoregrid" id="resScores"></div>
+  <div id="resWrong"></div>
+  <div id="resPenWrap"></div>
+
+  <div class="mailstat wait" id="mailStat" style="display:none"></div>
+  <button class="btn" id="btnNextDay" style="display:none">➡️ 다음 일차로 넘어가기</button>
+  <button class="btn" id="btnMail">📮 보호자에게 결과 보내기</button>
+  <button class="btn ghost sm" id="btnSaveImg">🖼️ 펜 풀이 그림으로 저장</button>
+</section>
+
+<!-- ============ 4-2. 홈 화면에 추가 ============ -->
+<section class="screen" id="scInstall">
+  <button class="backbtn" data-go="scHome">‹ 돌아가기</button>
+  <div class="bearbox" id="instBear"></div>
+  <div class="speech">홈 화면에 두면 앱처럼 열려요!</div>
+
+  <div id="instState"></div>
+
+  <div class="plat" id="platPick">
+    <button data-p="and">안드로이드</button>
+    <button data-p="ios">아이폰·아이패드</button>
+    <button data-p="pc">컴퓨터</button>
+  </div>
+
+  <div id="instSteps"></div>
+
+  <div class="urlbox">
+    <code id="appUrl"></code>
+    <button class="btn sm" id="btnCopyUrl" style="width:auto;margin:0;padding:9px 14px">복사</button>
+  </div>
+  <p class="tiny" style="margin-top:8px">
+    다른 기기에서 열려면 이 주소를 보내 주세요. 아이폰은 <b>사파리</b>로 열어야 합니다.
+  </p>
+</section>
+
+<!-- ============ 4-3. 공부 기록 ============ -->
+<section class="screen" id="scStats">
+  <button class="backbtn" data-go="scHome">‹ 돌아가기</button>
+  <h2 style="font-size:21px;margin:8px 0 2px">📊 공부 기록 <span id="syncBadge"></span></h2>
+  <p class="tiny" id="statsWho"></p>
+
+  <div class="range" id="rangePick">
+    <button data-r="7">최근 7일</button>
+    <button data-r="30" class="on">최근 30일</button>
+    <button data-r="0">전체</button>
+  </div>
+
+  <div class="kpi" id="statsKpi"></div>
+
+  <div class="chbox">
+    <h4>하루 공부 시간</h4>
+    <div class="cap">국어·수학·영어를 쌓아 올린 막대입니다 (분)</div>
+    <div id="chDaily"></div>
+  </div>
+
+  <div class="chbox">
+    <h4>과목별 성취도</h4>
+    <div class="cap">날마다의 정답률 (%)</div>
+    <div id="chAcc"></div>
+  </div>
+
+  <div class="chbox">
+    <h4>과목별 공부 시간 나눔</h4>
+    <div class="cap">고른 기간 동안 어디에 시간을 썼나</div>
+    <div id="chPie"></div>
+  </div>
+
+  <div class="chbox">
+    <h4>과목별 평균 점수</h4>
+    <div class="cap">정답률 평균 (%)</div>
+    <div id="chAvg"></div>
+  </div>
+
+  <button class="btn ghost sm" id="btnPull">☁️ 서버에서 모두 불러오기</button>
+  <button class="btn ghost sm" id="btnCsv">📄 표로 내려받기 (CSV)</button>
+  <div class="mailstat wait" id="statsMsg" style="display:none"></div>
+</section>
+
+<!-- ============ 5. 설정 ============ -->
+<section class="screen" id="scSet">
+  <button class="backbtn" data-go="scHome">‹ 돌아가기</button>
+  <h2 style="font-size:21px;margin:8px 0 0">설정</h2>
+  <p class="tiny">이 기기에만 저장되며 밖으로 나가지 않습니다.</p>
+
+  <div class="field">
+    <label for="fName">학생 이름</label>
+    <input id="fName" placeholder="예: 김하윤" autocomplete="off">
+  </div>
+  <div class="field">
+    <label for="fMail">결과를 받을 이메일</label>
+    <input id="fMail" type="email" placeholder="예: teacher@school.kr" autocomplete="off">
+    <div class="hint">하루 할당량을 끝내면 이 주소로 자동 발송됩니다.</div>
+  </div>
+  <div class="field">
+    <label for="fStart">학년도 시작일</label>
+    <input id="fStart" placeholder="2026-03-02" autocomplete="off">
+    <div class="hint" id="calInfo"></div>
+  </div>
+  <div class="field">
+    <label for="fDay">지금 일차 (1~190)</label>
+    <input id="fDay" type="number" min="1" max="190" autocomplete="off">
+    <div class="hint">쉬었다가 학사일정에 맞추고 싶을 때 여기서 옮길 수 있습니다.</div>
+  </div>
+  <div class="field">
+    <label for="fAuto">자동 발송</label>
+    <label style="display:flex;gap:8px;align-items:center;font-weight:700;font-size:16px;color:var(--ink)">
+      <input type="checkbox" id="fAuto" style="width:20px;height:20px" checked>
+      국·수·영을 모두 끝내면 자동으로 보내기
+    </label>
+  </div>
+
+  <hr class="sep">
+  <h3 style="font-size:17px;margin:0">기록 모으기 (Google Apps Script)</h3>
+  <p class="tiny">과목을 하나 끝낼 때마다 구글 스프레드시트에 한 줄씩 쌓입니다.
+  <b>무료이고 횟수 제한이 없습니다.</b> 여러 학생 기록을 한곳에 모을 수 있습니다.</p>
+  <div class="field">
+    <label for="fGas">웹앱 주소</label>
+    <input id="fGas" placeholder="https://script.google.com/macros/s/..../exec" autocomplete="off">
+  </div>
+  <div class="field">
+    <label for="fGasKey">암호 (Code.gs 의 SECRET 과 같게)</label>
+    <input id="fGasKey" placeholder="곰돌이2026" autocomplete="off">
+  </div>
+  <details class="help">
+    <summary>☁️ Apps Script 설정 방법 (처음 한 번, 약 10분)</summary>
+    <ol>
+      <li>구글 드라이브에서 <b>스프레드시트</b>를 새로 만듭니다.</li>
+      <li>메뉴 <b>확장 프로그램 → Apps Script</b> 를 엽니다.</li>
+      <li>저장소의 <code>engine/gas/Code.gs</code> 내용을 <b>전부 복사해</b> 붙여 넣습니다.
+        (원래 있던 <code>function myFunction</code> 은 지웁니다)</li>
+      <li>맨 위 <code>var SECRET = "곰돌이2026";</code> 의 글자를 원하는 암호로 바꾸고 저장합니다.</li>
+      <li>오른쪽 위 <b>배포 → 새 배포</b> → 톱니바퀴에서 <b>웹 앱</b> 선택
+        <div style="margin:6px 0;padding:9px;background:#F6EFE5;border-radius:9px;font-size:13.5px;line-height:1.7">
+          다음 사용자로 실행: <b>나</b><br>
+          액세스 권한이 있는 사용자: <b>모든 사용자</b>
+        </div>
+        <b>배포</b>를 누르고 권한을 <b>허용</b>합니다.</li>
+      <li>나온 <b>웹 앱 URL</b>(<code>/exec</code> 로 끝남)을 위 칸에 붙여 넣고,
+        암호도 같게 적은 뒤 <b>저장</b>합니다.</li>
+      <li>아래 <b>연결 시험</b>으로 확인합니다. 스프레드시트에 '기록' 시트가 생기면 성공입니다.</li>
+    </ol>
+    <p class="tiny">코드를 고친 뒤에는 <b>배포 → 배포 관리 → 연필 → 버전: 새 버전 → 배포</b>를 해야 반영됩니다.</p>
   </details>
-</div>
-<div class="offline" id="offmsg">📴 지금은 인터넷에 연결되어 있지 않아요. 이미 열어 본 학습지는 그대로 볼 수 있어요.</div>
+  <button class="btn ghost sm" id="btnGasTest">☁️ 연결 시험</button>
+  <div class="mailstat wait" id="gasStat" style="display:none"></div>
 
-<div class="tabs">
-  <button class="on" data-t="arch">학습지 목록</button>
-  <button data-t="flash">낱말 플래시카드</button>
-  <button data-t="wquiz">낱말 복습 퀴즈</button>
-  <button data-t="squiz">단어 쓰기 시험</button>
-  <button data-t="rquiz">문해력 복습 퀴즈</button>
-  <button data-t="mquiz">수학 복습 퀴즈</button>
-  <button data-t="pen">✏️ 펜으로 풀기</button>
-</div>
+  <hr class="sep">
+  <h3 style="font-size:17px;margin:0">메일 보내기 설정 (EmailJS)</h3>
+  <p class="tiny">한 번만 넣어 두면 계속 씁니다. 아래 '설정 방법'을 펼쳐 보세요.</p>
+  <div class="field"><label for="fSvc">Service ID</label><input id="fSvc" placeholder="service_xxxxxxx" autocomplete="off"></div>
+  <div class="field"><label for="fTpl">Template ID</label><input id="fTpl" placeholder="template_xxxxxxx" autocomplete="off"></div>
+  <div class="field"><label for="fKey">Public Key</label><input id="fKey" placeholder="xxxxxxxxxxxxxxxx" autocomplete="off"></div>
 
-<div class="panel on" id="arch"><div class="card"><span class="chip">DAY 005</span><a href="sheets/2026-08-09.html">2026-08-09 (일) — 건너가는 것들 — 한 주를 잇는 한 줄</a><div class="meta">한 주 동안 건너온 것들 · 파란 자전거</div><div class="wordpills">best, better, between, bicycle, bird, birthday, black, blue, boat, body, book, boot, borrow, bottom, bowl</div></div><div class="card"><span class="chip">DAY 004</span><a href="sheets/2026-08-08.html">2026-08-08 (토) — 씨앗 한 알을 남긴 사람들 — 심어야 이어지는 것</a><div class="meta">흙 속에 씨앗을 남긴 사람, 우장춘 · 책 대신 씨앗을 빌려주는 도서관</div><div class="wordpills">balloon, banana, basket, bath, beach, bean, beautiful, because, become, bee, before, begin, believe, bell, below</div></div><div class="card"><span class="chip">DAY 003</span><a href="sheets/2026-08-07.html">2026-08-07 (금) — 장바구니 속 사과 한 개 — 물건이 나에게 오는 길</a><div class="meta">사과 한 개가 걸어온 길 · 못난이 사과 한 봉지</div><div class="wordpills">around, arrive, art, aunt, autumn, away, back, bad, bag, ball</div></div><div class="card"><span class="chip">DAY 002</span><a href="sheets/2026-08-06.html">2026-08-06 (목) — 떨림에서 마음까지 — 소리가 건너오는 길</a><div class="meta">얼쑤! 두 사람이 만드는 판소리 한마당 · 소리는 어떻게 내 귀까지 올까</div><div class="wordpills">airport, almost, alone, already, also, always, animal, answer, ant, arm</div></div><div class="card"><span class="chip">DAY 001</span><a href="sheets/2026-08-05.html">2026-08-05 (수) — 더워진 여름, 우리가 만드는 그늘</a><div class="meta">폭염 특보가 세 단계로 늘었다 · 그늘을 만드는 나무</div><div class="wordpills">above, across, act, afraid, after, afternoon, age, ago, agree, air</div></div></div>
+  <details class="help">
+    <summary>📮 EmailJS 설정 방법 (처음 한 번, 약 10분)</summary>
+    <ol>
+      <li><code>emailjs.com</code> 에 들어가 무료로 가입합니다. (월 200통)</li>
+      <li>왼쪽 <b>Email Services</b> → <b>Add New Service</b> → Gmail 선택 → 본인 계정 연결
+        → 만들어진 <b>Service ID</b> 를 위 칸에 붙여 넣습니다.</li>
+      <li>왼쪽 <b>Email Templates</b> → <b>Create New Template</b>.
+        제목과 내용에 아래를 그대로 넣습니다.
+        <div style="margin:8px 0;padding:10px;background:#F6EFE5;border-radius:10px;font-size:13.5px;line-height:1.7">
+          <b>To Email</b> 칸: <code>{{to_email}}</code><br>
+          <b>Subject</b> 칸: <code>{{subject}}</code><br>
+          <b>Content</b> 칸(Code 편집으로 바꾼 뒤): <code>{{{body_html}}}</code>
+          <span class="tiny">— 중괄호 세 개입니다. 두 개면 표가 글자로 보입니다.</span>
+        </div>
+        저장하면 나오는 <b>Template ID</b> 를 위 칸에 붙여 넣습니다.</li>
+      <li>펜 풀이 그림을 함께 받으려면 템플릿 아래 <b>Attachments</b> →
+        <b>Add Attachment</b> → <b>Variable Attachment</b> 를 고르고
+        Parameter Name 에 <code>solution_image</code>, File Name 에 <code>풀이.png</code> 를 적습니다.</li>
+      <li>오른쪽 위 계정 메뉴 → <b>Account</b> → <b>Public Key</b> 를 복사해 위 칸에 붙여 넣습니다.</li>
+      <li><b>저장</b>을 누르고 아래 <b>시험 발송</b>으로 확인합니다.</li>
+    </ol>
+    <p class="tiny">그림 첨부는 용량 제한이 있어 자동으로 줄여서 보냅니다. 너무 크면 그림 없이 글만 보내고 알려 줍니다.</p>
+    <p class="tiny"><b>가장 많이 틀리는 곳</b> — Content 는 오른쪽 위 <code>&lt;/&gt;</code> 를 눌러
+    <b>코드 편집 모드</b>로 바꾼 뒤 <code>{{{body_html}}}</code> 를 넣어야 합니다.
+    중괄호가 두 개면 표가 글자 그대로 보입니다.</p>
+    <p class="tiny">더 자세한 설명은 저장소의 <code>docs/EmailJS_설정법.md</code> 에 그림 설명 없이
+    단계별로 적어 두었습니다.</p>
+  </details>
 
-<div class="panel" id="flash">
-  <div class="flash">
-    <div class="fw" id="fw">시작을 눌러 보세요</div>
-    <button class="spk" onclick="speakNow()" title="영어 발음 듣기">🔊</button>
-    <div class="fm" id="fm"></div>
-    <div class="fx" id="fx"></div>
-    <div style="margin-top:22px">
-      <button class="btn s" onclick="fPrev()">◀ 이전</button>
-      <button class="btn p" onclick="fFlip()">뜻 보기 / 감추기</button>
-      <button class="btn s" onclick="fNext()">다음 ▶</button>
-      <button class="btn g" onclick="fShuffle()">섞기</button>
-    </div>
-    <div class="spkbar">
-      <label id="fautoL"><input type="checkbox" id="fauto" checked>카드 넘길 때 자동으로 읽어 주기</label>
-      <label id="slowL"><input type="checkbox" id="slow">천천히 읽기</label>
-      <span id="spkmsg" class="nosp"></span>
-    </div>
-    <div style="margin-top:12px;font-size:13px;color:#8A8272" id="fcnt"></div>
-  </div>
-</div>
+  <button class="btn" id="btnSave">저장</button>
+  <button class="btn ghost sm" id="btnTest">✉️ 시험 발송 해 보기</button>
+  <div class="mailstat wait" id="setStat" style="display:none"></div>
 
-<div class="panel" id="wquiz">
-  <div class="bar"><i id="wbar"></i></div>
-  <div class="qz"><div class="qq" id="wq">준비 중…</div><div id="wopts"></div>
-  <div class="fb" id="wfb"></div>
-  <div style="margin-top:14px"><button class="btn p" onclick="wStart()">새로 풀기 (10문제)</button>
-  <button class="btn r" onclick="wWrong()">틀린 것만 다시</button></div>
-  <div style="margin-top:10px;font-size:13.5px;color:#8A8272" id="wsc"></div></div>
-</div>
+  <hr class="sep">
+  <h3 style="font-size:17px;margin:0">앱 상태 점검</h3>
+  <p class="tiny">홈 화면 설치가 안 될 때 어디가 막혔는지 알려 줍니다.</p>
+  <div class="diag" id="diagBox"></div>
+  <button class="btn ghost sm" id="btnDiag">다시 점검</button>
 
-<div class="panel" id="squiz">
-  <div class="bar"><i id="sbar"></i></div>
-  <div class="qz"><div class="qq" id="sq">준비 중…</div>
-  <div><input class="tin" id="sin" type="text" autocomplete="off" autocapitalize="off" spellcheck="false"
-        placeholder="영어 낱말을 쓰세요" disabled></div>
-  <div class="penpad" id="sPad"></div>
-  <div class="hintbox" id="shint"></div>
-  <div style="margin-top:12px"><button class="btn p" id="sgo" onclick="sCheck()">확인</button>
-  <button class="btn s" onclick="sHint()">힌트 (첫 글자)</button>
-  <button class="btn g" onclick="sSpeak()">🔊 다시 듣기</button></div>
-  <div class="spkbar" style="justify-content:flex-start">
-    <label id="sdictL"><input type="checkbox" id="sdict" checked>받아쓰기 모드 — 문제가 나오면 자동으로 읽어 주기</label>
-  </div>
-  <div class="fb" id="sfb"></div>
-  <div style="margin-top:14px"><button class="btn p" onclick="sStart()">새로 풀기 (10문제)</button>
-  <button class="btn r" onclick="sWrong()">틀린 것만 다시</button></div>
-  <div style="margin-top:10px;font-size:13.5px;color:#8A8272" id="ssc"></div></div>
+  <hr class="sep">
+  <button class="btn ghost sm" id="btnReset">오늘 기록 지우고 다시 하기</button>
+  <p class="tiny" style="margin-top:18px">
+    학습 기록·필기·형광펜은 이 기기의 브라우저 안에만 저장됩니다.
+    기기를 바꾸거나 브라우저 기록을 지우면 사라집니다.
+  </p>
+</section>
+
 </div>
 
-<div class="panel" id="rquiz">
-  <div class="bar"><i id="rbar"></i></div>
-  <div class="hlwrap" id="rPassage"></div>
-  <div class="qz"><div class="qq" id="rq">준비 중…</div><div id="ropts"></div>
-  <div class="fb" id="rfb"></div>
-  <div style="margin-top:14px"><button class="btn p" onclick="rStart()">새로 풀기 (5문제)</button>
-  <button class="btn r" onclick="rWrong()">틀린 것만 다시</button></div>
-  <div style="margin-top:10px;font-size:13.5px;color:#8A8272" id="rsc"></div></div>
-</div>
+<div class="toast" id="toast"></div>
 
-<div class="panel" id="mquiz">
-  <div class="bar"><i id="mbar"></i></div>
-  <div class="qz"><div class="qq mq2" id="mq">준비 중…</div>
-  <div id="mopts"></div>
-  <div class="penpad" id="mPad"></div>
-  <div id="minwrap"><input class="tin" id="min" type="text" autocomplete="off"
-       placeholder="답을 쓰세요" disabled></div>
-  <div class="mhow" id="mhow"></div>
-  <div style="margin-top:12px"><button class="btn p" id="mgo" onclick="mCheck()">확인</button></div>
-  <div class="fb" id="mfb"></div>
-  <div style="margin-top:14px"><button class="btn p" onclick="mStart()">새로 풀기 (10문제)</button>
-  <button class="btn r" onclick="mWrongOnly()">틀린 것만 다시</button></div>
-  <div style="margin-top:10px;font-size:13.5px;color:#8A8272" id="msc"></div></div>
-</div>
-
-<div class="panel" id="pen">
-  <div class="penhint">애플펜슬·갤럭시 S펜으로 바로 쓸 수 있어요.
-  펜을 한 번 쓰면 손바닥이 화면에 닿아도 그려지지 않아요.
-  쓴 풀이는 저장되니 나중에 다시 볼 수 있어요.</div>
-  <div class="qz" id="penBody"><div class="empty">준비 중…</div></div>
-</div>
-
-<footer>이 페이지는 매일 아침 자동으로 새로 만들어집니다.
-<div class="tip" id="iostip"></div>
-<div class="tip">화면이 옛날 것으로 보이거나 학습지가 안 열리면
-<button class="btn s" style="padding:6px 16px;font-size:13px" onclick="hardRefresh()">🔄 새로 받아오기</button></div>
-</footer>
-</div>
-
-<script>
-const REVIEW = {"words": [{"no": 1, "word": "above", "pos": "전", "meaning": "~보다 위에", "example": "The hot sun is above our school.", "example_ko": "뜨거운 해가 우리 학교 위에 있다.", "day": 1, "date": "2026-08-05"}, {"no": 2, "word": "across", "pos": "전", "meaning": "~을 가로질러", "example": "We walk across the shady road.", "example_ko": "우리는 그늘진 길을 가로질러 걷는다.", "day": 1, "date": "2026-08-05"}, {"no": 3, "word": "act", "pos": "동", "meaning": "행동하다", "example": "We must act to save the earth.", "example_ko": "우리는 지구를 지키기 위해 행동해야 한다.", "day": 1, "date": "2026-08-05"}, {"no": 4, "word": "afraid", "pos": "형", "meaning": "두려워하는", "example": "I am afraid of the hot summer.", "example_ko": "나는 뜨거운 여름이 두렵다.", "day": 1, "date": "2026-08-05"}, {"no": 5, "word": "after", "pos": "전", "meaning": "~후에", "example": "We rest after the long walk.", "example_ko": "우리는 오래 걸은 후에 쉰다.", "day": 1, "date": "2026-08-05"}, {"no": 6, "word": "afternoon", "pos": "명", "meaning": "오후", "example": "The afternoon is very hot today.", "example_ko": "오늘 오후는 매우 덥다.", "day": 1, "date": "2026-08-05"}, {"no": 7, "word": "age", "pos": "명", "meaning": "나이", "example": "This old tree has a great age.", "example_ko": "이 오래된 나무는 나이가 아주 많다.", "day": 1, "date": "2026-08-05"}, {"no": 8, "word": "ago", "pos": "부", "meaning": "~전에", "example": "It rained two days ago.", "example_ko": "이틀 전에 비가 왔다.", "day": 1, "date": "2026-08-05"}, {"no": 9, "word": "agree", "pos": "동", "meaning": "동의하다", "example": "I agree with my friend's idea.", "example_ko": "나는 친구의 생각에 동의한다.", "day": 1, "date": "2026-08-05"}, {"no": 10, "word": "air", "pos": "명", "meaning": "공기", "example": "Green trees make the air clean.", "example_ko": "푸른 나무는 공기를 깨끗하게 만든다.", "day": 1, "date": "2026-08-05"}, {"no": 11, "word": "airport", "pos": "명", "meaning": "공항", "example": "My uncle works at the airport.", "example_ko": "우리 삼촌은 공항에서 일한다.", "day": 2, "date": "2026-08-06"}, {"no": 12, "word": "almost", "pos": "부", "meaning": "거의", "example": "The bus is almost full today.", "example_ko": "오늘 버스는 거의 가득 찼다.", "day": 2, "date": "2026-08-06"}, {"no": 13, "word": "alone", "pos": "부", "meaning": "혼자", "example": "She sits alone under the big tree.", "example_ko": "그녀는 큰 나무 아래에 혼자 앉아 있다.", "day": 2, "date": "2026-08-06"}, {"no": 14, "word": "already", "pos": "부", "meaning": "이미", "example": "The show already started ten minutes ago.", "example_ko": "공연은 이미 10분 전에 시작했다.", "day": 2, "date": "2026-08-06"}, {"no": 15, "word": "also", "pos": "부", "meaning": "또한", "example": "I like music, and I also like art.", "example_ko": "나는 음악을 좋아하고, 미술도 또한 좋아한다.", "day": 2, "date": "2026-08-06"}, {"no": 16, "word": "always", "pos": "부", "meaning": "항상", "example": "My grandmother always sings in the morning.", "example_ko": "우리 할머니는 항상 아침에 노래하신다.", "day": 2, "date": "2026-08-06"}, {"no": 17, "word": "animal", "pos": "명", "meaning": "동물", "example": "This animal has very good ears.", "example_ko": "이 동물은 아주 좋은 귀를 가지고 있다.", "day": 2, "date": "2026-08-06"}, {"no": 18, "word": "answer", "pos": "명", "meaning": "대답", "example": "Your answer is right this time.", "example_ko": "이번에는 네 대답이 맞다.", "day": 2, "date": "2026-08-06"}, {"no": 19, "word": "ant", "pos": "명", "meaning": "개미", "example": "A small ant walks across my hand.", "example_ko": "작은 개미가 내 손을 가로질러 걷는다.", "day": 2, "date": "2026-08-06"}, {"no": 20, "word": "arm", "pos": "명", "meaning": "팔", "example": "He holds the drum with one arm.", "example_ko": "그는 한 팔로 북을 잡는다.", "day": 2, "date": "2026-08-06"}, {"no": 21, "word": "around", "pos": "전", "meaning": "~주위에", "example": "We walk around the market together.", "example_ko": "우리는 함께 시장 주위를 걷는다.", "day": 3, "date": "2026-08-07"}, {"no": 22, "word": "arrive", "pos": "동", "meaning": "도착하다", "example": "The fresh apples arrive early in the morning.", "example_ko": "신선한 사과는 이른 아침에 도착한다.", "day": 3, "date": "2026-08-07"}, {"no": 23, "word": "art", "pos": "명", "meaning": "미술", "example": "My aunt teaches art at a small school.", "example_ko": "우리 이모는 작은 학교에서 미술을 가르친다.", "day": 3, "date": "2026-08-07"}, {"no": 24, "word": "aunt", "pos": "명", "meaning": "이모, 고모", "example": "My aunt buys fruit at the market.", "example_ko": "우리 이모는 시장에서 과일을 산다.", "day": 3, "date": "2026-08-07"}, {"no": 25, "word": "autumn", "pos": "명", "meaning": "가을", "example": "Autumn brings sweet apples and cool wind.", "example_ko": "가을은 달콤한 사과와 시원한 바람을 가져온다.", "day": 3, "date": "2026-08-07"}, {"no": 26, "word": "away", "pos": "부", "meaning": "멀리", "example": "The farm is not far away from here.", "example_ko": "농장은 여기서 멀리 있지 않다.", "day": 3, "date": "2026-08-07"}, {"no": 27, "word": "back", "pos": "명", "meaning": "등, 뒤", "example": "The farmer puts a box on his back.", "example_ko": "농부가 상자를 등에 짊어진다.", "day": 3, "date": "2026-08-07"}, {"no": 28, "word": "bad", "pos": "형", "meaning": "나쁜", "example": "This apple looks bad, but it tastes good.", "example_ko": "이 사과는 나빠 보이지만 맛은 좋다.", "day": 3, "date": "2026-08-07"}, {"no": 29, "word": "bag", "pos": "명", "meaning": "가방", "example": "She puts ten apples in her bag.", "example_ko": "그녀는 사과 열 개를 가방에 담는다.", "day": 3, "date": "2026-08-07"}, {"no": 30, "word": "ball", "pos": "명", "meaning": "공", "example": "The small apple looks like a red ball.", "example_ko": "작은 사과는 빨간 공처럼 보인다.", "day": 3, "date": "2026-08-07"}, {"no": 31, "word": "balloon", "pos": "명", "meaning": "풍선", "example": "A red balloon flies over the green farm.", "example_ko": "빨간 풍선이 초록 농장 위로 난다.", "day": 4, "date": "2026-08-08"}, {"no": 32, "word": "banana", "pos": "명", "meaning": "바나나", "example": "We eat a banana after lunch.", "example_ko": "우리는 점심을 먹고 바나나를 먹는다.", "day": 4, "date": "2026-08-08"}, {"no": 33, "word": "basket", "pos": "명", "meaning": "바구니", "example": "She puts new seeds in the basket.", "example_ko": "그녀는 새 씨앗을 바구니에 담는다.", "day": 4, "date": "2026-08-08"}, {"no": 34, "word": "bath", "pos": "명", "meaning": "목욕", "example": "I take a bath after working in the field.", "example_ko": "나는 밭일을 한 뒤에 목욕을 한다.", "day": 4, "date": "2026-08-08"}, {"no": 35, "word": "beach", "pos": "명", "meaning": "해변", "example": "Some plants grow well near the beach.", "example_ko": "어떤 식물은 해변 가까이에서 잘 자란다.", "day": 4, "date": "2026-08-08"}, {"no": 36, "word": "bean", "pos": "명", "meaning": "콩", "example": "The boy grows twelve beans in a pot.", "example_ko": "소년이 화분에서 콩 열두 알을 기른다.", "day": 4, "date": "2026-08-08"}, {"no": 37, "word": "beautiful", "pos": "형", "meaning": "아름다운", "example": "The garden looks beautiful in autumn.", "example_ko": "그 정원은 가을에 아름다워 보인다.", "day": 4, "date": "2026-08-08"}, {"no": 38, "word": "because", "pos": "접", "meaning": "왜냐하면", "example": "I like seeds because they become plants.", "example_ko": "나는 씨앗을 좋아한다, 왜냐하면 식물이 되기 때문이다.", "day": 4, "date": "2026-08-08"}, {"no": 39, "word": "become", "pos": "동", "meaning": "~이 되다", "example": "A small seed can become a big tree.", "example_ko": "작은 씨앗이 큰 나무가 될 수 있다.", "day": 4, "date": "2026-08-08"}, {"no": 40, "word": "bee", "pos": "명", "meaning": "벌", "example": "A bee visits every flower in the garden.", "example_ko": "벌 한 마리가 정원의 모든 꽃을 찾아간다.", "day": 4, "date": "2026-08-08"}, {"no": 41, "word": "before", "pos": "전", "meaning": "~전에", "example": "We plant the seeds before summer comes.", "example_ko": "우리는 여름이 오기 전에 씨앗을 심는다.", "day": 4, "date": "2026-08-08"}, {"no": 42, "word": "begin", "pos": "동", "meaning": "시작하다", "example": "Small plants begin to grow after rain.", "example_ko": "작은 식물은 비가 온 뒤에 자라기 시작한다.", "day": 4, "date": "2026-08-08"}, {"no": 43, "word": "believe", "pos": "동", "meaning": "믿다", "example": "I believe every seed can grow.", "example_ko": "나는 모든 씨앗이 자랄 수 있다고 믿는다.", "day": 4, "date": "2026-08-08"}, {"no": 44, "word": "bell", "pos": "명", "meaning": "종", "example": "The school bell rings at nine.", "example_ko": "학교 종이 아홉 시에 울린다.", "day": 4, "date": "2026-08-08"}, {"no": 45, "word": "below", "pos": "전", "meaning": "~아래에", "example": "The roots grow below the brown soil.", "example_ko": "뿌리는 갈색 흙 아래에서 자란다.", "day": 4, "date": "2026-08-08"}, {"no": 46, "word": "best", "pos": "형", "meaning": "가장 좋은", "example": "This is the best day of my week.", "example_ko": "오늘은 이번 주에서 가장 좋은 날이다.", "day": 5, "date": "2026-08-09"}, {"no": 47, "word": "better", "pos": "형", "meaning": "더 좋은", "example": "My bicycle runs better after we fix it.", "example_ko": "내 자전거는 우리가 고친 뒤에 더 잘 달린다.", "day": 5, "date": "2026-08-09"}, {"no": 48, "word": "between", "pos": "전", "meaning": "~사이에", "example": "A small tree grows between two houses.", "example_ko": "작은 나무 한 그루가 집 두 채 사이에서 자란다.", "day": 5, "date": "2026-08-09"}, {"no": 49, "word": "bicycle", "pos": "명", "meaning": "자전거", "example": "My father rides this old bicycle every day.", "example_ko": "우리 아버지는 이 낡은 자전거를 날마다 탄다.", "day": 5, "date": "2026-08-09"}, {"no": 50, "word": "bird", "pos": "명", "meaning": "새", "example": "A bird sings above the big shady tree.", "example_ko": "새 한 마리가 크고 그늘진 나무 위에서 노래한다.", "day": 5, "date": "2026-08-09"}, {"no": 51, "word": "birthday", "pos": "명", "meaning": "생일", "example": "I get a bicycle on my birthday.", "example_ko": "나는 생일에 자전거를 받는다.", "day": 5, "date": "2026-08-09"}, {"no": 52, "word": "black", "pos": "형", "meaning": "검은", "example": "He wears black boots in the rain.", "example_ko": "그는 비 오는 날에 검은 장화를 신는다.", "day": 5, "date": "2026-08-09"}, {"no": 53, "word": "blue", "pos": "형", "meaning": "파란", "example": "The blue bicycle waits behind the door.", "example_ko": "파란 자전거가 문 뒤에서 기다린다.", "day": 5, "date": "2026-08-09"}, {"no": 54, "word": "boat", "pos": "명", "meaning": "배", "example": "A small boat carries apples across the river.", "example_ko": "작은 배 한 척이 강 건너로 사과를 실어 나른다.", "day": 5, "date": "2026-08-09"}, {"no": 55, "word": "body", "pos": "명", "meaning": "몸", "example": "I move my body when I ride.", "example_ko": "나는 자전거를 탈 때 몸을 움직인다.", "day": 5, "date": "2026-08-09"}, {"no": 56, "word": "book", "pos": "명", "meaning": "책", "example": "She borrows a book and a seed.", "example_ko": "그녀는 책 한 권과 씨앗 하나를 빌린다.", "day": 5, "date": "2026-08-09"}, {"no": 57, "word": "boot", "pos": "명", "meaning": "장화", "example": "My boot has brown mud on the bottom.", "example_ko": "내 장화 바닥에 갈색 진흙이 묻어 있다.", "day": 5, "date": "2026-08-09"}, {"no": 58, "word": "borrow", "pos": "동", "meaning": "빌리다", "example": "Can I borrow your bicycle for one day?", "example_ko": "네 자전거를 하루만 빌릴 수 있을까?", "day": 5, "date": "2026-08-09"}, {"no": 59, "word": "bottom", "pos": "명", "meaning": "바닥", "example": "The apples sit at the bottom of the basket.", "example_ko": "사과들이 바구니 바닥에 놓여 있다.", "day": 5, "date": "2026-08-09"}, {"no": 60, "word": "bowl", "pos": "명", "meaning": "그릇", "example": "Mother puts warm soup in my bowl.", "example_ko": "어머니가 내 그릇에 따뜻한 국을 담는다.", "day": 5, "date": "2026-08-09"}], "questions": [{"no": 1, "type": "사실 확인", "passage": 1, "q": "올여름 첫 폭염중대경보가 내려진 날짜와 지역으로 알맞은 것은?", "choices": ["8월 2일, 서울과 인천", "7월 12일, 경상북도 경산과 포항", "7월 12일, 서울과 인천", "8월 2일, 경상북도 경산과 포항"], "answer": 2, "explain": "첫 문단에 '7월 12일, 경상북도 경산과 포항에 올여름 첫 폭염중대경보가 내려졌다'라고 나와 있어요. 8월 2일은 기상청이 물을 마시라고 안내한 날이지 특보가 처음 내려진 날이 아니에요. 글에 날짜가 두 개 나오면 각각 무슨 일이 있었던 날인지 나누어 표시하며 읽는 습관이 필요합니다.", "day": 1, "date": "2026-08-05", "theme": "더워진 여름, 우리가 만드는 그늘"}, {"no": 2, "type": "낱말 뜻", "passage": 1, "q": "글에 쓰인 '특보'의 뜻으로 가장 알맞은 것은?", "choices": ["특별히 잘하는 재주", "특별히 아껴 두는 물건", "위험을 미리 알리려고 특별히 내보내는 알림", "특별한 손님을 맞이하는 일"], "answer": 3, "explain": "둘째 문단의 '더위가 위험할 만큼 심할 때 기상청이 내보내는 알림'과 마지막 문단의 '위험을 미리 알려 주는 신호'가 뜻을 알려 주는 열쇠예요. '특'이라는 글자만 보고 '특별한 재주'로 짐작하기 쉬운데, 낱말 뜻은 글자가 아니라 앞뒤 문장에서 찾아야 합니다.", "day": 1, "date": "2026-08-05", "theme": "더워진 여름, 우리가 만드는 그늘"}, {"no": 3, "type": "추론", "passage": 1, "q": "기상청이 폭염 특보를 두 단계에서 세 단계로 늘린 까닭으로 가장 알맞은 것은?", "choices": ["더위가 예전보다 심해져서, 위험한 정도를 더 자세히 나누어 알릴 필요가 생겼기 때문이다", "사람들이 일기 예보를 너무 많이 보아서 횟수를 줄이려고 했기 때문이다", "겨울 추위까지 함께 알리기 위해서이다", "온열질환자 수가 해마다 줄어들고 있기 때문이다"], "answer": 1, "explain": "글은 '단계를 늘린 까닭은 더위 때문에 아픈 사람이 계속 늘고 있기 때문'이라고 밝히고, 온열질환자가 2천818명에서 4천460명으로 늘어난 숫자를 보여 줍니다. ④는 숫자를 거꾸로 읽은 것이니 표에 나온 수가 커지는지 작아지는지 꼭 확인하세요.", "day": 1, "date": "2026-08-05", "theme": "더워진 여름, 우리가 만드는 그늘"}, {"no": 4, "type": "중심 생각", "passage": 0, "q": "두 지문을 하나로 묶는 중심 생각으로 가장 알맞은 것은?", "choices": ["여름에는 바깥에서 오래 노는 것이 가장 재미있다", "나무는 열매를 얻기 위해서만 심는 것이 좋다", "날씨 예보는 어른들만 확인하면 충분하다", "더위가 심해지는 만큼 위험을 미리 알아차리고, 나무와 그늘을 늘려 스스로를 지켜야 한다"], "answer": 4, "explain": "첫 글은 '위험을 미리 아는 일', 둘째 글은 '그늘을 늘리는 일'을 말합니다. 두 글을 함께 감싸는 문장을 골라야 해요. ①과 ③은 글의 당부와 반대되고, ②는 둘째 글의 일부만 잘못 말한 것입니다. 중심 생각 문제는 '한 지문에만 맞는 답'을 고르지 않도록 조심해야 합니다.", "day": 1, "date": "2026-08-05", "theme": "더워진 여름, 우리가 만드는 그늘"}, {"no": 1, "type": "사실 확인", "passage": 1, "q": "판소리 무대에 대한 설명으로 알맞은 것은 무엇인가요?", "choices": ["소리꾼 여러 명이 나란히 서서 함께 노래한다.", "고수는 북을 치지 않고 노래만 부른다.", "무대에는 소리꾼과 고수, 두 사람만 오른다.", "화려한 무대 장치가 반드시 있어야 한다."], "answer": 3, "explain": "첫 문단에 \"무대에 오르는 사람은 단 두 명이다. 부채를 든 소리꾼과 북을 든 고수\"라고 나옵니다. 관객도 함께 추임새를 넣는다는 3문단 때문에 '여러 사람이 함께 노래한다'고 헷갈리기 쉬운데, 무대에 오르는 사람 수와 함께 즐기는 사람 수는 다른 이야기입니다.", "day": 2, "date": "2026-08-06", "theme": "떨림에서 마음까지 — 소리가 건너오는 길"}, {"no": 2, "type": "낱말 뜻", "passage": 1, "q": "글에서 쓰인 '추임새'의 뜻으로 알맞은 것은 무엇인가요?", "choices": ["고수와 관객이 흥을 돋우려고 넣는 짧은 외침", "소리꾼이 노래하지 않고 말로 이야기를 풀어내는 부분", "소리꾼이 손에 들고 여러 물건처럼 쓰는 부채", "지금까지 전해 오는 판소리 다섯 마당의 이름"], "answer": 1, "explain": "3문단에서 고수가 \"얼쑤!\", \"잘한다!\" 하고 외치는 것을 추임새라고 했습니다. 2번은 '아니리'의 뜻이라 특히 헷갈리기 쉽습니다. 낱말 뜻을 고를 때는 그 낱말이 나온 문장의 바로 앞뒤를 다시 읽어 확인하세요.", "day": 2, "date": "2026-08-06", "theme": "떨림에서 마음까지 — 소리가 건너오는 길"}, {"no": 3, "type": "추론", "passage": 2, "q": "실 전화기의 실이 축 늘어지면 소리가 잘 건너가지 못합니다. 그 까닭으로 가장 알맞은 것은 무엇인가요?", "choices": ["실이 길어져서 소리가 도중에 지쳐 버리기 때문이다.", "늘어진 실이 둘레의 공기를 모두 빨아들이기 때문이다.", "종이컵이 소리를 컵 안에 가두어 버리기 때문이다.", "떨림이 실을 따라 이어지지 못하기 때문이다."], "answer": 4, "explain": "4문단은 \"말소리가 컵 바닥을 떨게 하고, 그 떨림이 팽팽한 실을 타고 건너간다\"고 했습니다. 소리를 옮기는 것은 실 자체가 아니라 실을 타고 이어지는 '떨림'입니다. 소리가 '지친다'거나 '길이' 때문이라고 생각하기 쉬운데, 글 전체가 떨림 이야기라는 점을 떠올리면 답이 보입니다.", "day": 2, "date": "2026-08-06", "theme": "떨림에서 마음까지 — 소리가 건너오는 길"}, {"no": 4, "type": "중심 생각", "passage": 0, "q": "두 글을 함께 읽고 알 수 있는 중심 생각으로 가장 알맞은 것은 무엇인가요?", "choices": ["판소리는 다른 나라의 음악보다 뛰어난 예술이다.", "소리는 떨림에서 시작해 무언가를 타고 전해지며, 사람들은 그 소리로 마음을 나눈다.", "소리는 공기가 하나도 없는 곳에서 가장 잘 들린다.", "판소리를 즐기려면 과학 공부를 먼저 해야 한다."], "answer": 2, "explain": "글 1은 소리로 마음을 주고받는 판소리를, 글 2는 소리가 전해지는 원리를 설명합니다. 두 글을 하나로 묶으면 2번이 됩니다. 1번처럼 어느 쪽이 더 뛰어나다고 견주는 말은 두 글 어디에도 없고, 3번은 글 2의 마지막 문단과 정반대입니다.", "day": 2, "date": "2026-08-06", "theme": "떨림에서 마음까지 — 소리가 건너오는 길"}, {"no": 1, "type": "사실 확인", "passage": 1, "q": "로컬푸드 직매장에서 농산물에 가격표를 붙이는 사람은 누구인가요?", "choices": ["도매시장에서 물건을 사 가는 상인", "물건을 나르는 택배 기사", "농산물을 기른 농부", "직매장에서 물건을 정리하는 판매원"], "answer": 3, "explain": "3문단에 '가격표도 농부가 직접 붙인다'라고 나옵니다. 직매장은 농부가 스스로 진열하고 값을 정하는 곳이라는 점이 핵심입니다. 아이들은 '가게에서는 당연히 주인이 값을 붙인다'고 생각해 4번을 고르기 쉬워요. 글에 적힌 대로 찾는 연습이 필요합니다.", "day": 3, "date": "2026-08-07", "theme": "장바구니 속 사과 한 개 — 물건이 나에게 오는 길"}, {"no": 2, "type": "낱말 뜻", "passage": 2, "q": "지문 2의 '껍질에 갈색 흠집이 나 있었다'에서 '흠집'의 뜻으로 알맞은 것은?", "choices": ["물건에 생긴 흠이나 상처 자국", "물건에 붙여 두는 가격표", "과일에서 나는 달콤한 맛", "사과를 담아 두는 종이 상자"], "answer": 1, "explain": "'작고, 껍질에 갈색 ○○이 나 있었다'라는 앞뒤 말에서 겉모습에 생긴 자국임을 짐작할 수 있습니다. 6문단의 '껍질만 얼룩덜룩할 뿐'도 같은 뜻을 다시 알려 줍니다. 낱말 뜻은 사전보다 앞뒤 문장에서 먼저 찾는 것이 요령이에요.", "day": 3, "date": "2026-08-07", "theme": "장바구니 속 사과 한 개 — 물건이 나에게 오는 길"}, {"no": 3, "type": "추론", "passage": 2, "q": "하람이가 되돌아가 못난이 사과 봉지를 담은 까닭으로 가장 알맞은 것은?", "choices": ["반짝이는 사과가 모두 팔려서 살 수 없었기 때문에", "이모가 못난이 사과를 사라고 시켰기 때문에", "못난이 사과가 더 크고 예뻤기 때문에", "사과를 기른 할머니의 이름표와 사진을 보았기 때문에"], "answer": 4, "explain": "글은 하람이의 마음을 직접 말하지 않고 행동으로 보여 줍니다. '사진을 한참 들여다보았다' 다음에 '되돌아가서' 담았지요. 기른 사람의 얼굴을 본 뒤 마음이 바뀐 것입니다. 2번은 '이모는 아무 말도 하지 않았다'와 어긋나니 함정입니다.", "day": 3, "date": "2026-08-07", "theme": "장바구니 속 사과 한 개 — 물건이 나에게 오는 길"}, {"no": 4, "type": "중심 생각", "passage": 1, "q": "지문 1이 말하려는 중심 생각은 무엇인가요?", "choices": ["사과는 도매시장을 거쳐야 더 맛있어진다.", "물건이 오는 길에 따라 신선함과 값이 달라지고, 그 길에는 여러 사람의 일이 있다.", "택배는 물건을 나르는 가장 나쁜 방법이다.", "농부는 자기가 기른 농산물을 직접 팔면 안 된다."], "answer": 2, "explain": "긴 길과 짧은 길을 나란히 보여 주고, 마지막 문단에서 '많은 일자리가 있다'로 묶었습니다. 글쓴이는 어느 한쪽이 나쁘다고 말하지 않아요. 그래서 3번처럼 한쪽을 몰아세우는 문장은 중심 생각이 될 수 없습니다.", "day": 3, "date": "2026-08-07", "theme": "장바구니 속 사과 한 개 — 물건이 나에게 오는 길"}, {"no": 1, "type": "사실 확인", "passage": 1, "q": "우장춘에 대한 설명으로 알맞은 것은 무엇인가요?", "choices": ["1898년에 부산에서 태어났다.", "1935년에 배추와 양배추를 교배하면 유채가 만들어진다는 사실을 밝혔다.", "한국에 온 뒤 채소 씨앗을 다른 나라에서 더 많이 사 오게 했다.", "세상을 떠나며 아주 많은 재산을 남겼다."], "answer": 2, "explain": "둘째 문단에 그대로 나와 있습니다. ①은 태어난 곳이 도쿄이므로 틀립니다. 셋째 문단의 '부산의 작은 연구소'만 보고 ①을 고르는 친구가 많으니, 태어난 곳과 일한 곳을 나누어 읽어야 합니다. ③은 오히려 씨앗을 우리 손으로 길러 낸 이야기이므로 반대입니다.", "day": 4, "date": "2026-08-08", "theme": "씨앗 한 알을 남긴 사람들 — 심어야 이어지는 것"}, {"no": 2, "type": "낱말 뜻", "passage": 2, "q": "둘째 글의 '대출 기간은 한 철이다'에서 '한 철'의 뜻으로 알맞은 것은 무엇인가요?", "choices": ["하루가 지나는 동안", "씨앗이 다 팔릴 때까지", "열두 달, 곧 한 해 내내", "봄이나 여름처럼 계절 하나가 지나는 동안"], "answer": 4, "explain": "봄에 심어 가을에 갚는다는 앞뒤 흐름에서 짐작할 수 있습니다. '철'을 쇠붙이 '철'로 잘못 읽거나 '한 번'으로 바꿔 생각하기 쉬우니, 문장 앞뒤에 나온 계절 낱말을 찾아보게 하세요.", "day": 4, "date": "2026-08-08", "theme": "씨앗 한 알을 남긴 사람들 — 심어야 이어지는 것"}, {"no": 3, "type": "추론", "passage": 2, "q": "사서가 웃으며 아이의 이름을 장부에 적은 까닭으로 가장 알맞은 것은 무엇인가요?", "choices": ["몇 알을 빌려 열두 알을 갚았고, 벌레 먹은 것까지 솔직히 말했기 때문이다.", "아이가 씨앗을 한 알도 잃지 않고 모두 길러 냈기 때문이다.", "벌레가 먹은 씨앗은 도서관이 돌려받지 않기 때문이다.", "아이가 빌린 책을 늦지 않게 반납했기 때문이다."], "answer": 1, "explain": "글은 사서의 마음을 설명하지 않고 '웃으며'라는 행동으로만 보여 줍니다. 앞 문단의 '한 알을 빌려 여러 알로 갚는 셈'과 이어 읽으면 짐작할 수 있습니다. ②는 '세 알은 벌레가 먹었어요'라는 아이의 말과 어긋납니다.", "day": 4, "date": "2026-08-08", "theme": "씨앗 한 알을 남긴 사람들 — 심어야 이어지는 것"}, {"no": 4, "type": "중심 생각", "passage": 0, "q": "두 글을 하나로 묶는 중심 생각으로 가장 알맞은 것은 무엇인가요?", "choices": ["씨앗은 창고에 잘 쌓아 두어야 오래 남는다.", "옛날에는 채소가 모자라 김장을 담그기 어려웠다.", "씨앗은 심고 나누는 사람이 있을 때 살아남아 다음 사람에게 이어진다.", "훌륭한 학자가 되려면 반드시 외국에서 공부해야 한다."], "answer": 3, "explain": "우장춘은 씨앗을 길러 남겼고, 씨앗도서관은 씨앗을 빌려주며 이어 갑니다. ①은 '창고에 쌓아 두지 않는다'는 넷째 문단과 정반대입니다. ②는 첫째 글의 한 부분일 뿐이어서 두 글을 아우르지 못합니다.", "day": 4, "date": "2026-08-08", "theme": "씨앗 한 알을 남긴 사람들 — 심어야 이어지는 것"}, {"no": 1, "type": "사실 확인", "passage": 1, "q": "첫째 글의 내용으로 알맞은 것은 무엇인가요?", "choices": ["나무는 뿌리로 둘레의 열을 곧바로 빨아들인다.", "소리는 공기가 없는 곳에서도 혼자 건너갈 수 있다.", "올해부터 폭염 특보가 세 단계로 늘었다.", "씨앗도서관은 빌려준 씨앗을 빌린 그대로 돌려받는다."], "answer": 3, "explain": "둘째 문단에 그대로 나옵니다. ①은 '뿌리로 빨아올린 물을 잎으로 내보내고, 그 물이 마르면서' 열을 데려간다고 했으니 순서가 다릅니다. '뿌리'라는 낱말만 보고 고르기 쉬우니 문장을 끝까지 읽게 하세요. ④는 '한 알을 빌려주고 여러 알로 돌려받는다'와 어긋납니다.", "day": 5, "date": "2026-08-09", "theme": "건너가는 것들 — 한 주를 잇는 한 줄"}, {"no": 2, "type": "낱말 뜻", "passage": 2, "q": "둘째 글의 '찌그러진 곳은 펴다 말고 그냥 두었다'에서 '펴다 말고'의 뜻으로 알맞은 것은 무엇인가요?", "choices": ["펴려고 하다가 도중에 그만두고", "다 펴고 나서 다시 눌러 놓고", "한 번도 펴 볼 생각을 하지 않고", "남에게 펴 달라고 부탁해 놓고"], "answer": 1, "explain": "'-다 말다'는 하던 일을 중간에 그만둔다는 뜻입니다. 지호는 손을 댔다가 그만둔 것이므로 ③처럼 '아예 하지 않았다'와는 다릅니다. 말끝을 대충 읽으면 ③을 고르기 쉬우니 '펴다'와 '말고'를 나누어 짚어 주세요.", "day": 5, "date": "2026-08-09", "theme": "건너가는 것들 — 한 주를 잇는 한 줄"}, {"no": 3, "type": "추론", "passage": 2, "q": "지호가 동생에게 \"그거, 내가 만든 거야.\"라고 말한 까닭으로 가장 알맞은 것은 무엇인가요?", "choices": ["찌그러진 바구니를 새로 만들어 자전거에 달았기 때문이다.", "동생이 자전거를 함부로 타지 못하게 겁을 주려 했기 때문이다.", "바구니를 망가뜨린 사람이 자기가 아니라고 밝히고 싶었기 때문이다.", "찌그러진 자국이 부끄러운 흠이 아니라 자전거와 함께 보낸 시간의 자국이 되었기 때문이다."], "answer": 4, "explain": "글은 지호의 마음을 설명하지 않고 행동으로만 보여 줍니다. 처음에는 창고 문을 세게 닫았지만, 넘어진 뒤에는 바구니를 오래 만져 보고, 나중에는 펴지 않고 그대로 둡니다. 이 변화를 이어 읽으면 짐작할 수 있습니다. ③은 '내가 만든 거야'라는 말과 정반대입니다.", "day": 5, "date": "2026-08-09", "theme": "건너가는 것들 — 한 주를 잇는 한 줄"}, {"no": 4, "type": "중심 생각", "passage": 0, "q": "두 글을 하나로 묶는 중심 생각으로 가장 알맞은 것은 무엇인가요?", "choices": ["오래된 물건은 새 물건보다 언제나 더 튼튼하다.", "무엇이든 다른 사람에게 건너가려면 누군가 먼저 내밀어야 한다.", "여름에는 나무 그늘을 찾아 다녀야 몸이 안전하다.", "자전거를 탈 때에는 언덕길에서 특히 조심해야 한다."], "answer": 2, "explain": "첫째 글은 그늘·소리·사과·씨앗이 누군가의 손을 거쳐 건너온다고 했고, 둘째 글에서는 자전거가 아빠에게서 지호에게, 다시 동생에게 건너갑니다. ③과 ④는 각 글의 한 조각일 뿐이어서 두 글을 아우르지 못합니다.", "day": 5, "date": "2026-08-09", "theme": "건너가는 것들 — 한 주를 잇는 한 줄"}], "math": [{"q": "‘오십팔만 사천구백팔십오’을 숫자로 쓰세요. (숫자만)", "answer": "584985", "explain": "오십팔만 사천구백팔십오 = 584,985 입니다. 오른쪽에서 네 자리씩 끊어 만·억을 붙여 읽습니다.", "std": "[4수01-02]", "unit": "큰 수", "kind": "calc", "no": 1, "day": 1, "date": "2026-08-05"}, {"q": "두 수의 크기를 비교하여 > 또는 < 를 쓰세요.  8,320,675 ☐ 8,397,895", "answer": "<", "explain": "자리 수가 같으므로 가장 높은 자리부터 차례로 비교합니다. 8,320,675 < 8,397,895", "std": "[4수01-02]", "unit": "큰 수", "kind": "calc", "no": 2, "day": 1, "date": "2026-08-05"}, {"q": "427,663 에서 100,000씩 3번 뛰어서 센 수를 쓰세요.", "answer": "727663", "explain": "427,663 + 100,000×3 = 727,663", "std": "[4수01-02]", "unit": "큰 수", "kind": "calc", "no": 3, "day": 1, "date": "2026-08-05"}, {"q": "12,129,390 에서 십만의 자리 숫자가 나타내는 값을 쓰세요.", "answer": "100000", "explain": "십만의 자리 숫자는 1이고, 십만의 자리는 100,000을 나타냅니다. 1×100,000=100,000", "std": "[4수01-02]", "unit": "큰 수", "kind": "calc", "no": 4, "day": 1, "date": "2026-08-05"}, {"q": "‘십삼만 칠천구백칠십’을 숫자로 쓰세요. (숫자만)", "answer": "137970", "explain": "십삼만 칠천구백칠십 = 137,970 입니다. 오른쪽에서 네 자리씩 끊어 만·억을 붙여 읽습니다.", "std": "[4수01-02]", "unit": "큰 수", "kind": "calc", "no": 5, "day": 1, "date": "2026-08-05"}, {"q": "76,818 을 반올림하여 백의 자리까지 나타내세요.", "answer": "76800", "explain": "백의 자리 바로 아래 숫자가 5 이상이면 올리고 5보다 작으면 버립니다. → 76,800", "std": "[4수01-08]", "unit": "어림셈", "kind": "calc", "no": 6, "day": 1, "date": "2026-08-05"}, {"q": "877 × 78 = ☐", "answer": "68406", "explain": "877×8=7016, 877×70=61390 이므로 두 값을 더하면 68,406 입니다.", "std": "[4수01-04]", "unit": "곱셈", "kind": "calc", "no": 7, "day": 1, "date": "2026-08-05"}, {"q": "저금통에 1,300,000원이 들어 있습니다. 오늘부터 매달 10,000원씩 8달 동안 모으면 모두 얼마가 되나요?", "answer": "1380000", "explain": "10,000씩 8번 뛰어 세면 80,000원이 늘어납니다. 1,300,000+80,000=1,380,000원", "std": "[4수01-02]", "unit": "큰 수", "kind": "word", "no": 8, "day": 1, "date": "2026-08-05"}, {"q": "어느 도시의 인구는 1,619,248명입니다. 올해 86,128명이 늘었다면 지금 인구는 몇 명인가요?", "answer": "1705376", "explain": "1,619,248 + 86,128 = 1,705,376명", "std": "[4수01-02]", "unit": "큰 수", "kind": "word", "no": 9, "day": 1, "date": "2026-08-05"}, {"q": "색종이 557장을 25명에게 똑같이 나누어 주려고 합니다. 한 사람이 몇 장씩 받고 몇 장이 남나요? (쓰는 법: 몫…나머지)", "answer": "22…7", "explain": "557÷25=22…7 이므로 한 사람이 22장씩 받고 7장이 남습니다.", "std": "[4수01-07]", "unit": "나눗셈", "kind": "word", "no": 10, "day": 1, "date": "2026-08-05"}, {"q": "535 × 85 = ☐", "answer": "45475", "explain": "535×5=2675, 535×80=42800 이므로 두 값을 더하면 45,475 입니다.", "std": "[4수01-04]", "unit": "곱셈", "kind": "calc", "no": 1, "day": 2, "date": "2026-08-06"}, {"q": "310 × 49 = ☐", "answer": "15190", "explain": "310×9=2790, 310×40=12400 이므로 두 값을 더하면 15,190 입니다.", "std": "[4수01-04]", "unit": "곱셈", "kind": "calc", "no": 2, "day": 2, "date": "2026-08-06"}, {"q": "979 × 81 = ☐", "answer": "79299", "explain": "979×1=979, 979×80=78320 이므로 두 값을 더하면 79,299 입니다.", "std": "[4수01-04]", "unit": "곱셈", "kind": "calc", "no": 3, "day": 2, "date": "2026-08-06"}, {"q": "225 × 58 = ☐", "answer": "13050", "explain": "225×8=1800, 225×50=11250 이므로 두 값을 더하면 13,050 입니다.", "std": "[4수01-04]", "unit": "곱셈", "kind": "calc", "no": 4, "day": 2, "date": "2026-08-06"}, {"q": "162 × 88 = ☐", "answer": "14256", "explain": "162×8=1296, 162×80=12960 이므로 두 값을 더하면 14,256 입니다.", "std": "[4수01-04]", "unit": "곱셈", "kind": "calc", "no": 5, "day": 2, "date": "2026-08-06"}, {"q": "331 ÷ 19 의 몫과 나머지를 쓰세요.  (쓰는 법: 몫…나머지)", "answer": "17…8", "explain": "19×17=323, 331−323=8 이므로 몫 17, 나머지 8. 나머지는 늘 나누는 수 19보다 작아야 합니다.", "std": "[4수01-07]", "unit": "나눗셈", "kind": "calc", "no": 6, "day": 2, "date": "2026-08-06"}, {"q": "887 × 57 를 어림셈으로 구하면 약 얼마인가요? (887는 백의 자리, 57는 십의 자리까지 반올림하기)", "answer": "54000", "explain": "887≈900, 57≈60 이므로 900×60=54,000 쯤으로 어림합니다. (정확한 값 50,559)", "std": "[4수01-08]", "unit": "어림셈", "kind": "calc", "no": 7, "day": 2, "date": "2026-08-06"}, {"q": "한 상자에 사과가 366개씩 들어 있습니다. 28상자에 든 사과는 모두 몇 개인가요?", "answer": "10248", "explain": "(한 상자 개수)×(상자 수) = 366×28 = 10,248개", "std": "[4수01-04]", "unit": "곱셈", "kind": "word", "no": 8, "day": 2, "date": "2026-08-06"}, {"q": "공연장의 좌석은 256자리입니다. 39일 동안 날마다 좌석이 모두 찼다면 공연을 본 사람은 모두 몇 명인가요?", "answer": "9984", "explain": "(하루 관람객)×(날수) = 256×39 = 9,984명", "std": "[4수01-04]", "unit": "곱셈", "kind": "word", "no": 9, "day": 2, "date": "2026-08-06"}, {"q": "어느 도시의 인구는 7,764,425명입니다. 올해 59,416명이 늘었다면 지금 인구는 몇 명인가요?", "answer": "7823841", "explain": "7,764,425 + 59,416 = 7,823,841명", "std": "[4수01-02]", "unit": "큰 수", "kind": "word", "no": 10, "day": 2, "date": "2026-08-06"}, {"q": "1944 ÷ 83 의 몫과 나머지를 쓰세요.  (쓰는 법: 몫…나머지)", "answer": "23…35", "explain": "83×23=1909, 1944−1909=35 이므로 몫 23, 나머지 35. 나머지는 늘 나누는 수 83보다 작아야 합니다.", "std": "[4수01-07]", "unit": "나눗셈", "kind": "calc", "no": 1, "day": 3, "date": "2026-08-07"}, {"q": "1066 ÷ 26 = ☐", "answer": "41", "explain": "26×41=1066 이므로 몫은 41 입니다.", "std": "[4수01-07]", "unit": "나눗셈", "kind": "calc", "no": 2, "day": 3, "date": "2026-08-07"}, {"q": "637 ÷ 29 의 몫과 나머지를 쓰세요.  (쓰는 법: 몫…나머지)", "answer": "21…28", "explain": "29×21=609, 637−609=28 이므로 몫 21, 나머지 28. 나머지는 늘 나누는 수 29보다 작아야 합니다.", "std": "[4수01-07]", "unit": "나눗셈", "kind": "calc", "no": 3, "day": 3, "date": "2026-08-07"}, {"q": "1222 ÷ 41 의 몫과 나머지를 쓰세요.  (쓰는 법: 몫…나머지)", "answer": "29…33", "explain": "41×29=1189, 1222−1189=33 이므로 몫 29, 나머지 33. 나머지는 늘 나누는 수 41보다 작아야 합니다.", "std": "[4수01-07]", "unit": "나눗셈", "kind": "calc", "no": 4, "day": 3, "date": "2026-08-07"}, {"q": "1267 ÷ 46 의 몫과 나머지를 쓰세요.  (쓰는 법: 몫…나머지)", "answer": "27…25", "explain": "46×27=1242, 1267−1242=25 이므로 몫 27, 나머지 25. 나머지는 늘 나누는 수 46보다 작아야 합니다.", "std": "[4수01-07]", "unit": "나눗셈", "kind": "calc", "no": 5, "day": 3, "date": "2026-08-07"}, {"q": "65,302,767 에서 백만의 자리 숫자가 나타내는 값을 쓰세요.", "answer": "5000000", "explain": "백만의 자리 숫자는 5이고, 백만의 자리는 1,000,000을 나타냅니다. 5×1,000,000=5,000,000", "std": "[4수01-02]", "unit": "큰 수", "kind": "calc", "no": 6, "day": 3, "date": "2026-08-07"}, {"q": "220 × 54 = ☐", "answer": "11880", "explain": "220×4=880, 220×50=11000 이므로 두 값을 더하면 11,880 입니다.", "std": "[4수01-04]", "unit": "곱셈", "kind": "calc", "no": 7, "day": 3, "date": "2026-08-07"}, {"q": "귤 194개를 한 상자에 15개씩 담으려고 합니다. 상자는 몇 개가 필요하고 귤은 몇 개가 남나요? (쓰는 법: 몫…나머지)", "answer": "12…14", "explain": "194÷15=12…14 이므로 상자 12개가 가득 차고 귤 14개가 남습니다.", "std": "[4수01-07]", "unit": "나눗셈", "kind": "word", "no": 8, "day": 3, "date": "2026-08-07"}, {"q": "색종이 322장을 18명에게 똑같이 나누어 주려고 합니다. 한 사람이 몇 장씩 받고 몇 장이 남나요? (쓰는 법: 몫…나머지)", "answer": "17…16", "explain": "322÷18=17…16 이므로 한 사람이 17장씩 받고 16장이 남습니다.", "std": "[4수01-07]", "unit": "나눗셈", "kind": "word", "no": 9, "day": 3, "date": "2026-08-07"}, {"q": "한 권에 1,331원인 공책을 30권 사려고 합니다. 돈이 얼마쯤 필요한지 어림셈으로 구하세요. (값은 천의 자리, 권수는 십의 자리까지 반올림)", "answer": "30000", "explain": "1,331≈1,000원, 30≈30권 → 1,000×30=30,000원쯤 필요합니다.", "std": "[4수01-08]", "unit": "어림셈", "kind": "word", "no": 10, "day": 3, "date": "2026-08-07"}, {"q": "256 × 23 를 어림셈으로 구하면 약 얼마인가요? (256는 백의 자리, 23는 십의 자리까지 반올림하기)", "answer": "6000", "explain": "256≈300, 23≈20 이므로 300×20=6,000 쯤으로 어림합니다. (정확한 값 5,888)", "std": "[4수01-08]", "unit": "어림셈", "kind": "calc", "no": 1, "day": 4, "date": "2026-08-08"}, {"q": "2,815 을 반올림하여 천의 자리까지 나타내세요.", "answer": "3000", "explain": "천의 자리 바로 아래 숫자가 5 이상이면 올리고 5보다 작으면 버립니다. → 3,000", "std": "[4수01-08]", "unit": "어림셈", "kind": "calc", "no": 2, "day": 4, "date": "2026-08-08"}, {"q": "48,450 을 반올림하여 백의 자리까지 나타내세요.", "answer": "48500", "explain": "백의 자리 바로 아래 숫자가 5 이상이면 올리고 5보다 작으면 버립니다. → 48,500", "std": "[4수01-08]", "unit": "어림셈", "kind": "calc", "no": 3, "day": 4, "date": "2026-08-08"}, {"q": "9,868 을 반올림하여 천의 자리까지 나타내세요.", "answer": "10000", "explain": "천의 자리 바로 아래 숫자가 5 이상이면 올리고 5보다 작으면 버립니다. → 10,000", "std": "[4수01-08]", "unit": "어림셈", "kind": "calc", "no": 4, "day": 4, "date": "2026-08-08"}, {"q": "82,262 을 반올림하여 백의 자리까지 나타내세요.", "answer": "82300", "explain": "백의 자리 바로 아래 숫자가 5 이상이면 올리고 5보다 작으면 버립니다. → 82,300", "std": "[4수01-08]", "unit": "어림셈", "kind": "calc", "no": 5, "day": 4, "date": "2026-08-08"}, {"q": "2823 ÷ 76 의 몫과 나머지를 쓰세요.  (쓰는 법: 몫…나머지)", "answer": "37…11", "explain": "76×37=2812, 2823−2812=11 이므로 몫 37, 나머지 11. 나머지는 늘 나누는 수 76보다 작아야 합니다.", "std": "[4수01-07]", "unit": "나눗셈", "kind": "calc", "no": 6, "day": 4, "date": "2026-08-08"}, {"q": "‘팔십구만 천육십육’을 숫자로 쓰세요. (숫자만)", "answer": "891066", "explain": "팔십구만 천육십육 = 891,066 입니다. 오른쪽에서 네 자리씩 끊어 만·억을 붙여 읽습니다.", "std": "[4수01-02]", "unit": "큰 수", "kind": "calc", "no": 7, "day": 4, "date": "2026-08-08"}, {"q": "박물관에 어제 3,092명, 오늘 2,456명이 왔습니다. 이틀 동안 온 사람이 몇 명쯤인지 천의 자리까지 반올림하여 어림하세요.", "answer": "5000", "explain": "3,092≈3,000명, 2,456≈2,000명이므로 3,000+2,000=5,000명쯤입니다. (정확한 값 5,548명)", "std": "[4수01-08]", "unit": "어림셈", "kind": "word", "no": 8, "day": 4, "date": "2026-08-08"}, {"q": "한 권에 2,796원인 공책을 33권 사려고 합니다. 돈이 얼마쯤 필요한지 어림셈으로 구하세요. (값은 천의 자리, 권수는 십의 자리까지 반올림)", "answer": "90000", "explain": "2,796≈3,000원, 33≈30권 → 3,000×30=90,000원쯤 필요합니다.", "std": "[4수01-08]", "unit": "어림셈", "kind": "word", "no": 9, "day": 4, "date": "2026-08-08"}, {"q": "한 상자에 사과가 319개씩 들어 있습니다. 47상자에 든 사과는 모두 몇 개인가요?", "answer": "14993", "explain": "(한 상자 개수)×(상자 수) = 319×47 = 14,993개", "std": "[4수01-04]", "unit": "곱셈", "kind": "word", "no": 10, "day": 4, "date": "2026-08-08"}, {"q": "대분수 5 1/8 를 가분수로 나타내세요. (쓰는 법: 13/4)", "answer": "41/8", "explain": "5=40/8 이므로 40/8+1/8=41/8", "std": "[4수01-10]", "unit": "분수", "kind": "calc", "no": 1, "day": 5, "date": "2026-08-09"}, {"q": "두 단위분수의 크기를 비교하여 > 또는 < 를 쓰세요.  1/4 ☐ 1/9", "answer": ">", "explain": "단위분수는 분모가 작을수록 큽니다. 1/4 > 1/9", "std": "[4수01-10]", "unit": "분수", "kind": "calc", "no": 2, "day": 5, "date": "2026-08-09"}, {"q": "가분수 16/7 를 대분수로 나타내세요. (쓰는 법: 3 1/4)", "answer": "2 2/7", "explain": "16÷7=2…2 이므로 2 2/7 입니다.", "std": "[4수01-10]", "unit": "분수", "kind": "calc", "no": 3, "day": 5, "date": "2026-08-09"}, {"q": "대분수 5 3/8 를 가분수로 나타내세요. (쓰는 법: 13/4)", "answer": "43/8", "explain": "5=40/8 이므로 40/8+3/8=43/8", "std": "[4수01-10]", "unit": "분수", "kind": "calc", "no": 4, "day": 5, "date": "2026-08-09"}, {"q": "대분수 3 3/4 를 가분수로 나타내세요. (쓰는 법: 13/4)", "answer": "15/4", "explain": "3=12/4 이므로 12/4+3/4=15/4", "std": "[4수01-10]", "unit": "분수", "kind": "calc", "no": 5, "day": 5, "date": "2026-08-09"}, {"q": "272 ÷ 24 의 몫과 나머지를 쓰세요.  (쓰는 법: 몫…나머지)", "answer": "11…8", "explain": "24×11=264, 272−264=8 이므로 몫 11, 나머지 8. 나머지는 늘 나누는 수 24보다 작아야 합니다.", "std": "[4수01-07]", "unit": "나눗셈", "kind": "calc", "no": 6, "day": 5, "date": "2026-08-09"}, {"q": "728 × 53 를 어림셈으로 구하면 약 얼마인가요? (728는 백의 자리, 53는 십의 자리까지 반올림하기)", "answer": "35000", "explain": "728≈700, 53≈50 이므로 700×50=35,000 쯤으로 어림합니다. (정확한 값 38,584)", "std": "[4수01-08]", "unit": "어림셈", "kind": "calc", "no": 7, "day": 5, "date": "2026-08-09"}, {"q": "피자 한 판을 똑같이 7조각으로 나누었습니다. 이런 피자 3판과 6조각을 먹었다면 먹은 양은 모두 몇 조각인가요?", "answer": "27", "explain": "피자 한 판이 7조각이므로 3판은 3×7=21조각입니다. 여기에 6조각을 더하면 27조각, 곧 3 6/7 판입니다.", "std": "[4수01-10]", "unit": "분수", "kind": "word", "no": 8, "day": 5, "date": "2026-08-09"}, {"q": "구슬 30개를 똑같이 6묶음으로 나누었습니다. 그중 4묶음은 전체의 4/6 입니다. 4묶음은 몇 개인가요?", "answer": "20", "explain": "한 묶음은 30÷6=5개이므로 4묶음은 5×4=20개", "std": "[4수01-10]", "unit": "분수", "kind": "word", "no": 9, "day": 5, "date": "2026-08-09"}, {"q": "어느 도시의 인구는 3,127,980명입니다. 올해 29,230명이 늘었다면 지금 인구는 몇 명인가요?", "answer": "3157210", "explain": "3,127,980 + 29,230 = 3,157,210명", "std": "[4수01-02]", "unit": "큰 수", "kind": "word", "no": 10, "day": 5, "date": "2026-08-09"}], "essays": [{"no": 5, "type": "적용·서술형", "passage": 0, "q": "두 글을 읽고, 우리 반이나 우리 학교에서 여름 더위를 이겨 내기 위해 바꾸고 싶은 일을 한 가지 고르세요. 그리고 그렇게 생각한 까닭을 두 글에서 찾아 함께 쓰세요.", "sample": "나는 운동장 가장자리에 나무를 더 심었으면 좋겠다. 둘째 글에서 흙과 아스팔트는 햇빛을 그대로 받아 뜨거워지지만 나무 아래는 그늘이 져서 훨씬 시원하다고 했기 때문이다. 또 첫 글에서 온열질환자가 해마다 늘고 있다고 했으니, 점심시간에 쉴 그늘이 있으면 친구들이 덜 아플 것이다.", "rubric": ["바꾸고 싶은 일을 한 가지로 분명하게 골랐는가 (1점)", "그렇게 생각한 까닭을 지문에서 찾아 근거로 들었는가 (2점)", "두 지문을 모두 이용했고 문장이 이어지게 썼는가 (2점)"], "day": 1, "date": "2026-08-05", "theme": "더워진 여름, 우리가 만드는 그늘"}, {"no": 5, "type": "적용·서술형", "passage": 0, "q": "판소리 공연에서 관객이 \"얼쑤!\" 하고 추임새를 넣었습니다. 이 소리가 소리꾼에게 닿기까지 어떤 길을 지나는지 글 2의 내용을 이용해 설명하고, 그 소리를 들은 소리꾼의 마음은 어떠할지 한 문장으로 덧붙여 쓰세요.", "sample": "관객의 목이 떨리면서 소리가 생기고, 그 떨림이 둘레의 공기를 밀어 물결처럼 퍼져 나간다. 퍼진 떨림이 소리꾼의 귓속 얇은 막을 떨게 해서 소리꾼이 \"얼쑤!\"를 듣게 된다. 그 소리를 들은 소리꾼은 힘이 나서 더 신나게 노래를 이어 갈 것이다.", "rubric": ["소리의 시작이 '떨림'이라는 점을 썼는가.", "떨림이 공기를 타고 귀까지 전해지는 과정을 순서대로 썼는가.", "소리꾼의 마음을 자기 말로 한 문장 덧붙였는가."], "day": 2, "date": "2026-08-06", "theme": "떨림에서 마음까지 — 소리가 건너오는 길"}, {"no": 5, "type": "적용·서술형", "passage": 0, "q": "내가 장바구니를 들고 직매장에 갔다고 생각해 봅시다. 반짝이는 사과와 못난이 사과 가운데 무엇을 고르겠나요? 고른 것과 그 까닭 두 가지를 두세 문장으로 쓰세요.", "sample": "나는 못난이 사과를 고르겠다. 첫째, 껍질에 흠집이 있어도 속은 똑같이 달고 단단하기 때문이다. 둘째, 모양 때문에 버려질 수도 있는 사과를 사면 힘들게 기른 농부에게 도움이 되기 때문이다.", "rubric": ["고른 것(반짝이는 사과 / 못난이 사과)을 분명하게 밝혔는가.", "까닭을 두 가지 썼고, 각 까닭이 지문의 내용이나 자기 경험과 이어지는가.", "어느 쪽을 골랐든 다른 선택을 깎아내리지 않고 자기 이유로 설명했는가."], "day": 3, "date": "2026-08-07", "theme": "장바구니 속 사과 한 개 — 물건이 나에게 오는 길"}, {"no": 5, "type": "적용·서술형", "passage": 0, "q": "내가 씨앗도서관에서 씨앗 다섯 알을 빌린다면 무엇을 심고 싶은가요? 그리고 가을에 씨앗을 꼭 돌려주어야 하는 까닭은 무엇인지, 이유를 들어 세 문장 이상 써 봅시다.", "sample": "나는 강낭콩을 심고 싶다. 왜냐하면 자라는 모습을 날마다 볼 수 있고 열매도 빨리 맺히기 때문이다. 가을에 씨앗을 꼭 돌려주어야 하는 까닭은, 내가 갚은 씨앗을 다음 사람이 또 심어야 그 씨앗이 사라지지 않기 때문이다. 우장춘이 남긴 씨앗이 지금 우리 밥상에 오르는 것처럼, 내가 갚은 씨앗도 누군가의 밭으로 갈 것이다.", "rubric": ["심고 싶은 씨앗을 하나 정해 분명히 밝혔는가.", "돌려주어야 하는 까닭을 '왜냐하면 ~ 때문이다' 꼴로 이유를 들어 썼는가.", "두 지문(우장춘 또는 씨앗도서관)의 내용을 한 가지 이상 근거로 가져왔는가."], "day": 4, "date": "2026-08-08", "theme": "씨앗 한 알을 남긴 사람들 — 심어야 이어지는 것"}, {"no": 5, "type": "적용·서술형", "passage": 0, "q": "이번 주에 만난 것들(나무 그늘, 소리, 사과, 씨앗, 파란 자전거) 가운데 내가 다른 사람에게 건네주고 싶은 것은 무엇인가요? 그것을 누구에게, 왜 건네고 싶은지 이유를 들어 세 문장 이상 써 봅시다.", "sample": "나는 나무 그늘을 건네주고 싶다. 왜냐하면 우리 반 창가에 화분을 놓아 두면 다음에 이 교실을 쓸 동생들이 시원하게 앉아 있을 수 있기 때문이다. 지호가 찌그러진 자전거를 동생에게 물려준 것처럼, 내가 기른 작은 나무도 다음 사람에게 건너갈 수 있다. 건너가려면 누군가 먼저 심어야 하는데, 그 사람이 나였으면 좋겠다.", "rubric": ["건네주고 싶은 것을 하나 골라 분명히 밝혔는가.", "누구에게 건네고 싶은지와 그 까닭을 '왜냐하면 ~ 때문이다' 꼴로 썼는가.", "두 지문의 내용을 한 가지 이상 근거로 가져왔는가."], "day": 5, "date": "2026-08-09", "theme": "건너가는 것들 — 한 주를 잇는 한 줄"}], "passages": [{"no": 1, "genre": "사회 — 신문 기사", "title": "폭염 특보가 세 단계로 늘었다", "body": ["2026년 여름은 유난히 뜨거웠다. 7월 12일, 경상북도 경산과 포항에 올여름 첫 폭염중대경보가 내려졌다. 이날 경산의 낮 기온은 39.9도까지 올랐다.", "폭염 특보는 더위가 위험할 만큼 심할 때 기상청이 내보내는 알림이다. 예전에는 폭염주의보와 폭염경보, 두 단계뿐이었다. 올해부터는 여기에 폭염중대경보가 더해져 세 단계가 되었다. 밤에도 더위가 식지 않을 때 알리는 열대야주의보도 새로 만들어졌다.", "단계를 늘린 까닭은 더위 때문에 아픈 사람이 계속 늘고 있기 때문이다. 질병관리청 자료를 보면 온열질환자는 2023년 2천818명, 2024년 3천704명, 2025년 4천460명으로 해마다 많아졌다.", "기상청은 8월 2일에도 밤더위 탓에 잠을 설치기 쉬우니 물을 넉넉히 마시고 한낮 바깥 활동은 줄이라고 안내했다.", "특보는 위험을 미리 알려 주는 신호다. 그 신호를 읽을 줄 아는 사람만이 자기 몸을 지킬 수 있다."], "hard_words": [{"word": "온열질환", "meaning": "더위 때문에 생기는 병. 어지럽거나 쓰러지기도 한다."}, {"word": "열대야", "meaning": "밤에도 기온이 25도 아래로 내려가지 않아 잠들기 힘든 밤."}], "day": 1, "date": "2026-08-05", "theme": "더워진 여름, 우리가 만드는 그늘"}, {"no": 2, "genre": "환경", "title": "그늘을 만드는 나무", "body": ["여름 한낮, 운동장 한가운데와 느티나무 아래는 같은 학교 안인데도 느낌이 아주 다르다. 흙과 아스팔트는 햇빛을 그대로 받아 뜨겁게 달아오른다. 나무 아래는 그늘이 져서 훨씬 시원하다.", "나무는 그늘만 만드는 것이 아니다. 뿌리로 빨아올린 물을 잎으로 내보내는데, 그 물이 마르면서 둘레의 열을 함께 데리고 간다. 땀을 흘리면 몸이 시원해지는 것과 같은 이치다.", "나무는 공기도 손본다. 잎은 이산화탄소를 마시고 산소를 내놓는다. 이산화탄소는 지구를 담요처럼 덮어 온도를 올리는 기체다. 나무가 줄면 담요는 두꺼워지고, 여름은 더 뜨거워진다.", "그래서 도시마다 나무를 심고 건물 옥상에 풀을 기른다. 환경부도 플라스틱을 처음부터 덜 만들고 덜 쓰는 대책을 세우고 있다. 플라스틱을 만들고 태울 때에도 지구를 데우는 기체가 나오기 때문이다.", "우리가 할 수 있는 일도 있다. 교실 창가에 화분을 놓는 일, 등굣길에 그늘길을 골라 걷는 일, 쓰던 물건을 한 번 더 쓰는 일. 작아 보여도 그늘은 그렇게 넓어진다."], "hard_words": [{"word": "이산화탄소", "meaning": "숨을 내쉴 때 나오는 기체. 지구를 데우는 성질이 있다."}, {"word": "대책", "meaning": "어떤 문제를 풀기 위해 미리 세우는 방법."}], "day": 1, "date": "2026-08-05", "theme": "더워진 여름, 우리가 만드는 그늘"}, {"no": 1, "genre": "예술·문화", "title": "얼쑤! 두 사람이 만드는 판소리 한마당", "body": ["무대에 오르는 사람은 단 두 명이다. 부채를 든 소리꾼과 북을 든 고수. 화려한 무대 장치도, 여러 대의 악기도 없다. 그런데도 사람들은 몇 시간 동안 자리를 뜨지 않는다. 이것이 우리 소리, 판소리다.", "소리꾼은 노래만 하지 않는다. 이야기를 말로 풀어내는 아니리를 섞고, 몸짓으로 장면을 보여 주는 너름새를 함께 한다. 손에 든 부채 하나가 배를 젓는 노가 되었다가, 지팡이가 되었다가, 편지가 된다. 듣는 사람은 그 작은 부채를 보며 넓은 강도 보고 높은 산도 본다.", "고수는 북을 치면서 \"얼쑤!\", \"잘한다!\" 하고 외친다. 이것을 추임새라고 한다. 추임새는 소리꾼에게 힘을 주고, 이야기의 빈자리를 채운다. 관객도 함께 추임새를 넣는다. 그래서 판소리에는 가만히 구경만 하는 사람이 없고, 함께 만드는 자리만 있다.", "지금까지 전해 오는 판소리는 다섯 마당이다. 춘향가, 심청가, 흥보가, 수궁가, 적벽가. 한 마당을 처음부터 끝까지 부르면 서너 시간이 걸리기도 한다. 소리꾼은 그 긴 시간을 목소리 하나로 버틴다.", "2003년, 유네스코는 판소리를 인류가 함께 지켜야 할 소중한 유산으로 뽑았다. 오래전부터 우리 곁에 있던 소리가 세계의 소리가 된 것이다."], "hard_words": [{"word": "아니리", "meaning": "판소리에서 노래하지 않고 말로 이야기를 풀어내는 부분."}, {"word": "너름새", "meaning": "소리꾼이 몸짓과 표정으로 장면을 보여 주는 것."}, {"word": "추임새", "meaning": "고수나 관객이 흥을 돋우려고 넣는 짧은 외침. \"얼쑤!\" 같은 말."}], "day": 2, "date": "2026-08-06", "theme": "떨림에서 마음까지 — 소리가 건너오는 길"}, {"no": 2, "genre": "과학", "title": "소리는 어떻게 내 귀까지 올까", "body": ["고수가 북을 치면 북 가죽이 파르르 떨린다. 이 떨림이 소리의 시작이다. 떨림이 없으면 소리도 없다. 자를 책상 끝에 걸쳐 놓고 튕겨 보면 떨리는 모습을 눈으로도 볼 수 있다.", "떨림은 둘레의 공기를 밀었다 당겼다 한다. 밀린 공기는 그 옆의 공기를 밀고, 그 공기는 또 옆의 공기를 민다. 이렇게 떨림이 물결처럼 퍼져 나가 우리 귀에 닿는다. 귓속의 얇은 막이 함께 떨리면 그제야 우리는 소리를 듣는다.", "소리는 공기로만 다니지 않는다. 물속에서도 다니고, 나무나 쇠처럼 단단한 것에서도 다닌다. 오히려 단단한 것에서 더 빠르고 또렷하게 간다. 책상에 귀를 대고 반대쪽 끝을 손톱으로 긁어 보면, 공기로 들을 때보다 훨씬 크게 들린다.", "종이컵 두 개를 실로 이으면 실 전화기가 되는 것도 그래서다. 말소리가 컵 바닥을 떨게 하고, 그 떨림이 팽팽한 실을 타고 건너간다. 실이 축 늘어지면 떨림이 이어지지 못해 소리도 건너가지 못한다.", "반대로 공기가 하나도 없는 곳에서는 아무리 큰 소리를 내도 들리지 않는다. 우주에서 우주인들이 무전기로 이야기를 나누는 까닭이 여기에 있다. 소리는 혼자 다니지 못한다. 언제나 무언가를 타고 건너온다."], "hard_words": [{"word": "무전기", "meaning": "전파를 이용해 멀리 있는 사람과 말을 주고받는 기계."}, {"word": "또렷하다", "meaning": "흐리지 않고 분명하다."}], "day": 2, "date": "2026-08-06", "theme": "떨림에서 마음까지 — 소리가 건너오는 길"}, {"no": 1, "genre": "경제·진로", "title": "사과 한 개가 걸어온 길", "body": ["아침 식탁에 사과 한 개가 놓여 있다. 이 사과는 어디에서 왔을까? 사과는 스스로 걸어오지 못한다. 사람과 자동차가 대신 옮겨 준다. 물건이 만든 사람에게서 쓰는 사람에게 오는 그 길을 유통이라고 한다.", "보통 사과는 긴 길을 지난다. 농부가 딴 사과는 먼저 큰 도매시장으로 간다. 거기서 상인이 사과를 사서 다시 가게로 보낸다. 그다음에야 우리 손에 온다. 길이 길어질수록 옮기는 사람도, 드는 값도 늘어난다.", "짧은 길도 있다. 로컬푸드 직매장이다. 농부가 그날 아침에 딴 농산물을 스스로 진열대에 올린다. 가격표도 농부가 직접 붙인다. 농림축산식품부도 이런 직매장을 새로 짓거나 고치도록 해마다 돕는다.", "길이 짧으면 좋은 점이 있다. 딴 지 몇 시간 안 된 채소가 바로 진열대에 오르니 더 신선하다. 중간에 나누는 몫이 적어서 농부에게 돌아가는 돈도 많아진다. 그래서 '월급 받는 농부'라는 말까지 생겼다.", "물론 먼 길이 늘 나쁜 것은 아니다. 2024년 한 해 우리나라에서 오간 택배는 59억5천만 개였다. 국민 한 사람이 1년에 116번쯤 택배를 받은 셈이다. 그 물건이 하루 만에 오도록 수많은 사람이 일한다.", "사과 한 개 뒤에는 농부, 상인, 물류 기사, 판매원이 있다. 물건이 오는 길에는 그만큼 많은 일자리가 있다. 오늘 저녁, 장바구니 속 물건이 어디서 왔는지 살펴보자."], "hard_words": [{"word": "유통", "meaning": "물건이 만든 사람에게서 쓰는 사람에게 옮겨 가는 과정"}, {"word": "도매시장", "meaning": "물건을 한꺼번에 많이 사고파는 큰 시장"}, {"word": "직매장", "meaning": "농부가 자기 농산물을 직접 가져다 파는 가게"}], "day": 3, "date": "2026-08-07", "theme": "장바구니 속 사과 한 개 — 물건이 나에게 오는 길"}, {"no": 2, "genre": "문학 — 창작 이야기", "title": "못난이 사과 한 봉지", "body": ["가을 첫 주 토요일, 하람이는 이모 손을 잡고 직매장에 갔다. 문을 열자 사과 냄새가 확 밀려왔다. 하람이는 장바구니를 들고 진열대 주위를 한 바퀴 돌았다.", "빨갛고 동그란 사과들이 공처럼 반짝였다. 그 옆에는 종이 상자 하나가 놓여 있었다. '못난이 사과, 다섯 개 이천 원.' 상자 속 사과들은 작고, 껍질에 갈색 흠집이 나 있었다.", "하람이는 그 봉지를 집었다가 슬그머니 뒤로 밀어 두었다. 그러고는 반짝이는 사과 쪽으로 걸어갔다. 이모는 아무 말도 하지 않았다.", "계산대로 가는 길에 하람이는 걸음을 멈췄다. 상자에 작은 이름표가 붙어 있었다. '심은 사람: 김순덕. 딴 날짜: 오늘 아침.' 그 아래에는 밀짚모자를 쓴 할머니 사진이 있었다. 하람이는 사진을 한참 들여다보았다.", "하람이는 되돌아가서 못난이 사과 봉지를 장바구니에 담았다. 그리고 이모를 보지 않은 채 말했다. \"이것도… 사과잖아요.\" 이모의 입꼬리가 살짝 올라갔다.", "집에 와서 깎아 보니 껍질만 얼룩덜룩할 뿐 속은 하얗고 단단했다. 한 입 베어 물자 단물이 흘렀다. 다음 주 토요일, 하람이는 직매장 문 앞에서 먼저 물었다. \"이모, 그 상자 오늘도 있어요?\""], "hard_words": [{"word": "못난이 사과", "meaning": "모양이 고르지 않거나 흠이 있어 값을 싸게 파는 사과"}, {"word": "흠집", "meaning": "물건에 생긴 흠이나 상처 자국"}, {"word": "계산대", "meaning": "가게에서 물건값을 치르는 자리"}], "day": 3, "date": "2026-08-07", "theme": "장바구니 속 사과 한 개 — 물건이 나에게 오는 길"}, {"no": 1, "genre": "인물·역사", "title": "흙 속에 씨앗을 남긴 사람, 우장춘", "body": ["우장춘은 1898년 일본 도쿄에서 태어났다. 아버지는 조선 사람이고 어머니는 일본 사람이었다. 집은 몹시 가난했다. 그는 흙과 씨앗이 좋아 농업 학교로 갔다.", "우장춘은 배추와 양배추를 오래오래 살폈다. 1935년, 그는 배추와 양배추를 교배하면 유채가 만들어진다는 사실을 밝혔다. 세상에 없던 종이 사람의 손으로도 태어날 수 있다는 뜻이었다. 이 연구는 '종의 합성'이라 불리며 세계 학자들을 놀라게 했다.", "1950년, 그는 한국으로 왔다. 그때 우리나라는 채소 씨앗을 거의 다 다른 나라에서 사 왔다. 전쟁까지 겹쳐 먹을 것이 모자랐다. 그는 부산의 작은 연구소에서 밤낮으로 씨앗을 길렀다.", "몇 해 뒤 우리 땅에 잘 맞는 배추와 무 씨앗이 나왔다. 김장을 담글 배추가 넉넉해졌다. 병들지 않는 씨감자도 만들어 굶주림을 덜었다. 그가 기른 씨앗은 지금도 우리 밥상 위에 올라온다.", "우장춘은 1959년 8월 10일에 세상을 떠났다. 그는 큰 재산을 남기지 않았다. 대신 흙 속에 씨앗을 남겼다."], "hard_words": [{"word": "교배", "meaning": "서로 다른 두 종류를 짝지어 새로운 것을 얻는 일."}, {"word": "유채", "meaning": "노란 꽃이 피는 밭 식물. 씨에서 기름을 짠다."}, {"word": "씨감자", "meaning": "심어서 새 감자를 얻으려고 남겨 둔 감자."}], "day": 4, "date": "2026-08-08", "theme": "씨앗 한 알을 남긴 사람들 — 심어야 이어지는 것"}, {"no": 2, "genre": "인문·생활", "title": "책 대신 씨앗을 빌려주는 도서관", "body": ["책이 아니라 씨앗을 빌려주는 곳이 있다. 이름은 씨앗도서관이다. 2013년 수원에서 처음 시작해 지금은 서울, 광명, 춘천 등 여러 지역에서 운영된다.", "빌리는 방법은 쉽다. 이름을 적고 작은 봉투 하나를 받는다. 봉투 안에는 콩이나 상추 씨가 몇 알 들어 있다. 대출 기간은 한 철이다.", "돌려주는 방법은 조금 다르다. 씨앗은 빌린 그대로 돌려줄 수 없다. 흙에 심고 물을 주며 여름을 함께 보내야 한다. 가을에 열매가 맺히면 그 안에서 새 씨앗을 받아 도서관에 가져온다. 한 알을 빌려 여러 알로 갚는 셈이다.", "씨앗도서관이 지키려는 것은 토종 씨앗이다. 토종 씨앗은 우리 땅에서 오래 살아온 씨앗이다. 심는 사람이 줄면 씨앗도 조용히 사라진다. 그래서 도서관은 씨앗을 창고에 쌓아 두지 않는다. 자꾸 빌려주고 자꾸 심게 한다.", "지난여름, 한 아이가 강낭콩 열두 알을 갚으러 왔다. 아이는 봉투를 내밀며 말했다. \"세 알은 벌레가 먹었어요.\" 사서는 웃으며 아이의 이름을 장부에 적었다."], "hard_words": [{"word": "토종", "meaning": "그 땅에서 오래전부터 살아온 것."}, {"word": "사서", "meaning": "도서관에서 책과 자료를 맡아 관리하는 사람."}, {"word": "장부", "meaning": "빌려주고 돌려받은 일을 적어 두는 공책."}], "day": 4, "date": "2026-08-08", "theme": "씨앗 한 알을 남긴 사람들 — 심어야 이어지는 것"}, {"no": 1, "genre": "한 주 복습 — 지문 재구성", "title": "한 주 동안 건너온 것들", "body": ["이번 주에 우리는 네 가지 이야기를 읽었다. 폭염과 나무, 소리, 사과, 씨앗. 서로 달라 보이지만 한 가지 닮은 곳이 있다.", "수요일에는 더위 이야기를 읽었다. 올해부터 폭염 특보가 세 단계로 늘었다. 나무는 뿌리로 빨아올린 물을 잎으로 내보내고, 그 물이 마르면서 둘레의 열을 함께 데리고 간다. 나무의 시원함이 사람에게 건너오는 것이다.", "목요일에는 소리를 따라갔다. 고수가 북을 치면 북 가죽이 파르르 떨린다. 그 떨림이 공기를 밀며 물결처럼 퍼져 나가고, 귓속의 얇은 막이 함께 떨릴 때 우리는 소리를 듣는다. 소리는 혼자 다니지 못하고 언제나 무언가를 타고 건너온다.", "금요일에는 사과가 걸어온 길을 보았다. 농부의 밭에서 도매시장을 지나 가게로, 다시 우리 식탁으로 온다. 하람이는 못난이 사과 상자에 붙은 이름표를 보고 되돌아가 그 봉지를 집었다. 사과와 함께 심은 사람의 손길도 건너온 것이다.", "토요일에는 씨앗을 만났다. 우장춘은 재산 대신 씨앗을 남겼고, 씨앗도서관은 한 알을 빌려주고 여러 알로 돌려받는다. 심는 사람이 없으면 씨앗은 조용히 사라진다.", "네 이야기에는 같은 자리가 있다. 무언가가 한 곳에서 다른 곳으로 건너간다는 것이다. 그늘도, 떨림도, 사과도, 씨앗도 그렇다. 다만 저절로 건너가지는 않는다. 누군가 먼저 심고, 먼저 내밀어야 한다."], "hard_words": [{"word": "특보", "meaning": "위험한 일이 생길 것 같을 때 미리 알려 주는 소식."}, {"word": "고수", "meaning": "판소리에서 북을 치며 장단을 맞추는 사람."}, {"word": "도매시장", "meaning": "물건을 한꺼번에 많이 사고파는 큰 시장."}], "day": 5, "date": "2026-08-09", "theme": "건너가는 것들 — 한 주를 잇는 한 줄"}, {"no": 2, "genre": "문학 — 창작 이야기", "title": "파란 자전거", "body": ["창고 안쪽에는 파란 자전거가 한 대 서 있었다. 안장은 갈라졌고 앞바구니는 한쪽이 찌그러져 있었다. 지호는 열한 번째 생일에 그 자전거를 받았다.", "\"아빠도 열한 살 때 이걸 탔어.\" 아빠가 손잡이를 천천히 닦으며 말했다. 지호는 새 자전거를 타고 온 짝꿍을 떠올렸다. 아무 말도 하지 않고 창고 문을 닫았다. 문소리가 조금 컸다.", "그래도 지호는 날마다 자전거를 탔다. 학교 가는 길, 도서관 가는 길, 할머니 댁 가는 길. 어느 날 언덕을 내려오다 돌을 밟고 넘어졌다. 무릎이 까지고 앞바구니가 한 번 더 찌그러졌다.", "옆집 아저씨가 공구통을 들고 나왔다. 아저씨는 바퀴를 돌려 보고 기름을 발랐다. \"이 자전거, 예전에 나도 한 번 빌려 탔지.\" 아저씨가 웃었다. 지호는 찌그러진 바구니를 손바닥으로 오래 만져 보았다.", "삼 년이 지나자 자전거가 작아졌다. 무릎이 자꾸 손잡이에 닿았다. 지호는 자전거를 깨끗이 닦고 바퀴에 바람을 넣었다. 찌그러진 곳은 펴다 말고 그냥 두었다.", "사촌 동생이 자전거를 받으러 왔다. 동생이 바구니를 보며 물었다. \"여기 왜 찌그러졌어?\" 지호는 안장을 툭툭 두드렸다. \"그거, 내가 만든 거야.\" 그러고는 바구니에 책 한 권을 넣어 주었다."], "hard_words": [{"word": "안장", "meaning": "자전거에서 사람이 앉는 자리."}, {"word": "공구통", "meaning": "망치나 드라이버 같은 연장을 담아 두는 통."}], "day": 5, "date": "2026-08-09", "theme": "건너가는 것들 — 한 주를 잇는 한 줄"}]};
-const CIRCLE = ["①","②","③","④"];
-const LS = {get:(k,d)=>{try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}},
-            set:(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
-
-document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{
-  document.querySelectorAll('.tabs button').forEach(x=>x.classList.remove('on'));
-  document.querySelectorAll('.panel').forEach(x=>x.classList.remove('on'));
-  b.classList.add('on'); document.getElementById(b.dataset.t).classList.add('on');
-  if(b.dataset.t==='flash'&&!fList.length) fShuffle();
-  if(b.dataset.t==='wquiz'&&!wSet.length) wStart();
-  if(b.dataset.t==='squiz'&&!sSet.length) sStart();
-  if(b.dataset.t==='rquiz'&&!rSet.length) rStart();
-  if(b.dataset.t==='mquiz'&&!mSet.length) mStart();
-  if(b.dataset.t==='pen'&&window.penTabOpen) penTabOpen();
-});
-
-
-
-/* ================= 앱으로 쓰기 (PWA) ================= */
-if ("serviceWorker" in navigator && location.protocol !== "file:") {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker.register("sw.js").catch(() => {});
-  });
-}
-
-/* 새 버전이 준비되면 화면을 한 번만 자동으로 새로 고친다.
-   (이게 없으면 학습지를 새로 올려도 기기에 저장된 옛 화면이 계속 뜬다) */
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.addEventListener("message", ev => {
-    if (ev.data && ev.data.type === "updated") {
-      if (sessionStorage.getItem("swReloaded") === ev.data.version) return;
-      sessionStorage.setItem("swReloaded", ev.data.version);
-      location.reload();
-    }
-  });
-}
-
-/* 그래도 옛 화면이 남아 있을 때 쓰는 비상 단추 */
-async function hardRefresh() {
-  try {
-    if ("serviceWorker" in navigator) {
-      const rs = await navigator.serviceWorker.getRegistrations();
-      await Promise.all(rs.map(r => r.unregister()));
-    }
-    if (window.caches) {
-      const ks = await caches.keys();
-      await Promise.all(ks.map(k => caches.delete(k)));
-    }
-    sessionStorage.removeItem("swReloaded");
-  } catch (e) {}
-  location.replace(location.pathname + "?v=" + Date.now());
-}
-
-let deferredPrompt = null;
-
-window.addEventListener("beforeinstallprompt", ev => {
-  ev.preventDefault();
-  deferredPrompt = ev;
-  const b = document.getElementById("instBtn");
-  if (b) b.style.display = "";
-  setHow("<b>준비됐어요.</b> 오른쪽 ‘설치’ 단추를 누르세요.");
-});
-function doInstall() {
-  if (!deferredPrompt) return;
-  deferredPrompt.prompt();
-  deferredPrompt.userChoice.finally(() => {
-    deferredPrompt = null;
-    const b = document.getElementById("instBtn");
-    if (b) b.style.display = "none";
-  });
-}
-window.addEventListener("appinstalled", () => {
-  const c = document.getElementById("inst");
-  if (c) c.classList.add("done");
-  document.getElementById("instTitle").textContent = "앱으로 설치됐어요";
-  setHow("이제 홈 화면(또는 독)의 부엉이 아이콘으로 바로 열 수 있어요.");
-  const b = document.getElementById("instBtn");
-  if (b) b.style.display = "none";
-});
-
-function setHow(html) {
-  const el = document.getElementById("instHow");
-  if (el) el.innerHTML = html;
-}
-function chip(t) { return '<span class="step">' + t + '</span>'; }
-
-/* ---- 기기별 설치 방법 안내 ---- */
-(function () {
-  const ua = navigator.userAgent;
-  const ios = /iPad|iPhone|iPod/.test(ua)
-           || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
-  const android = /Android/.test(ua);
-  const edge = /Edg\//.test(ua);
-  const chrome = /Chrome\//.test(ua) && !edge;
-  const safari = /Safari\//.test(ua) && !/Chrome\//.test(ua) && !edge;
-  const inApp = /KAKAOTALK|NAVER|Instagram|FBAN|FBAV|Line\//i.test(ua);
-  const standalone = window.matchMedia("(display-mode: standalone)").matches
-                  || window.navigator.standalone === true;
-
-  if (standalone) {
-    document.getElementById("inst").classList.add("done");
-    document.getElementById("instTitle").textContent = "이미 앱으로 열려 있어요";
-    setHow("잘 설치되어 있습니다. 인터넷이 없어도 지난 학습지를 볼 수 있어요.");
-    document.getElementById("instDiag").style.display = "none";
-    return;
-  }
-
-  if (inApp) {
-    setHow("<b>지금은 카카오톡·네이버 같은 앱 안의 브라우저로 보고 있어요.</b> "
-         + "여기서는 설치가 안 됩니다. 오른쪽 아래 " + chip("⋯")
-         + " 를 눌러 <b>‘다른 브라우저로 열기’</b>(크롬 또는 사파리)를 고른 뒤 다시 해 보세요.");
-  } else if (ios) {
-    setHow("<b>아이폰·아이패드</b>는 설치 단추가 없어요. 사파리에서 화면 아래 "
-         + chip("공유 ⬆") + " → 목록을 내려 " + chip("홈 화면에 추가")
-         + " → " + chip("추가") + " 를 누르세요. (크롬 앱에서는 안 나옵니다)");
-  } else if (android) {
-    setHow("<b>안드로이드 크롬</b>이라면 오른쪽 위 " + chip("⋮") + " → "
-         + chip("앱 설치") + " 또는 " + chip("홈 화면에 추가") + " 를 누르세요.");
-  } else if (chrome || edge) {
-    setHow("<b>컴퓨터 " + (edge ? "엣지</b>라면" : "크롬</b>이라면") + " 주소창 오른쪽 끝의 "
-         + chip("⊕") + " 또는 " + chip("🖥️") + " 모양 아이콘을 누르세요. "
-         + "안 보이면 오른쪽 위 " + chip("⋮") + " → "
-         + (edge ? chip("app") + " → " + chip("이 사이트를 앱으로 설치")
-                 : chip("전송, 저장 및 공유") + " → " + chip("페이지를 앱으로 설치"))
-         + " 로도 됩니다.");
-  } else if (safari) {
-    setHow("<b>맥 사파리</b>는 위쪽 메뉴 " + chip("파일") + " → " + chip("독에 추가")
-         + " 를 누르면 앱처럼 쓸 수 있어요. (사파리 17 이상)");
-  } else {
-    setHow("브라우저 메뉴에서 <b>‘앱 설치’</b> 또는 <b>‘홈 화면에 추가’</b> 를 찾아 누르세요.");
-  }
-})();
-
-/* ---- 설치가 되려면 갖춰야 할 조건을 스스로 점검 ---- */
-(async function () {
-  const out = [];
-  const mark = (ok, good, bad) =>
-    out.push('<li class="' + (ok ? "yes" : "no") + '">' + (ok ? "✅ " : "⚠️ ") + (ok ? good : bad) + "</li>");
-
-  const host = location.hostname;
-  const secure = location.protocol === "https:" || host === "localhost";
-  mark(secure, "안전한 주소(https)로 열렸습니다",
-       "주소가 https 가 아닙니다 — 지금 주소: " + location.protocol + "//" + host
-       + " · 파일을 직접 열거나 http 로 열면 설치가 안 됩니다");
-
-  const onGitHub = /(^|\.)github\.com$/.test(host);
-  mark(!onGitHub, "학습지 사이트 주소가 맞습니다",
-       "<b>여기는 깃허브 저장소 화면입니다.</b> 학습지 사이트 주소는 "
-       + "<b>아이디.github.io</b> 처럼 생겼습니다. 저장소의 Settings → Pages 에 적힌 주소로 들어가세요");
-
-  try {
-    const r = await fetch("manifest.webmanifest", { cache: "no-store" });
-    const m = await r.json();
-    mark(true, "앱 정보 파일을 읽었습니다 (" + m.short_name + ")", "");
-    let iconOk = true;
-    for (const ic of m.icons) {
-      const ir = await fetch(ic.src, { method: "GET", cache: "no-store" });
-      if (!ir.ok) iconOk = false;
-    }
-    mark(iconOk, "앱 아이콘 " + m.icons.length + "개를 모두 찾았습니다",
-         "아이콘 파일이 없습니다 — app 폴더를 올렸는지 확인하세요");
-  } catch (e) {
-    mark(false, "", "앱 정보 파일(manifest.webmanifest)을 못 읽었습니다 — 이 파일을 올렸는지 확인하세요");
-  }
-
-  if ("serviceWorker" in navigator) {
-    try {
-      const reg = await navigator.serviceWorker.getRegistration();
-      mark(!!reg, "오프라인 기능이 켜져 있습니다",
-           "오프라인 기능이 아직 안 켜졌습니다 — 화면을 한 번 새로고침 해 보세요");
-    } catch (e) { mark(false, "", "오프라인 기능 확인에 실패했습니다"); }
-  } else {
-    mark(false, "", "이 브라우저는 앱 설치를 지원하지 않습니다");
-  }
-
-  document.getElementById("diagList").innerHTML = out.join("");
-})();
-
-/* 인터넷 연결 상태 표시 */
-function netCheck() {
-  document.getElementById("offmsg").classList.toggle("on", !navigator.onLine);
-}
-window.addEventListener("online", netCheck);
-window.addEventListener("offline", netCheck);
-netCheck();
-
-/* 주소 뒤 #flash 처럼 붙이면 그 탭이 바로 열리게 (홈 화면 바로가기용) */
-function openTab(name) {
-  const btn = document.querySelector('.tabs button[data-t="' + name + '"]');
-  if (btn) btn.click();
-}
-if (location.hash) openTab(location.hash.slice(1));
-
-/* ================= 영어 발음 읽어주기 (Web Speech API) ================= */
-let VOICE=null, TTS_OK=('speechSynthesis' in window);
-function pickVoice(){
-  if(!TTS_OK) return;
-  const vs=speechSynthesis.getVoices();
-  if(!vs.length) return;
-  VOICE = vs.find(v=>/^en[-_]US/i.test(v.lang)&&/female|samantha|zira|aria|jenny/i.test(v.name))
-       || vs.find(v=>/^en[-_]US/i.test(v.lang))
-       || vs.find(v=>/^en/i.test(v.lang)) || null;
-}
-if(TTS_OK){ pickVoice(); speechSynthesis.onvoiceschanged=pickVoice; }
-else { const m=document.getElementById('spkmsg'); if(m) m.textContent='이 브라우저는 소리 읽기를 지원하지 않아요.'; }
-
-function speak(text, opt){
-  if(!TTS_OK||!text) return;
-  opt = opt || {};
-  try{
-    speechSynthesis.cancel();
-    const u=new SpeechSynthesisUtterance(text);
-    u.lang='en-US';
-    if(VOICE) u.voice=VOICE;
-    const slow=document.getElementById('slow');
-    u.rate = opt.rate || ((slow&&slow.checked)?0.62:0.88);
-    u.pitch=1.05; u.volume=1;
-    speechSynthesis.speak(u);
-  }catch(e){}
-}
-/* 낱말 + 예문을 이어서 읽기 */
-function speakWord(w, withEx){
-  if(!TTS_OK||!w) return;
-  speak(w.word);
-  if(withEx&&w.example){
-    setTimeout(()=>{
-      const u=new SpeechSynthesisUtterance(w.example);
-      u.lang='en-US'; if(VOICE) u.voice=VOICE;
-      const slow=document.getElementById('slow');
-      u.rate=(slow&&slow.checked)?0.62:0.9; u.pitch=1.05;
-      speechSynthesis.speak(u);
-    }, 90);
-  }
-}
-function speakNow(){ if(fList.length) speakWord(fList[fi], fOpen); }
-document.querySelectorAll('.spkbar label').forEach(l=>{
-  const cb=l.querySelector('input');
-  const sync=()=>l.classList.toggle('on',cb.checked); sync();
-  cb.addEventListener('change',sync);
-});
-
-function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a}
-
-/* ---- 플래시카드 ---- */
-let fList=[],fi=0,fOpen=false,fAutoOk=false;
-function fRender(){ if(!fList.length){document.getElementById('fw').textContent='낱말이 없어요';return}
-  const w=fList[fi];
-  document.getElementById('fw').textContent=w.word;
-  document.getElementById('fm').textContent=fOpen?('('+w.pos+') '+w.meaning):'';
-  document.getElementById('fx').textContent=fOpen?(w.example+' — '+w.example_ko):'';
-  document.getElementById('fcnt').textContent=(fi+1)+' / '+fList.length+'  ·  DAY '+String(w.day).padStart(3,'0');
-  const auto=document.getElementById('fauto');
-  if(auto&&auto.checked&&fAutoOk) speakWord(w,false);
-  fAutoOk=true;
-}
-function fShuffle(){fList=shuffle(REVIEW.words);fi=0;fOpen=false;fRender()}
-function fFlip(){fOpen=!fOpen;fRender()}
-function fNext(){if(!fList.length)return;fi=(fi+1)%fList.length;fOpen=false;fRender()}
-function fPrev(){if(!fList.length)return;fi=(fi-1+fList.length)%fList.length;fOpen=false;fRender()}
-
-/* ---- 낱말 복습 퀴즈 ---- */
-let wSet=[],wi=0,wOk=0;
-function wMake(pool){
-  return pool.map(w=>{
-    const others=shuffle(REVIEW.words.filter(x=>x.word!==w.word)).slice(0,3).map(x=>x.meaning);
-    const ch=shuffle([w.meaning,...others]);
-    return {key:w.word,q:'"'+w.word+'" 의 뜻은?',choices:ch,answer:ch.indexOf(w.meaning),
-             explain:w.word+' ('+w.pos+') '+w.meaning+' — 예문: '+w.example};
-  });
-}
-function wStart(){ if(REVIEW.words.length<4){document.getElementById('wq').textContent='낱말이 4개 이상 쌓이면 풀 수 있어요.';return}
-  wSet=wMake(shuffle(REVIEW.words).slice(0,10));wi=0;wOk=0;wShow()}
-function wWrong(){ const bad=LS.get('wWrong',[]); const pool=REVIEW.words.filter(w=>bad.includes(w.word));
-  if(pool.length<1){document.getElementById('wq').textContent='틀린 낱말이 없어요! 잘했어요.';document.getElementById('wopts').innerHTML='';return}
-  wSet=wMake(pool);wi=0;wOk=0;wShow()}
-function wShow(){ const fb=document.getElementById('wfb');fb.style.display='none';
-  if(wi>=wSet.length){document.getElementById('wq').textContent='끝! '+wSet.length+'문제 중 '+wOk+'개 맞았어요.';
-    document.getElementById('wopts').innerHTML='';document.getElementById('wbar').style.width='100%';return}
-  const q=wSet[wi];
-  document.getElementById('wq').innerHTML=(wi+1)+'. '+q.q.replace(/&/g,'&amp;')+
-    '<button class="spk sm" onclick="speak(&quot;'+q.key+'&quot;)" title="발음 듣기">🔊</button>';
-  document.getElementById('wbar').style.width=(wi/wSet.length*100)+'%';
-  document.getElementById('wopts').innerHTML=q.choices.map((c,i)=>
-    '<button class="opt" onclick="wPick('+i+')">'+CIRCLE[i]+' '+c+'</button>').join('');
-  document.getElementById('wsc').textContent='맞은 개수 '+wOk+' / '+wi;
-}
-function wPick(i){ const q=wSet[wi],btns=document.querySelectorAll('#wopts .opt');
-  btns.forEach((b,j)=>{b.disabled=true;if(j===q.answer)b.classList.add('ok');else if(j===i)b.classList.add('no')});
-  const bad=LS.get('wWrong',[]);
-  if(i===q.answer){wOk++;const k=bad.indexOf(q.key);if(k>-1)bad.splice(k,1)}
-  else if(!bad.includes(q.key))bad.push(q.key);
-  LS.set('wWrong',bad);
-  const fb=document.getElementById('wfb');fb.style.display='block';
-  fb.innerHTML=(i===q.answer?'⭕ 맞았어요! ':'❌ 다시 볼까요? ')+q.explain+
-    '<div style="margin-top:10px"><button class="btn s" onclick="wi++;wShow()">다음 문제 ▶</button></div>';
-  document.getElementById('wsc').textContent='맞은 개수 '+wOk+' / '+(wi+1);
-}
-
-/* ---- 단어 쓰기 시험 (철자 입력) ---- */
-let sSet=[],si=0,sOk=0,sDone=false;
-function sStart(){ if(!REVIEW.words.length){document.getElementById('sq').textContent='낱말이 아직 없어요.';return}
-  sSet=shuffle(REVIEW.words).slice(0,10);si=0;sOk=0;sShow()}
-function sWrong(){ const bad=LS.get('sWrong',[]); const pool=REVIEW.words.filter(w=>bad.includes(w.word));
-  if(!pool.length){document.getElementById('sq').textContent='틀린 낱말이 없어요! 철자를 잘 쓰고 있어요.';
-    document.getElementById('sin').disabled=true;document.getElementById('shint').textContent='';return}
-  sSet=shuffle(pool);si=0;sOk=0;sShow()}
-function sShow(){ const fb=document.getElementById('sfb');fb.style.display='none';sDone=false;
-  const inp=document.getElementById('sin');inp.className='tin';inp.value='';
-  document.getElementById('shint').textContent='';
-  document.getElementById('sgo').textContent='확인';
-  if(si>=sSet.length){document.getElementById('sq').textContent='끝! '+sSet.length+'개 중 '+sOk+'개를 정확히 썼어요.';
-    inp.disabled=true;document.getElementById('sbar').style.width='100%';return}
-  const w=sSet[si];
-  document.getElementById('sq').innerHTML='<span style="font-size:12px;color:#3C6690;background:#DCEBF7;border-radius:999px;padding:2px 10px">DAY '
-    +String(w.day).padStart(3,'0')+' · '+w.pos+'</span><br>'+(si+1)+'. <b>'+w.meaning+'</b> &nbsp;→ 영어로 쓰면?';
-  document.getElementById('sbar').style.width=(si/sSet.length*100)+'%';
-  inp.disabled=false;inp.focus();
-  const dic=document.getElementById('sdict');
-  if(dic&&dic.checked) setTimeout(()=>speak(w.word),260);
-  document.getElementById('ssc').textContent='맞은 개수 '+sOk+' / '+si;
-}
-function sSpeak(){ if(si<sSet.length) speak(sSet[si].word); }
-function sHint(){ if(si>=sSet.length||sDone)return; const w=sSet[si].word;
-  document.getElementById('shint').textContent=w[0]+' '+'_ '.repeat(w.length-1).trim();
-}
-function sCheck(){
-  if(si>=sSet.length)return;
-  if(sDone){si++;sShow();return}
-  const w=sSet[si],inp=document.getElementById('sin');
-  const mine=inp.value.trim().toLowerCase(), right=w.word.toLowerCase();
-  if(!mine)return;
-  sDone=true;inp.disabled=true;
-  const bad=LS.get('sWrong',[]);
-  const good=(mine===right);
-  if(good){sOk++;const k=bad.indexOf(w.word);if(k>-1)bad.splice(k,1);inp.classList.add('ok')}
-  else{if(!bad.includes(w.word))bad.push(w.word);inp.classList.add('no')}
-  LS.set('sWrong',bad);
-  document.getElementById('shint').textContent='';
-  const fb=document.getElementById('sfb');fb.style.display='block';
-  fb.innerHTML=(good?'⭕ 정확해요! ':'❌ 아쉬워요. 바르게 쓰면 ')
-    +'<b style="font-family:Georgia,serif;font-size:18px;color:#1F4E79">'+w.word+'</b> ('+w.pos+') '+w.meaning
-    +'<br><span style="font-size:13.5px;color:#6B6357">'+w.example+' — '+w.example_ko+'</span>'
-    +'<div style="margin-top:10px"><button class="btn s" onclick="si++;sShow()">다음 낱말 ▶</button></div>';
-  document.getElementById('sgo').textContent='다음 낱말 ▶';
-  if(!good) setTimeout(()=>speakWord(w,true),200);
-  document.getElementById('ssc').textContent='맞은 개수 '+sOk+' / '+(si+1);
-}
-document.getElementById('sin').addEventListener('keydown',e=>{if(e.key==='Enter')sCheck()});
-
-
-/* ================= 수학 복습 퀴즈 ================= */
-let mSet=[],mi=0,mOk=0,mDone=false;
-const MATH=(REVIEW.math||[]);
-
-function mNorm(v){
-  return String(v).trim().toLowerCase()
-    .replace(/\s+/g,'')
-    .replace(/,/g,'')
-    .replace(/\.\.\./g,'…')
-    .replace(/과/g,'')
-    .replace(/[·∙]/g,'')
-    .replace(/원|개|명|권|장|쌍|도|번째/g,'');
-}
-function mKey(m){ return m.date+'#'+m.no; }
-
-function mStart(){
-  if(!MATH.length){document.getElementById('mq').textContent='수학 문제가 아직 없어요.';return}
-  mSet=shuffle(MATH).slice(0,10);mi=0;mOk=0;mShow();
-}
-function mWrongOnly(){
-  const bad=LS.get('mWrong',[]);
-  const pool=MATH.filter(m=>bad.includes(mKey(m)));
-  if(!pool.length){document.getElementById('mq').textContent='틀린 수학 문제가 없어요! 훌륭해요.';
-    document.getElementById('mopts').innerHTML='';document.getElementById('min').disabled=true;
-    document.getElementById('mhow').textContent='';return}
-  mSet=shuffle(pool);mi=0;mOk=0;mShow();
-}
-function mShow(){
-  const fb=document.getElementById('mfb');fb.style.display='none';mDone=false;
-  const inp=document.getElementById('min');inp.className='tin';inp.value='';inp.disabled=true;
-  document.getElementById('mopts').innerHTML='';
-  document.getElementById('mgo').textContent='확인';
-  document.getElementById('mhow').textContent='';
-  if(mi>=mSet.length){
-    document.getElementById('mq').textContent='끝! '+mSet.length+'문제 중 '+mOk+'개 맞았어요.';
-    document.getElementById('minwrap').style.display='none';
-    document.getElementById('mgo').style.display='none';
-    document.getElementById('mbar').style.width='100%';return;
-  }
-  document.getElementById('minwrap').style.display='';
-  document.getElementById('mgo').style.display='';
-  const m=mSet[mi];
-  document.getElementById('mq').innerHTML='<span class="mchip">DAY '+String(m.day).padStart(3,'0')+
-    ' · '+m.unit+'</span><span class="mchip" style="background:#FBEFCF;color:#8A6A1E">'+
-    (m.kind==='calc'?'계산':'문장제')+'</span><br>'+(mi+1)+'. '+
-    String(m.q).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');
-  document.getElementById('mbar').style.width=(mi/mSet.length*100)+'%';
-  if(m.choices){
-    document.getElementById('minwrap').style.display='none';
-    document.getElementById('mgo').style.display='none';
-    document.getElementById('mopts').innerHTML=m.choices.map((c,i)=>
-      '<button class="opt" onclick="mPick('+(i+1)+')">'+CIRCLE[i]+' '+c+'</button>').join('');
-  } else {
-    inp.disabled=false;inp.focus();
-    document.getElementById('mhow').textContent='답만 간단히 쓰세요. 부호(>, <)나 몫…나머지 형태도 그대로 쓰면 돼요.';
-  }
-  document.getElementById('msc').textContent='맞은 개수 '+mOk+' / '+mi;
-}
-function mFeedback(good,m){
-  const bad=LS.get('mWrong',[]),k=mKey(m);
-  if(good){mOk++;const j=bad.indexOf(k);if(j>-1)bad.splice(j,1)}
-  else if(!bad.includes(k))bad.push(k);
-  LS.set('mWrong',bad);
-  const shown=m.choices?(CIRCLE[Number(m.answer)-1]+' '+m.choices[Number(m.answer)-1]):m.answer;
-  const fb=document.getElementById('mfb');fb.style.display='block';
-  fb.innerHTML=(good?'⭕ 맞았어요! ':'❌ 아쉬워요. 정답은 <b>'+shown+'</b> 이에요. ')+
-    '<div style="margin-top:6px">'+m.explain+' <span style="color:#9AA7B5;font-size:12px">'+m.std+'</span></div>'+
-    '<div style="margin-top:10px"><button class="btn s" onclick="mi++;mShow()">다음 문제 ▶</button>'+
-    '<a class="btn s" style="text-decoration:none;display:inline-block" href="sheets/'+m.date+'.html">학습지 열기</a></div>';
-  document.getElementById('msc').textContent='맞은 개수 '+mOk+' / '+(mi+1);
-}
-function mPick(i){
-  const m=mSet[mi],btns=document.querySelectorAll('#mopts .opt'),a=Number(m.answer)-1;
-  btns.forEach((b,j)=>{b.disabled=true;if(j===a)b.classList.add('ok');else if(j===i-1)b.classList.add('no')});
-  mFeedback(i===Number(m.answer),m);
-}
-function mCheck(){
-  if(mi>=mSet.length)return;
-  if(mDone){mi++;mShow();return}
-  const m=mSet[mi],inp=document.getElementById('min');
-  if(!inp.value.trim())return;
-  mDone=true;inp.disabled=true;
-  const good=(mNorm(inp.value)===mNorm(m.answer));
-  inp.classList.add(good?'ok':'no');
-  document.getElementById('mgo').textContent='다음 문제 ▶';
-  mFeedback(good,m);
-}
-document.getElementById('min').addEventListener('keydown',e=>{if(e.key==='Enter')mCheck()});
-
-/* ---- 문해력 복습 퀴즈 ---- */
-let rSet=[],ri=0,rOk=0;
-function rStart(){ if(!REVIEW.questions.length){document.getElementById('rq').textContent='문제가 아직 없어요.';return}
-  rSet=shuffle(REVIEW.questions).slice(0,5);ri=0;rOk=0;rShow()}
-function rWrong(){ const bad=LS.get('rWrong',[]);
-  const pool=REVIEW.questions.filter(q=>bad.includes(q.date+'#'+q.no));
-  if(!pool.length){document.getElementById('rq').textContent='틀린 문제가 없어요! 훌륭해요.';document.getElementById('ropts').innerHTML='';return}
-  rSet=pool;ri=0;rOk=0;rShow()}
-function rShow(){ const fb=document.getElementById('rfb');fb.style.display='none';
-  if(ri>=rSet.length){document.getElementById('rq').textContent='끝! '+rSet.length+'문제 중 '+rOk+'개 맞았어요.';
-    document.getElementById('ropts').innerHTML='';document.getElementById('rbar').style.width='100%';return}
-  const q=rSet[ri];
-  document.getElementById('rq').innerHTML='<span style="font-size:12px;color:#8A6A1E;background:#FBEFCF;border-radius:999px;padding:2px 10px">DAY '
-    +String(q.day).padStart(3,'0')+' · '+q.type+'</span><br>'+(ri+1)+'. '+q.q;
-  document.getElementById('rbar').style.width=(ri/rSet.length*100)+'%';
-  document.getElementById('ropts').innerHTML=q.choices.map((c,i)=>
-    '<button class="opt" onclick="rPick('+i+')">'+CIRCLE[i]+' '+c+'</button>').join('');
-  document.getElementById('rsc').textContent='이 문제는 '+q.date+' 학습지에 있어요. 지문을 다시 읽고 싶으면 학습지 목록에서 열어 보세요.';
-}
-function rPick(i){ const q=rSet[ri],a=q.answer-1,btns=document.querySelectorAll('#ropts .opt');
-  btns.forEach((b,j)=>{b.disabled=true;if(j===a)b.classList.add('ok');else if(j===i)b.classList.add('no')});
-  const key=q.date+'#'+q.no,bad=LS.get('rWrong',[]);
-  if(i===a){rOk++;const k=bad.indexOf(key);if(k>-1)bad.splice(k,1)}
-  else if(!bad.includes(key))bad.push(key);
-  LS.set('rWrong',bad);
-  const fb=document.getElementById('rfb');fb.style.display='block';
-  fb.innerHTML=(i===a?'⭕ 맞았어요! ':'❌ 아쉬워요. ')+q.explain+
-    '<div style="margin-top:10px"><button class="btn s" onclick="ri++;rShow()">다음 문제 ▶</button>'+
-    '<a class="btn s" style="text-decoration:none;display:inline-block" href="sheets/'+q.date+'.html">지문 다시 읽기</a></div>';
-}
-</script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="app/bank-math.js"></script>
+<script src="app/bank-en.js"></script>
+<script src="app/bank-ko.js"></script>
+<script src="app/bank-ko2.js"></script>
+<script src="app/bank-ko3.js"></script>
+<script src="app/plan.js"></script>
+<script src="app/chart.js"></script>
 <script src="app/pen.js"></script>
 <script src="app/hl.js"></script>
-<script src="app/pentab.js"></script>
-<script>
-/* 필기판을 각 탭에 붙인다 (pen.js 가 먼저 읽혀야 하므로 여기서 한다) */
-(function () {
-  if (!window.Pen) return;
-  var mp = null, sp = null;
-
-  var _mShow = window.mShow;
-  window.mShow = function () {
-    _mShow.apply(null, arguments);
-    var host = document.getElementById("mPad");
-    if (!host) return;
-    if (mp) { mp.destroy(); mp = null; }
-    if (mi >= mSet.length) { host.innerHTML = ""; return; }
-    var m = mSet[mi];
-    mp = new Pen.Pad(host, "ink:" + m.date + ":m" + m.no, { height: 220 });
-  };
-
-  var hls = [];
-  function showPassages(host, date, want) {
-    hls.forEach(function (h) { h.destroy(); });
-    hls = [];
-    host.innerHTML = "";
-    var ps = (REVIEW.passages || []).filter(function (p) {
-      return p.date === date && (!want || want === 0 || p.no === want);
-    });
-    if (!ps.length) return;
-    if (ps.length > 1) {
-      var tabs = document.createElement("div");
-      tabs.className = "hltabs";
-      tabs.innerHTML = ps.map(function (p, i) {
-        return '<button class="' + (i ? "" : "on") + '" data-n="' + p.no + '">지문 ' + p.no + "</button>";
-      }).join("");
-      host.appendChild(tabs);
-    }
-    var slot = document.createElement("div");
-    host.appendChild(slot);
-    function draw(p) {
-      hls.forEach(function (h) { h.destroy(); });
-      hls = [HL.make(slot, "hl:" + p.date + ":" + p.no, p)];
-    }
-    draw(ps[0]);
-    if (ps.length > 1) {
-      host.querySelectorAll(".hltabs button").forEach(function (b) {
-        b.onclick = function () {
-          host.querySelectorAll(".hltabs button").forEach(function (x) { x.classList.remove("on"); });
-          b.classList.add("on");
-          draw(ps.filter(function (p) { return String(p.no) === b.dataset.n; })[0]);
-        };
-      });
-    }
-  }
-
-  var _rShow = window.rShow;
-  window.rShow = function () {
-    _rShow.apply(null, arguments);
-    var host = document.getElementById("rPassage");
-    if (!host || !window.HL) return;
-    if (ri >= rSet.length) { host.innerHTML = ""; return; }
-    var q = rSet[ri];
-    showPassages(host, q.date, q.passage);
-  };
-  window.showPassages = showPassages;
-
-  var _sShow = window.sShow;
-  window.sShow = function () {
-    _sShow.apply(null, arguments);
-    var host = document.getElementById("sPad");
-    if (!host) return;
-    if (sp) { sp.destroy(); sp = null; }
-    if (si >= sSet.length) { host.innerHTML = ""; return; }
-    sp = new Pen.Pad(host, "ink:w:" + sSet[si].word, { height: 150 });
-  };
-})();
-</script>
-</body></html>
+<script src="app/app.js"></script>
+</body>
+</html>

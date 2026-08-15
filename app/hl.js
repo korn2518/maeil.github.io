@@ -84,6 +84,7 @@
         "</span>" +
         '<button class="hltool" data-a="erase">지우개</button>' +
         '<button class="hltool" data-a="clear">모두 지우기</button>' +
+        '<div class="hlhint">색을 고르면 형광펜이 켜집니다. 낱말을 누르거나 문질러 칠하세요.</div>' +
       "</div>" +
       '<div class="hlpassage">' +
         '<span class="genre">지문 ' + p.no + " · " + esc(p.genre) + "</span>" +
@@ -102,8 +103,9 @@
         self.bar.querySelectorAll(".hlc").forEach(function (x) {
           x.classList.toggle("on", x === b);
         });
-        self.bar.querySelector('[data-a="erase"]').classList.remove("on");
-        if (!self.on) self.toggle(true);
+        var eb = self.bar.querySelector('[data-a="erase"]');
+        if (eb) eb.classList.remove("on");
+        self.toggle(true);
       };
     });
     this.bar.querySelectorAll(".hltool").forEach(function (b) {
@@ -111,7 +113,9 @@
         var a = b.dataset.a;
         if (a === "toggle") return self.toggle();
         if (a === "clear") {
-          if (!Object.keys(self.marks).length) return;
+          var n = Object.keys(self.marks).length;
+          if (!n) return;
+          if (!window.confirm("칠한 " + n + "곳을 모두 지울까요?")) return;
           self.marks = {}; save(self.key, self.marks); self.paint(); return;
         }
         if (a === "erase") {
@@ -125,9 +129,11 @@
     var box = this.box;
     box.addEventListener("pointerdown", function (e) { self.down(e); });
     box.addEventListener("pointermove", function (e) { self.move(e); });
-    box.addEventListener("pointerup", function () { self.drawing = false; });
-    box.addEventListener("pointercancel", function () { self.drawing = false; });
-    box.addEventListener("pointerleave", function () { self.drawing = false; });
+    box.addEventListener("pointerup", function () { self.up(); });
+    box.addEventListener("pointercancel", function () { self.up(); });
+    box.addEventListener("pointerleave", function () { self.up(); });
+    // 마우스로 문지를 때 글자가 선택되어 파랗게 되는 것을 막는다
+    box.addEventListener("selectstart", function (e) { if (self.on) e.preventDefault(); });
   };
 
   Highlighter.prototype.toggle = function (force) {
@@ -136,8 +142,13 @@
     b.textContent = this.on ? "🖍 형광펜 끄기" : "🖍 형광펜 켜기";
     b.classList.toggle("on", this.on);
     this.box.classList.toggle("marking", this.on);
-    // 펜을 쓰는 기기는 손가락으로 화면을 넘길 수 있게 남겨 둔다
-    this.box.style.touchAction = this.on ? (sawPen ? "pan-y" : "none") : "";
+    // 세로로 밀면 화면이 내려가고, 가로로 문지르면 칠해진다.
+    // (예전에는 none 이라 형광펜을 켜면 긴 지문을 스크롤할 수 없었다)
+    this.box.style.touchAction = this.on ? "pan-y" : "";
+    var hint = this.bar.querySelector(".hlhint");
+    if (hint) hint.textContent = this.on
+      ? "낱말을 누르거나 옆으로 문질러 칠하세요. 위아래로 밀면 화면이 넘어갑니다."
+      : "색을 고르면 형광펜이 켜집니다. 낱말을 누르거나 문질러 칠하세요.";
   };
 
   Highlighter.prototype.hit = function (e) {
@@ -157,19 +168,21 @@
   Highlighter.prototype.down = function (e) {
     if (e.pointerType === "pen" || e.pointerType === "eraser") sawPen = true;
     if (!this.on) return;
-    if (e.pointerType === "touch" && sawPen) return;   // 펜을 쓰면 손가락은 넘기기용
     if (e.pointerType === "eraser") this.erasing = true;
-    e.preventDefault();
     this.drawing = true;
-    this.apply(this.hit(e));
+    this.moved = false;
+    this.apply(this.hit(e));       // 톡 누르면 그 낱말이 칠해진다
   };
 
   Highlighter.prototype.move = function (e) {
     if (!this.drawing || !this.on) return;
+    // 펜을 쓰는 중이면 손바닥(touch)은 무시한다 — 팜 리젝션
     if (e.pointerType === "touch" && sawPen) return;
-    e.preventDefault();
+    this.moved = true;
     this.apply(this.hit(e));
   };
+
+  Highlighter.prototype.up = function () { this.drawing = false; this.moved = false; };
 
   Highlighter.prototype.paint = function () {
     var m = this.marks;

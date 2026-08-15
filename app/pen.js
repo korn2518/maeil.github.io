@@ -230,12 +230,18 @@
     var a = String(answer);
     var rows = [["7", "8", "9"], ["4", "5", "6"], ["1", "2", "3"], ["0"]];
     var extra = [];
-    if (a.indexOf("…") >= 0) extra.push("…");
-    if (a.indexOf("/") >= 0) { extra.push("/"); extra.push("공백"); }
-    if (a.indexOf(".") >= 0) extra.push(".");
-    if (a.indexOf(">") >= 0 || a.indexOf("<") >= 0) { extra.push(">"); extra.push("<"); }
-    ["kg", "g", "km", "cm", "mm", "mL", "L", "m", "시", "분", "초", "°"].forEach(function (u) {
-      if (new RegExp(u + "(?![a-zA-Z])").test(a) && extra.indexOf(u) < 0) extra.push(u);
+    function add(t) { if (t && extra.indexOf(t) < 0) extra.push(t); }
+
+    /* 숫자를 뺀 나머지 부분을 그대로 글쇠로 만든다.
+       "5…3", "2m30cm", "몫 5, 나머지 3", "2와1/3" 처럼 어떤 답이든 칠 수 있게 된다.
+       문제에 이미 "(예: 몫 3, 나머지 1)" 처럼 쓰는 법이 적혀 있으므로 힌트가 새지 않는다.
+       — 낱말 자체가 답인 문제(도형 이름 등)는 숫자판을 쓰지 않고 골라 답하게 한다. */
+    a.split(/\d+/).forEach(function (seg) {
+      if (!seg) return;
+      seg.split(/(\s+)/).forEach(function (t) {
+        if (!t) return;
+        if (/^\s+$/.test(t)) add("공백"); else add(t);
+      });
     });
     if (/^[월화수목금토일]$/.test(a)) extra = ["월", "화", "수", "목", "금"];
     if (/^[가나다라]$/.test(a)) extra = ["가", "나", "다", "라"];

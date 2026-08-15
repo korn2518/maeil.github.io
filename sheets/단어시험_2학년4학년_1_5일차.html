@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>영어 단어 시험 — 2학년·4학년 (1~5일차)</title>
+<style>
+  :root{
+    --navy:#274472; --sky:#5b8def; --mint:#2f9e6b; --coral:#e0645a;
+    --bg:#f6f8fc; --card:#ffffff; --line:#e2e8f0; --text:#22304a; --sub:#6b7c93;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; font-family:"Apple SD Gothic Neo","Malgun Gothic","Pretendard",sans-serif;
+    background:var(--bg); color:var(--text); line-height:1.5;
+  }
+  .wrap{max-width:880px; margin:0 auto; padding:24px 18px 80px;}
+  header.top{
+    background:linear-gradient(135deg,var(--navy),var(--sky));
+    color:#fff; border-radius:16px; padding:22px 24px; margin-bottom:18px;
+  }
+  header.top h1{margin:0 0 6px; font-size:1.4rem;}
+  header.top p{margin:0; opacity:.9; font-size:.92rem;}
+
+  .info-bar{
+    display:flex; flex-wrap:wrap; gap:14px; background:var(--card);
+    border:1px solid var(--line); border-radius:12px; padding:14px 18px; margin-bottom:16px;
+  }
+  .info-bar label{font-size:.88rem; color:var(--sub); display:flex; align-items:center; gap:6px;}
+  .info-bar input[type=text], .info-bar input[type=date]{
+    border:none; border-bottom:1.5px solid var(--line); padding:4px 2px; font-size:.95rem;
+    background:transparent; min-width:120px;
+  }
+  .info-bar input:focus{outline:none; border-bottom-color:var(--sky);}
+
+  .notice{
+    background:#eef4ff; border:1px solid #d5e3ff; border-radius:10px;
+    padding:10px 14px; font-size:.85rem; color:var(--navy); margin-bottom:18px;
+  }
+
+  .grade-tabs{display:flex; gap:8px; margin-bottom:16px;}
+  .tab-btn{
+    flex:1; padding:12px; border-radius:10px; border:1.5px solid var(--line);
+    background:#fff; font-size:1rem; font-weight:700; color:var(--sub); cursor:pointer;
+  }
+  .tab-btn.active{background:var(--navy); color:#fff; border-color:var(--navy);}
+
+  .grade-section{display:none;}
+  .grade-section.active{display:block;}
+
+  .section-intro{
+    background:var(--card); border:1px solid var(--line); border-radius:12px;
+    padding:14px 18px; margin-bottom:16px; font-size:.88rem; color:var(--sub);
+  }
+  .section-intro b{color:var(--text);}
+
+  .quiz-card{
+    background:var(--card); border:1px solid var(--line); border-radius:14px;
+    padding:8px 18px 18px;
+  }
+  ol.quiz-list{list-style:none; margin:0; padding:0;}
+  ol.quiz-list li{
+    display:flex; align-items:center; gap:12px; padding:12px 4px;
+    border-bottom:1px dashed var(--line);
+  }
+  ol.quiz-list li:last-child{border-bottom:none;}
+  .qno{
+    width:26px; height:26px; border-radius:50%; background:var(--bg);
+    color:var(--navy); font-weight:700; font-size:.85rem;
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  }
+  .day-badge{
+    font-size:.7rem; background:#eef4ff; color:var(--sky); border:1px solid #d5e3ff;
+    border-radius:6px; padding:2px 6px; flex-shrink:0; white-space:nowrap;
+  }
+  .meaning{flex:1; font-size:1.02rem; font-weight:600;}
+  .meaning .pos{font-size:.75rem; color:var(--sub); font-weight:400; margin-right:2px;}
+  .answer-input{
+    width:150px; border:none; border-bottom:2px solid var(--line);
+    background:transparent; font-size:1.05rem; padding:6px 4px; text-align:center;
+    color:var(--text); font-family:inherit;
+  }
+  .answer-input:focus{outline:none; border-bottom-color:var(--sky);}
+  li.correct .answer-input{border-bottom-color:var(--mint); color:var(--mint); font-weight:700;}
+  li.wrong .answer-input{border-bottom-color:var(--coral); color:var(--coral); font-weight:700;}
+  .correct-hint{font-size:.78rem; color:var(--coral); flex-shrink:0; min-width:70px;}
+
+  .controls{display:flex; flex-wrap:wrap; gap:10px; margin-top:18px;}
+  .controls button{
+    padding:11px 16px; border-radius:9px; border:none; font-size:.92rem; font-weight:700;
+    cursor:pointer;
+  }
+  .btn-grade{background:var(--navy); color:#fff;}
+  .btn-reset{background:#fff; color:var(--navy); border:1.5px solid var(--navy) !important;}
+  .btn-print{background:#fff; color:var(--mint); border:1.5px solid var(--mint) !important;}
+  .btn-key{background:#fff; color:var(--sub); border:1.5px solid var(--line) !important;}
+  .btn-mail{background:#fff; color:var(--coral); border:1.5px solid var(--coral) !important;}
+
+  .score-panel{
+    display:none; margin-top:16px; padding:14px 18px; border-radius:12px;
+    background:#f0fbf6; border:1px solid #cdeedd; font-weight:700; color:var(--mint);
+  }
+  .score-panel.show{display:block;}
+  .score-panel .sub{font-weight:400; color:var(--sub); font-size:.85rem; margin-top:4px;}
+
+  .answerkey-section{
+    background:var(--card); border:1px solid var(--line); border-radius:14px;
+    padding:18px; margin-top:16px;
+  }
+  table.key-table{width:100%; border-collapse:collapse; font-size:.92rem;}
+  table.key-table th, table.key-table td{
+    border-bottom:1px solid var(--line); padding:8px 6px; text-align:left;
+  }
+  table.key-table th{color:var(--sub); font-weight:700; font-size:.82rem;}
+
+  .foot-note{font-size:.78rem; color:var(--sub); margin-top:26px; text-align:center;}
+
+  /* ---------------- PRINT ---------------- */
+  @media print{
+    body{background:#fff;}
+    .no-print, .grade-tabs, .controls, .score-panel, .section-intro, .notice{display:none !important;}
+    .wrap{max-width:100%; padding:0;}
+    header.top{background:#fff !important; color:#000 !important; border-radius:0; padding:0 0 10px; border-bottom:2px solid #000;}
+    header.top p{color:#000;}
+    .info-bar{border:none; padding:0; margin:10px 0 14px;}
+    .grade-section{display:none !important;}
+    .grade-section.print-active{display:block !important;}
+    .quiz-card{border:none; padding:0;}
+    .answer-input{border-bottom:1.4px solid #000;}
+    ol.quiz-list li{border-bottom:1px dotted #999; page-break-inside:avoid;}
+    html[data-print-mode="key"] .quiz-card{display:none !important;}
+    html:not([data-print-mode="key"]) .answerkey-section{display:none !important;}
+    .answerkey-section{border:none; padding:0; page-break-before:always;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <h1>영어 단어 평가지 <span style="font-weight:400;">— 1일차~5일차 누적 20문항</span></h1>
+    <p>초등 2학년 · 4학년용 · 매일 배운 단어 중 하루 4개씩 5일간 20개를 뽑은 복습 평가입니다.</p>
+  </header>
+
+  <div class="info-bar no-print-in-key">
+    <label>이름 <input type="text" id="studentName" placeholder="홍길동"></label>
+    <label>학년 <input type="text" id="studentGrade" placeholder="예: 2학년 3반" style="min-width:100px;"></label>
+    <label>응시일 <input type="date" id="testDate"></label>
+  </div>
+
+  <div class="notice no-print">
+    온라인으로 풀 때는 빈칸에 스펠링을 입력한 뒤 <b>채점하기</b>를 누르세요. 오프라인 종이 시험으로 낼 때는
+    <b>오프라인 시험지 인쇄</b>를 누르면 빈칸만 있는 시험지가, <b>정답지 인쇄</b>를 누르면 채점용 정답표가 인쇄됩니다.
+  </div>
+
+  <div class="grade-tabs no-print">
+    <button class="tab-btn active" data-target="g2">2학년 시험 (20문항)</button>
+    <button class="tab-btn" data-target="g4">4학년 시험 (20문항)</button>
+  </div>
+
+  <!-- ============ 2학년 ============ -->
+  <section class="grade-section active" id="g2">
+    <div class="section-intro">
+      <b>2학년 — 파닉스 낱말 20개</b> (1일차~5일차, 하루 4개씩 선정) · 우리말 뜻을 보고 알맞은 영어 단어의 철자를 쓰세요.
+    </div>
+    <div class="quiz-card">
+      <ol class="quiz-list" id="list-g2"></ol>
+      <div class="controls no-print">
+        <button class="btn-grade" data-grade="g2">채점하기</button>
+        <button class="btn-reset" data-grade="g2">다시 풀기</button>
+        <button class="btn-print" data-grade="g2" data-mode="test">오프라인 시험지 인쇄</button>
+        <button class="btn-key" data-grade="g2" data-mode="key">정답지 인쇄</button>
+        <button class="btn-mail" data-grade="g2">결과 이메일로 보내기</button>
+      </div>
+      <div class="score-panel" id="score-g2"></div>
+    </div>
+    <div class="answerkey-section" id="key-g2">
+      <b>2학년 정답지</b>
+      <table class="key-table"><thead><tr><th>번호</th><th>일차</th><th>단어</th><th>뜻</th></tr></thead>
+        <tbody id="keybody-g2"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============ 4학년 ============ -->
+  <section class="grade-section" id="g4">
+    <div class="section-intro">
+      <b>4학년 — 교과 어휘 20개</b> (1일차~5일차, 하루 4개씩 선정) · 우리말 뜻을 보고 알맞은 영어 단어의 철자를 쓰세요.
+    </div>
+    <div class="quiz-card">
+      <ol class="quiz-list" id="list-g4"></ol>
+      <div class="controls no-print">
+        <button class="btn-grade" data-grade="g4">채점하기</button>
+        <button class="btn-reset" data-grade="g4">다시 풀기</button>
+        <button class="btn-print" data-grade="g4" data-mode="test">오프라인 시험지 인쇄</button>
+        <button class="btn-key" data-grade="g4" data-mode="key">정답지 인쇄</button>
+        <button class="btn-mail" data-grade="g4">결과 이메일로 보내기</button>
+      </div>
+      <div class="score-panel" id="score-g4"></div>
+    </div>
+    <div class="answerkey-section" id="key-g4">
+      <b>4학년 정답지</b>
+      <table class="key-table"><thead><tr><th>번호</th><th>일차</th><th>단어</th><th>뜻</th></tr></thead>
+        <tbody id="keybody-g4"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <p class="foot-note">두레자연중학교 초등 학습 자료 · bear-study 앱의 190일 학사 계획 엔진(plan.js) 기준 1~5일차 단어를 그대로 사용했습니다.</p>
+</div>
+
+<script>
+/* 1일차~5일차 단어 (앱의 PLAN.en(grade, day) 알고리즘으로 산출된 값을 그대로 사용,
+   하루 4개씩 5일 = 20개, 새로 배운 단어를 우선하고 복습 단어로 채움) */
+const DATA = {
+  g2: [
+    {day:1, word:"cat", meaning:"고양이"},
+    {day:1, word:"bag", meaning:"가방"},
+    {day:1, word:"bed", meaning:"침대"},
+    {day:1, word:"pen", meaning:"펜"},
+    {day:2, word:"bat", meaning:"방망이"},
+    {day:2, word:"leg", meaning:"다리"},
+    {day:2, word:"red", meaning:"빨간색"},
+    {day:2, word:"pig", meaning:"돼지"},
+    {day:3, word:"hat", meaning:"모자"},
+    {day:3, word:"sit", meaning:"앉다"},
+    {day:3, word:"lip", meaning:"입술"},
+    {day:3, word:"win", meaning:"이기다"},
+    {day:4, word:"map", meaning:"지도"},
+    {day:4, word:"hot", meaning:"뜨거운"},
+    {day:4, word:"top", meaning:"꼭대기"},
+    {day:4, word:"mom", meaning:"엄마"},
+    {day:5, word:"cap", meaning:"모자"},
+    {day:5, word:"cup", meaning:"컵"},
+    {day:5, word:"sun", meaning:"해"},
+    {day:5, word:"run", meaning:"달리다"}
+  ],
+  g4: [
+    {day:1, word:"agree", pos:"동", meaning:"동의하다"},
+    {day:1, word:"build", pos:"동", meaning:"짓다"},
+    {day:1, word:"catch", pos:"동", meaning:"잡다"},
+    {day:1, word:"chair", pos:"명", meaning:"의자"},
+    {day:2, word:"beach", pos:"명", meaning:"해변"},
+    {day:2, word:"clock", pos:"명", meaning:"시계"},
+    {day:2, word:"close", pos:"동", meaning:"닫다"},
+    {day:2, word:"cloud", pos:"명", meaning:"구름"},
+    {day:3, word:"black", pos:"형", meaning:"검은"},
+    {day:3, word:"dress", pos:"명", meaning:"원피스"},
+    {day:3, word:"drive", pos:"동", meaning:"운전하다"},
+    {day:3, word:"fence", pos:"명", meaning:"울타리"},
+    {day:4, word:"bread", pos:"명", meaning:"빵"},
+    {day:4, word:"glass", pos:"명", meaning:"유리, 잔"},
+    {day:4, word:"grape", pos:"명", meaning:"포도"},
+    {day:4, word:"grass", pos:"명", meaning:"풀"},
+    {day:5, word:"break", pos:"동", meaning:"깨뜨리다"},
+    {day:5, word:"horse", pos:"명", meaning:"말"},
+    {day:5, word:"house", pos:"명", meaning:"집"},
+    {day:5, word:"jeans", pos:"명", meaning:"청바지"}
+  ]
+};
+
+function buildList(grade){
+  const ol = document.getElementById('list-' + grade);
+  const kb = document.getElementById('keybody-' + grade);
+  DATA[grade].forEach((item, idx) => {
+    const li = document.createElement('li');
+    li.dataset.answer = item.word;
+    const posHtml = item.pos ? '<span class="pos">('+item.pos+')</span>' : '';
+    li.innerHTML =
+      '<span class="qno">' + (idx+1) + '</span>' +
+      '<span class="day-badge">' + item.day + '일차</span>' +
+      '<span class="meaning">' + posHtml + item.meaning + '</span>' +
+      '<input type="text" class="answer-input" autocomplete="off" spellcheck="false" placeholder="spelling">' +
+      '<span class="correct-hint"></span>';
+    ol.appendChild(li);
+
+    const tr = document.createElement('tr');
+    tr.innerHTML = '<td>'+(idx+1)+'</td><td>'+item.day+'일차</td><td><b>'+item.word+'</b></td><td>'+item.meaning+'</td>';
+    kb.appendChild(tr);
+  });
+}
+buildList('g2');
+buildList('g4');
+
+/* 탭 전환 */
+document.querySelectorAll('.tab-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const target = btn.dataset.target;
+    document.querySelectorAll('.grade-section').forEach(s=>s.classList.remove('active'));
+    document.getElementById(target).classList.add('active');
+  });
+});
+
+/* 채점 */
+document.querySelectorAll('.btn-grade').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const grade = btn.dataset.grade;
+    const items = document.querySelectorAll('#list-' + grade + ' li');
+    let correct = 0;
+    const wrongWords = [];
+    items.forEach(li=>{
+      const input = li.querySelector('.answer-input');
+      const hint = li.querySelector('.correct-hint');
+      const ans = li.dataset.answer;
+      const user = input.value.trim().toLowerCase();
+      li.classList.remove('correct','wrong');
+      if(user.length === 0){
+        li.classList.add('wrong');
+        hint.textContent = '정답: ' + ans;
+        wrongWords.push(ans + '(' + li.querySelector('.meaning').textContent.trim() + ')');
+      } else if(user === ans.toLowerCase()){
+        li.classList.add('correct');
+        hint.textContent = '';
+        correct++;
+      } else {
+        li.classList.add('wrong');
+        hint.textContent = '정답: ' + ans;
+        wrongWords.push(ans + '(' + li.querySelector('.meaning').textContent.trim() + ')');
+      }
+    });
+    const total = items.length;
+    const score = Math.round((correct/total)*100);
+    const panel = document.getElementById('score-' + grade);
+    panel.classList.add('show');
+    panel.innerHTML = total + '문항 중 ' + correct + '개 정답 (' + score + '점)' +
+      '<div class="sub">' + (wrongWords.length ? '틀린 단어: ' + wrongWords.join(', ') : '전 문항 정답입니다! 참 잘했어요.') + '</div>';
+    panel.dataset.correct = correct;
+    panel.dataset.total = total;
+    panel.dataset.wrong = wrongWords.join(', ');
+  });
+});
+
+/* 다시 풀기 */
+document.querySelectorAll('.btn-reset').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const grade = btn.dataset.grade;
+    document.querySelectorAll('#list-' + grade + ' li').forEach(li=>{
+      li.classList.remove('correct','wrong');
+      li.querySelector('.answer-input').value = '';
+      li.querySelector('.correct-hint').textContent = '';
+    });
+    const panel = document.getElementById('score-' + grade);
+    panel.classList.remove('show');
+    panel.innerHTML = '';
+  });
+});
+
+/* 인쇄 (시험지 / 정답지) */
+document.querySelectorAll('.btn-print, .btn-key').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const grade = btn.dataset.grade;
+    const mode = btn.dataset.mode; // 'test' or 'key'
+    document.querySelectorAll('.grade-section').forEach(s=>s.classList.remove('print-active'));
+    document.getElementById(grade).classList.add('print-active');
+    document.documentElement.setAttribute('data-print-mode', mode);
+    window.print();
+  });
+});
+
+/* 결과 이메일로 보내기 (mailto - 감독자/보호자에게 채점 결과 전달) */
+document.querySelectorAll('.btn-mail').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const grade = btn.dataset.grade;
+    const panel = document.getElementById('score-' + grade);
+    if(!panel.classList.contains('show')){
+      alert('먼저 채점하기를 눌러 채점을 완료해 주세요.');
+      return;
+    }
+    const name = document.getElementById('studentName').value || '(이름 미입력)';
+    const gradeLabel = document.getElementById('studentGrade').value || (grade === 'g2' ? '2학년' : '4학년');
+    const date = document.getElementById('testDate').value || '(날짜 미입력)';
+    const correct = panel.dataset.correct, total = panel.dataset.total;
+    const wrong = panel.dataset.wrong || '없음';
+    const subject = encodeURIComponent('[영어 단어 시험 결과] ' + name + ' (' + gradeLabel + ')');
+    const body = encodeURIComponent(
+      '이름: ' + name + '\n학년/반: ' + gradeLabel + '\n응시일: ' + date +
+      '\n\n결과: ' + total + '문항 중 ' + correct + '개 정답\n틀린 단어: ' + wrong
+    );
+    window.location.href = 'mailto:?subject=' + subject + '&body=' + body;
+  });
+});
+</script>
+</body>
+</html>
