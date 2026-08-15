@@ -37,6 +37,10 @@
     {
       "name": "지난 학습지 보기",
       "url": "./archive.html"
+    },
+    {
+      "name": "영단어장",
+      "url": "./wordbook.html"
     }
   ]
 }

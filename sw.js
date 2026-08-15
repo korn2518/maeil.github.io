@@ -1,5 +1,5 @@
 /* 곰돌이 학습장 — 서비스워커 (자동 생성: 엔진/make_pwa.py) */
-const CACHE = "bear-6b6b5e39a1";
+const CACHE = "bear-5318c93bf5";
 const ASSETS = [
   "./",
   "./index.html",
@@ -19,7 +19,8 @@ const ASSETS = [
   "./app/icon-512.png",
   "./app/icon-maskable-512.png",
   "./app/apple-touch-icon.png",
-  "./archive.html"
+  "./archive.html",
+  "./wordbook.html"
 ];
 
 self.addEventListener("install", e => {
